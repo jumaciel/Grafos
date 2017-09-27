@@ -1,8 +1,16 @@
 package view;
 
 import java.awt.Color;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import model.Edge;
 import model.Graph;
 import model.Graphml;
@@ -527,7 +535,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInfoActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-
+        salvarArquivo();
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnSalvarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalvarMouseEntered
@@ -582,6 +590,117 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnAbrirActionPerformed
 
+    
+    public void salvarArquivo(){
+        txtAreaDisplay.setForeground(Color.black);
+        JFileChooser arquivo = new JFileChooser();
+        FileNameExtensionFilter filtroXML = new FileNameExtensionFilter("Arquivos XML", "xml");
+        arquivo.addChoosableFileFilter(filtroXML);
+        arquivo.setAcceptAllFileFilterUsed(false);
+        if (arquivo.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+            txtAreaDisplay.setText(arquivo.getSelectedFile().getAbsolutePath());
+            choose = txtAreaDisplay.getText();
+        }
+        XStream xstream = new XStream(new DomDriver());
+        String xml = null;
+         
+        xstream.omitField(Edge.class, "node1");
+        xstream.omitField(Edge.class, "node2");
+        xstream.alias("graphml", Graphml.class);
+        xstream.alias("graph", Graph.class);
+        xstream.alias("node", Node.class);
+        xstream.alias("edge", Edge.class);
+        xstream.useAttributeFor("id", String.class);
+        xstream.useAttributeFor("edgedefault", String.class);
+        xstream.useAttributeFor("source", String.class);
+        xstream.useAttributeFor("target", String.class);
+        xstream.useAttributeFor("xmlns", String.class);
+        xstream.useAttributeFor("id", String.class);
+        xstream.addImplicitArray(Graph.class, "nodes");
+        xstream.addImplicitArray(Graph.class, "edges");
+        graphml.setGraph(graph);
+        try {    
+            xml = xstream.toXML(graphml);
+            System.out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + xml);
+            File file = new File(choose + ".xml");
+            PrintWriter print = new PrintWriter(file);
+            print.write(xml);
+            print.flush();
+            print.close();
+            txtAreaDisplay.setText(xml);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void abrirArquivo(){
+   JFileChooser arquivo = new JFileChooser();
+        FileNameExtensionFilter filtroXML = new FileNameExtensionFilter("Arquivos XML", "xml");
+        arquivo.addChoosableFileFilter(filtroXML);
+        arquivo.setAcceptAllFileFilterUsed(false);
+        if (arquivo.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            txtAreaDisplay.setText(arquivo.getSelectedFile().getAbsolutePath());
+            choose = txtAreaDisplay.getText();
+            try {
+                FileReader leitor = new FileReader(choose);
+                XStream xstream = new XStream(new DomDriver());
+             
+                xstream.omitField(Edge.class, "node1");
+        xstream.omitField(Edge.class, "node2");
+        xstream.alias("graphml", Graphml.class);
+        xstream.alias("graph", Graph.class);
+        xstream.alias("node", Node.class);
+        xstream.alias("edge", Edge.class);
+        xstream.useAttributeFor("id", String.class);
+        xstream.useAttributeFor("edgedefault", String.class);
+        xstream.useAttributeFor("source", String.class);
+        xstream.useAttributeFor("target", String.class);
+        xstream.useAttributeFor("xmlns", String.class);
+        xstream.useAttributeFor("id", String.class);
+        xstream.addImplicitArray(Graph.class, "nodes");
+        xstream.addImplicitArray(Graph.class, "edges");
+        
+        graphml = null;
+        graphml = (Graphml) xstream.fromXML(leitor);
+        ArrayList lst = (ArrayList) graphml.getGraph().getEdges();
+        graphml.getGraph().setNodes(new ArrayList<Node>());
+        graphml.getGraph().setEdges(new ArrayList<Edge>());
+                for (Object e : lst) {
+                    if (e instanceof Node) {
+                        graphml.getGraph().getNodes().add((Node) e);
+                    } else {
+                        graphml.getGraph().getEdges().add((Edge) e);
+                    }
+                }
+
+                for (Edge edge : graphml.getGraph().getEdges()) {
+                    for (Node no : graphml.getGraph().getNodes()) {
+                        if (no.getId().equals(edge.getSoucer())) {
+                            edge.setNode1(no);
+                        }
+                        if (no.getId().equals(edge.getTarget())) {
+                            edge.setNode2(no);
+                        }
+                    }
+                }
+                listaNode = (ArrayList<Node>) graphml.getGraph().getNodes();
+                listaEdge = (ArrayList<Edge>) graphml.getGraph().getEdges();
+                
+                graph.setNodes(listaNode);
+                graph.setEdges(listaEdge);
+                
+                String r ="",r2="";
+                for(int i = 0; i < graph.getNodes().size();i++){
+                    cbOrigem.addItem(graph.getNodes().get(i).getId());
+                    cbDestino.addItem(graph.getNodes().get(i).getId());
+                }
+                graph.setId(graphml.getGraph().getId());
+                txtNomeDoGrafo.setText(graph.getId());
+                imprimeInfo();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }   
 
     /**
      * @param args the command line arguments
