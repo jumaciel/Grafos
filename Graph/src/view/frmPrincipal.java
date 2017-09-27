@@ -700,7 +700,49 @@ public class frmPrincipal extends javax.swing.JFrame {
                 Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }   
+    }
+
+    public void adicionarVertice(){
+        int i;
+        if(txtQtVertice.getText().equals("")){
+            txtAreaDisplay.setForeground(Color.red);
+            txtAreaDisplay.setText("\n\n\n\n\n\n\n\n\n\n\n"
+                    + "\tConfimar o nome e tipo do grafo!!");
+        }else{
+            try{
+                for(i=0;i<Integer.parseInt(txtQtVertice.getText());i++){
+                    Node node = new Node();
+                    node.setId(Integer.toString(i+1));
+                    graph.addNode(node);
+                    cbOrigem.addItem(Integer.toString(i+1));
+                    cbDestino.addItem(Integer.toString(i+1));
+                }
+                ImprimeNode();
+                txtQtVertice.setText("");
+            }catch(NumberFormatException ex)
+            {
+                if(txtQtVertice.getText().equals("")){
+                    txtAreaDisplay.setForeground(Color.red);
+                    txtAreaDisplay.setText("\t==========ATENÇÂO==========\n"
+                            + "\n\n\t Ocorreu um erro ao tentar adicionar"
+                            + "\n\t uma quantidade de VERTICES"
+                            + "\n\t coloque um NÚMERO valido.\n\n"
+                            + "\n\t EXEMPLO: 10"
+                            + "\n\n\t TENTE NOVAMENTE!!");
+                    txtQtVertice.setText("");
+                }else{
+                    txtAreaDisplay.setForeground(Color.red);
+                    txtAreaDisplay.setText("\t==========ATENÇÂO==========\n"
+                            + "\n\n\t Ocorreu um errou ao tentar adicionar"
+                            + "\t uma quantidade de VERTICES \n"
+                            + "\t coloque somente valores NÚMERICOS"
+                            + "\n\n\t TENTE NOVAMENTE!!");
+                    txtQtVertice.setText("");
+                }
+            }
+        }
+    }
+
 
     /**
      * @param args the command line arguments
