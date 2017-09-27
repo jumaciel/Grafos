@@ -702,6 +702,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         }
     }
 
+    //Adicionado por Giovanni Stroppa
     public void adicionarVertice(){
         int i;
         if(txtQtVertice.getText().equals("")){
@@ -742,6 +743,22 @@ public class frmPrincipal extends javax.swing.JFrame {
             }
         }
     }
+
+    //Adicionado por Giovanni Stroppa
+    public void ImprimeNode(){
+        String r=" Vertice: {";
+        int i;
+        txtAreaDisplay.setForeground(Color.black);
+        for(i=0;i<graph.getNodes().size();i++){
+            r+= graph.getNodes().get(i).getId();
+            if(i<graph.getNodes().size()-1){
+                r+=",";
+            }
+        }
+        r+="}";
+        txtAreaDisplay.setText(r);
+    }
+
 
 
     /**
