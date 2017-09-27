@@ -5,9 +5,9 @@
  */
 package model;
 /**
- *
  * @author Ana Carolyne
  */
+
 public class Graphml {
     private Graph graph;
     private String xmlns = "http://graphml.graphdrawing.org/xmlns";
@@ -26,4 +26,5 @@ public class Graphml {
     public void setXmlns(String xmlns) {
         this.xmlns = xmlns;
     }
+    
 }
