@@ -34,7 +34,7 @@ public class Edge {
 
     public void setNode1(Node node1) {
         this.node1 = node1;
-        this.source = node1.getId();
+//        this.source = node1.getId();
     }
 
     public Node getNode2() {
@@ -43,7 +43,7 @@ public class Edge {
 
     public void setNode2(Node node2) {
         this.node2 = node2;
-        this.target = node2.getId();
+//        this.target = node2.getId();
     }
 
     public String getSoucer() {
