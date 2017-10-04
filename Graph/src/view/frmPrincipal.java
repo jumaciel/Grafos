@@ -21,20 +21,21 @@ import model.Node;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Luiz Fernando
  */
 public class frmPrincipal extends javax.swing.JFrame {
+
     /**
      * Creates new form Principal
      */
     Graph graph = new Graph();
     Graphml graphml = new Graphml();
     private String choose = null;
-    List<Node>listaNode = new ArrayList<Node>();
-    List<Edge>listaEdge = new ArrayList<Edge>();
+    List<Node> listaNode = new ArrayList<Node>();
+    List<Edge> listaEdge = new ArrayList<Edge>();
+
     public frmPrincipal() {
         graph.setEdgedefault("undirected");
         initComponents();
@@ -487,17 +488,17 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdicionarVerticeActionPerformed
 
     private void btnAdicionarVerticeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdicionarVerticeMouseEntered
-       btnAdicionarVertice.setContentAreaFilled(true);
-       btnAdicionarVertice.setBackground(Color.gray);
+        btnAdicionarVertice.setContentAreaFilled(true);
+        btnAdicionarVertice.setBackground(Color.gray);
     }//GEN-LAST:event_btnAdicionarVerticeMouseEntered
 
     private void btnAdicionarVerticeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdicionarVerticeMouseExited
-       btnAdicionarVertice.setContentAreaFilled(false);
+        btnAdicionarVertice.setContentAreaFilled(false);
     }//GEN-LAST:event_btnAdicionarVerticeMouseExited
 
     private void btnAdicionarArestaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdicionarArestaMouseEntered
-       btnAdicionarAresta.setContentAreaFilled(true);
-       btnAdicionarAresta.setBackground(Color.gray);
+        btnAdicionarAresta.setContentAreaFilled(true);
+        btnAdicionarAresta.setBackground(Color.gray);
     }//GEN-LAST:event_btnAdicionarArestaMouseEntered
 
     private void btnAdicionarArestaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdicionarArestaMouseExited
@@ -505,7 +506,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdicionarArestaMouseExited
 
     private void btnAdicionarArestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarArestaActionPerformed
-
+        adicionarAresta();
     }//GEN-LAST:event_btnAdicionarArestaActionPerformed
 
     private void btnSairMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSairMouseEntered
@@ -518,7 +519,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSairMouseExited
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
-         System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnInfoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInfoMouseEntered
@@ -531,7 +532,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnInfoMouseExited
 
     private void btnInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInfoActionPerformed
- 
+        imprimeInfo();
     }//GEN-LAST:event_btnInfoActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
@@ -544,7 +545,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalvarMouseEntered
 
     private void btnSalvarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalvarMouseExited
-       btnSalvar.setContentAreaFilled(false);
+        btnSalvar.setContentAreaFilled(false);
     }//GEN-LAST:event_btnSalvarMouseExited
 
     private void btnAbrirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAbrirMouseEntered
@@ -557,7 +558,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAbrirMouseExited
 
     private void txtNomeDoGrafoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeDoGrafoKeyPressed
-        
+
     }//GEN-LAST:event_txtNomeDoGrafoKeyPressed
 
     private void btnConfirmarGrafoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmarGrafoMouseEntered
@@ -570,19 +571,16 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConfirmarGrafoMouseExited
 
     private void btnConfirmarGrafoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarGrafoActionPerformed
-        if(txtNomeDoGrafo.getText().equals("")){
+        if (txtNomeDoGrafo.getText().equals("")) {
             txtAreaDisplay.setForeground(Color.red);
             txtAreaDisplay.setText("\n\n\n\n\n\n\n\n\n\n\n"
                     + "\tNome do GRAFO invalido!!");
-        }else{
-            
-            if(cbxDigrafo.isSelected()==true){
-                graph.setId(txtNomeDoGrafo.getText());
-                graph.setEdgedefault("direction");
-            }else{
-                graph.setId(txtNomeDoGrafo.getText());
-                graph.setEdgedefault("undirection");
-            }
+        } else if (cbxDigrafo.isSelected() == true) {
+            graph.setId(txtNomeDoGrafo.getText());
+            graph.setEdgedefault("direction");
+        } else {
+            graph.setId(txtNomeDoGrafo.getText());
+            graph.setEdgedefault("undirection");
         }
     }//GEN-LAST:event_btnConfirmarGrafoActionPerformed
 
@@ -590,8 +588,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnAbrirActionPerformed
 
-    
-    public void salvarArquivo(){
+    public void salvarArquivo() {
         txtAreaDisplay.setForeground(Color.black);
         JFileChooser arquivo = new JFileChooser();
         FileNameExtensionFilter filtroXML = new FileNameExtensionFilter("Arquivos XML", "xml");
@@ -603,7 +600,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         }
         XStream xstream = new XStream(new DomDriver());
         String xml = null;
-         
+
         xstream.omitField(Edge.class, "node1");
         xstream.omitField(Edge.class, "node2");
         xstream.alias("graphml", Graphml.class);
@@ -619,7 +616,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         xstream.addImplicitArray(Graph.class, "nodes");
         xstream.addImplicitArray(Graph.class, "edges");
         graphml.setGraph(graph);
-        try {    
+        try {
             xml = xstream.toXML(graphml);
             System.out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + xml);
             File file = new File(choose + ".xml");
@@ -632,8 +629,9 @@ public class frmPrincipal extends javax.swing.JFrame {
             Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void abrirArquivo(){
-   JFileChooser arquivo = new JFileChooser();
+
+    public void abrirArquivo() {
+        JFileChooser arquivo = new JFileChooser();
         FileNameExtensionFilter filtroXML = new FileNameExtensionFilter("Arquivos XML", "xml");
         arquivo.addChoosableFileFilter(filtroXML);
         arquivo.setAcceptAllFileFilterUsed(false);
@@ -643,27 +641,27 @@ public class frmPrincipal extends javax.swing.JFrame {
             try {
                 FileReader leitor = new FileReader(choose);
                 XStream xstream = new XStream(new DomDriver());
-             
+
                 xstream.omitField(Edge.class, "node1");
-        xstream.omitField(Edge.class, "node2");
-        xstream.alias("graphml", Graphml.class);
-        xstream.alias("graph", Graph.class);
-        xstream.alias("node", Node.class);
-        xstream.alias("edge", Edge.class);
-        xstream.useAttributeFor("id", String.class);
-        xstream.useAttributeFor("edgedefault", String.class);
-        xstream.useAttributeFor("source", String.class);
-        xstream.useAttributeFor("target", String.class);
-        xstream.useAttributeFor("xmlns", String.class);
-        xstream.useAttributeFor("id", String.class);
-        xstream.addImplicitArray(Graph.class, "nodes");
-        xstream.addImplicitArray(Graph.class, "edges");
-        
-        graphml = null;
-        graphml = (Graphml) xstream.fromXML(leitor);
-        ArrayList lst = (ArrayList) graphml.getGraph().getEdges();
-        graphml.getGraph().setNodes(new ArrayList<Node>());
-        graphml.getGraph().setEdges(new ArrayList<Edge>());
+                xstream.omitField(Edge.class, "node2");
+                xstream.alias("graphml", Graphml.class);
+                xstream.alias("graph", Graph.class);
+                xstream.alias("node", Node.class);
+                xstream.alias("edge", Edge.class);
+                xstream.useAttributeFor("id", String.class);
+                xstream.useAttributeFor("edgedefault", String.class);
+                xstream.useAttributeFor("source", String.class);
+                xstream.useAttributeFor("target", String.class);
+                xstream.useAttributeFor("xmlns", String.class);
+                xstream.useAttributeFor("id", String.class);
+                xstream.addImplicitArray(Graph.class, "nodes");
+                xstream.addImplicitArray(Graph.class, "edges");
+
+                graphml = null;
+                graphml = (Graphml) xstream.fromXML(leitor);
+                ArrayList lst = (ArrayList) graphml.getGraph().getEdges();
+                graphml.getGraph().setNodes(new ArrayList<Node>());
+                graphml.getGraph().setEdges(new ArrayList<Edge>());
                 for (Object e : lst) {
                     if (e instanceof Node) {
                         graphml.getGraph().getNodes().add((Node) e);
@@ -684,12 +682,12 @@ public class frmPrincipal extends javax.swing.JFrame {
                 }
                 listaNode = (ArrayList<Node>) graphml.getGraph().getNodes();
                 listaEdge = (ArrayList<Edge>) graphml.getGraph().getEdges();
-                
+
                 graph.setNodes(listaNode);
                 graph.setEdges(listaEdge);
-                
-                String r ="",r2="";
-                for(int i = 0; i < graph.getNodes().size();i++){
+
+                String r = "", r2 = "";
+                for (int i = 0; i < graph.getNodes().size(); i++) {
                     cbOrigem.addItem(graph.getNodes().get(i).getId());
                     cbDestino.addItem(graph.getNodes().get(i).getId());
                 }
@@ -703,26 +701,25 @@ public class frmPrincipal extends javax.swing.JFrame {
     }
 
     //Adicionado por Giovanni Stroppa
-    public void adicionarVertice(){
+    public void adicionarVertice() {
         int i;
-        if(txtQtVertice.getText().equals("")){
+        if (txtQtVertice.getText().equals("")) {
             txtAreaDisplay.setForeground(Color.red);
             txtAreaDisplay.setText("\n\n\n\n\n\n\n\n\n\n\n"
                     + "\tConfimar o nome e tipo do grafo!!");
-        }else{
-            try{
-                for(i=0;i<Integer.parseInt(txtQtVertice.getText());i++){
+        } else {
+            try {
+                for (i = 0; i < Integer.parseInt(txtQtVertice.getText()); i++) {
                     Node node = new Node();
-                    node.setId(Integer.toString(i+1));
+                    node.setId(Integer.toString(i + 1));
                     graph.addNode(node);
-                    cbOrigem.addItem(Integer.toString(i+1));
-                    cbDestino.addItem(Integer.toString(i+1));
+                    cbOrigem.addItem(Integer.toString(i + 1));
+                    cbDestino.addItem(Integer.toString(i + 1));
                 }
                 ImprimeNode();
                 txtQtVertice.setText("");
-            }catch(NumberFormatException ex)
-            {
-                if(txtQtVertice.getText().equals("")){
+            } catch (NumberFormatException ex) {
+                if (txtQtVertice.getText().equals("")) {
                     txtAreaDisplay.setForeground(Color.red);
                     txtAreaDisplay.setText("\t==========ATENÇÂO==========\n"
                             + "\n\n\t Ocorreu um erro ao tentar adicionar"
@@ -731,7 +728,7 @@ public class frmPrincipal extends javax.swing.JFrame {
                             + "\n\t EXEMPLO: 10"
                             + "\n\n\t TENTE NOVAMENTE!!");
                     txtQtVertice.setText("");
-                }else{
+                } else {
                     txtAreaDisplay.setForeground(Color.red);
                     txtAreaDisplay.setText("\t==========ATENÇÂO==========\n"
                             + "\n\n\t Ocorreu um errou ao tentar adicionar"
@@ -745,21 +742,19 @@ public class frmPrincipal extends javax.swing.JFrame {
     }
 
     //Adicionado por Giovanni Stroppa
-    public void ImprimeNode(){
-        String r=" Vertice: {";
+    public void ImprimeNode() {
+        String r = " Vertice: {";
         int i;
         txtAreaDisplay.setForeground(Color.black);
-        for(i=0;i<graph.getNodes().size();i++){
-            r+= graph.getNodes().get(i).getId();
-            if(i<graph.getNodes().size()-1){
-                r+=",";
+        for (i = 0; i < graph.getNodes().size(); i++) {
+            r += graph.getNodes().get(i).getId();
+            if (i < graph.getNodes().size() - 1) {
+                r += ",";
             }
         }
-        r+="}";
+        r += "}";
         txtAreaDisplay.setText(r);
     }
-
-
 
     /**
      * @param args the command line arguments
@@ -799,6 +794,68 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
     }
 
+    public void ImprimeEdge(){
+    String r=" Aresta: {";
+    int i;
+    txtAreaDisplay.setForeground(Color.black);
+    for(i=0;i<graph.getEdges().size();i++){
+       r+="("+graph.getEdges().get(i).getNode1().getId()+","+graph.getEdges().get(i).getNode2().getId()+")";
+       if(i<graph.getEdges().size()-1){
+           r+=",";
+       }
+    }
+    r+="}";
+    txtAreaDisplay.setText(r);
+}
+    
+    public void adicionarAresta() {
+        if (txtQtVertice.getText().equals("")) {
+            txtAreaDisplay.setForeground(Color.red);
+            txtAreaDisplay.setText("\n\n\n\n\n\n\n\n\n\n\n"
+                    + "\tConfimar o nome e tipo do grafo!!");
+        } else {
+            Edge edge = new Edge();
+            edge.setNode1(graph.getNodes().get(cbOrigem.getSelectedIndex()));
+            edge.setNode2(graph.getNodes().get(cbDestino.getSelectedIndex()));
+            graph.addEdge(edge);
+            ImprimeEdge();
+        }
+    }
+
+    public void imprimeInfo() {
+        String r = "";
+        int i;
+        txtAreaDisplay.setForeground(Color.black);
+        if (graph.getNodes().size() != 0) {
+            r += " INFORMAÇÂO:\n*****************\n";
+            r += " Vertice: {";
+            for (i = 0; i < graph.getNodes().size(); i++) {
+                r += graph.getNodes().get(i).getId();
+                if (i < graph.getNodes().size() - 1) {
+                    r += ",";
+                }
+            }
+            r += "}";
+        } else {
+            r += "\t==========ATENÇÂO==========\n INFORMAÇÂO:\n*****************\n";
+            txtAreaDisplay.setForeground(Color.red);
+            r += " Vertice: Lista vazia";
+        }
+        if (graph.getEdges().size() != 0) {
+            r += "\n Aresta: {";
+            for (i = 0; i < graph.getEdges().size(); i++) {
+                r += "(" + graph.getEdges().get(i).getNode1().getId() + "," + graph.getEdges().get(i).getNode2().getId() + ")";
+                if (i < graph.getEdges().size() - 1) {
+                    r += ",";
+                }
+            }
+            r += "}";
+        } else {
+            txtAreaDisplay.setForeground(Color.red);
+            r += "\n Aresta: Lista vazia";
+        }
+        txtAreaDisplay.setText(r);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAbrir;
     private javax.swing.JButton btnAdicionarAresta;
