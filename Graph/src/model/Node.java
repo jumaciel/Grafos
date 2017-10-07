@@ -7,8 +7,21 @@ package model;
 
 /**
  *
- * @author Anah
+ * @author GiovanniStroppa
  */
 public class Node {
+        
+   public String id;
+   public Node() {
+        
+   }
+
+   public String getId() {
+       return id;
+   }
+
+   public void setId(String id) {
+       this.id = id;
+   }
     
 }
