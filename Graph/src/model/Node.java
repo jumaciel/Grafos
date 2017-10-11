@@ -8,13 +8,12 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author GiovanniStroppa
- */
+
 public class Node {
         
    public String id;
+   private int grau;
+   
    public Node() {
         
    }
@@ -26,5 +25,13 @@ public class Node {
    public void setId(String id) {
        this.id = id;
    }
+
+    public int getGrau() {
+        return grau;
+    }
+
+    public void setGrau(int grau) {
+        this.grau = grau;
+    }
     
 }
