@@ -46,11 +46,11 @@ public class Edge {
 //        this.target = node2.getId();
     }
 
-    public String getSoucer() {
+    public String getSource() {
         return source;
     }
 
-    public void setSoucer(String source) {
+    public void setSource(String source) {
         this.source = source;
     }
 
