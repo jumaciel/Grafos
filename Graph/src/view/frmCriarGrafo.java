@@ -5,9 +5,24 @@
  */
 package view;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import model.Edge;
+import model.Graph;
+import model.Graphml;
+import model.Node;
 
 /**
  *
@@ -18,7 +33,11 @@ public class frmCriarGrafo extends javax.swing.JFrame {
     /**
      * Creates new form frmCriarGrafo
      */
-    
+    private String choose = null;
+    private Graphml graphml = new Graphml();
+    private Graph graph = new Graph();
+    private List<Node>listaNode = new ArrayList<Node>();
+    private List<Edge>listaEdge = new ArrayList<Edge>();
     public frmPrincipal fp;
     public frmCriarGrafo() {
         centralizarComponente();
@@ -39,11 +58,13 @@ public class frmCriarGrafo extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         btnConfirmarGrafo = new javax.swing.JButton();
-        cbxDigrafo = new javax.swing.JCheckBox();
+        cbDigrafo = new javax.swing.JCheckBox();
         txtQtVertice = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,8 +104,8 @@ public class frmCriarGrafo extends javax.swing.JFrame {
             }
         });
 
-        cbxDigrafo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        cbxDigrafo.setText("Digrafo");
+        cbDigrafo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        cbDigrafo.setText("Digrafo");
 
         txtQtVertice.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         txtQtVertice.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -92,53 +113,42 @@ public class frmCriarGrafo extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel4.setText("Quantidade de vertice:");
 
-        jLabel12.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel12.setText("Criar Grafo");
-
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator2)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(34, 34, 34)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNomeDoGrafo, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtQtVertice, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel10)
+                        .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbxDigrafo)
-                            .addComponent(btnConfirmarGrafo, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtNomeDoGrafo, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel12)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtQtVertice, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbDigrafo)
+                    .addComponent(btnConfirmarGrafo, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbxDigrafo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
+                        .addGap(28, 28, 28)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
                             .addComponent(txtNomeDoGrafo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11))))
+                            .addComponent(jLabel11)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(cbDigrafo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -146,6 +156,32 @@ public class frmCriarGrafo extends javax.swing.JFrame {
                     .addComponent(btnConfirmarGrafo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(141, 141, 141))
         );
+
+        jMenu1.setText("Arquivo");
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/abrir.png"))); // NOI18N
+        jMenuItem1.setText("Abrir");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sair.png"))); // NOI18N
+        jMenuItem2.setText("Sair");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -175,14 +211,136 @@ public class frmCriarGrafo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConfirmarGrafoMouseExited
 
     private void btnConfirmarGrafoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarGrafoActionPerformed
-        fp = new frmPrincipal();
-        fp.setVisible(true);
-        fp.setNomeGrago("22222");
-        
+        if(txtNomeDoGrafo.getText().equals("")){
+            JOptionPane.showMessageDialog(null,"Nome do Grafo não pode ser em branco\n"
+            + "coloque um nome e Tente novamente...");
+        }else{
+        if(fp == null){
+            fp = new frmPrincipal();
+            fp.setVisible(true);
+            if(cbDigrafo.isSelected()){
+                if(txtQtVertice.getText().equals("")){
+                    fp.setNovoGrafo(txtNomeDoGrafo.getText(),"0",1);
+                }else{
+                    fp.setNovoGrafo(txtNomeDoGrafo.getText(),txtQtVertice.getText(),1);
+                }
+            }else{
+                if(txtQtVertice.getText().equals("")){
+                    fp.setNovoGrafo(txtNomeDoGrafo.getText(),"0",0);
+                }else{
+                    fp.setNovoGrafo(txtNomeDoGrafo.getText(),txtQtVertice.getText(),0);
+                }
+            }
+        }else{
+            fp.setVisible(true);
+            fp.setState(frmPrincipal.NORMAL);
 
+            if(cbDigrafo.isSelected()){
+                if(txtQtVertice.getText().equals("")){
+                    fp.setNovoGrafo(txtNomeDoGrafo.getText(),"0",1);
+                }else{
+                    fp.setNovoGrafo(txtNomeDoGrafo.getText(),txtQtVertice.getText(),1);
+                }
+            }else{
+                if(txtQtVertice.getText().equals("")){
+                    fp.setNovoGrafo(txtNomeDoGrafo.getText(),"0",0);
+                }else{
+                    fp.setNovoGrafo(txtNomeDoGrafo.getText(),txtQtVertice.getText(),0);
+                }
+            }
+        }
         this.dispose();
+        }
     }//GEN-LAST:event_btnConfirmarGrafoActionPerformed
-public void centralizarComponente() {
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        abrirArquivo();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+public void abrirArquivo(){
+   JFileChooser arquivo = new JFileChooser();
+        FileNameExtensionFilter filtroXML = new FileNameExtensionFilter("Arquivos XML", "xml");
+        arquivo.addChoosableFileFilter(filtroXML);
+        arquivo.setAcceptAllFileFilterUsed(false);
+        if (arquivo.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            txtNomeDoGrafo.setText(arquivo.getSelectedFile().getAbsolutePath());
+            choose = txtNomeDoGrafo.getText();
+            try {
+                FileReader leitor = new FileReader(choose);
+                XStream xstream = new XStream(new DomDriver());
+             
+                xstream.omitField(Edge.class, "node1");
+                xstream.omitField(Edge.class, "node2");
+                xstream.alias("graphml", Graphml.class);
+                xstream.alias("graph", Graph.class);
+                xstream.alias("node", Node.class);
+                xstream.alias("edge", Edge.class);
+                xstream.useAttributeFor("id", String.class);
+                xstream.useAttributeFor("edgedefault", String.class);
+                xstream.useAttributeFor("source", String.class);
+                xstream.useAttributeFor("target", String.class);
+                xstream.useAttributeFor("xmlns", String.class);
+                xstream.useAttributeFor("id", String.class);
+                xstream.addImplicitArray(Graph.class, "nodes");
+                xstream.addImplicitArray(Graph.class, "edges");
+                
+                graphml = null;
+                graphml = (Graphml) xstream.fromXML(leitor);
+                ArrayList lst = (ArrayList) graphml.getGraph().getEdges();
+                graphml.getGraph().setNodes(new ArrayList<Node>());
+                graphml.getGraph().setEdges(new ArrayList<Edge>());
+                for (Object e : lst) {
+                    if (e instanceof Node) {
+                        graphml.getGraph().getNodes().add((Node) e);
+                    } else {
+                        graphml.getGraph().getEdges().add((Edge) e);
+                    }
+                }
+
+                for (Edge edge : graphml.getGraph().getEdges()) {
+                    for (Node no : graphml.getGraph().getNodes()) {
+                        if (no.getId().equals(edge.getSoucer())) {
+                            edge.setNode1(no);
+                        }
+                        if (no.getId().equals(edge.getTarget())) {
+                            edge.setNode2(no);
+                        }
+                    }
+                }
+                listaNode = (ArrayList<Node>) graphml.getGraph().getNodes();
+                listaEdge = (ArrayList<Edge>) graphml.getGraph().getEdges();                       
+                graph.setId(graphml.getGraph().getId());
+                
+                if(fp == null){
+                    fp = new frmPrincipal();
+                    fp.setVisible(true);
+                   
+                    if(graph.getId() == "direction"){
+                        fp.setAbrirGrafo(listaNode, listaEdge,graph.getId(),"direction");
+                    }else{
+                        fp.setAbrirGrafo(listaNode, listaEdge,graph.getId(),"undirection");
+                    }
+                }else{
+                fp.setVisible(true);
+                fp.setState(frmPrincipal.NORMAL);
+                
+                if(graph.getId() == "direction"){
+                    fp.setAbrirGrafo(listaNode, listaEdge,graph.getId(),"direction");
+                }else{
+                    fp.setAbrirGrafo(listaNode, listaEdge,graph.getId(),"undirection");
+                }
+            }
+            this.dispose();
+               
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }            
+    public void centralizarComponente() {
         Dimension ds = Toolkit.getDefaultToolkit().getScreenSize();
         Dimension dw = getSize();
         setLocation((ds.width - dw.width) / 3, (ds.height - dw.height) / 3);
@@ -213,6 +371,7 @@ public void centralizarComponente() {
             java.util.logging.Logger.getLogger(frmCriarGrafo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -224,13 +383,15 @@ public void centralizarComponente() {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirmarGrafo;
-    private javax.swing.JCheckBox cbxDigrafo;
+    private javax.swing.JCheckBox cbDigrafo;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField txtNomeDoGrafo;
     private javax.swing.JTextField txtQtVertice;
     // End of variables declaration//GEN-END:variables
