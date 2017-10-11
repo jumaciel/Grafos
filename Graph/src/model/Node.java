@@ -12,7 +12,7 @@ import java.util.List;
 public class Node {
         
    public String id;
-   private int grau;
+//   private int grau;
    
    public Node() {
         
@@ -26,12 +26,12 @@ public class Node {
        this.id = id;
    }
 
-    public int getGrau() {
-        return grau;
-    }
-
-    public void setGrau(int grau) {
-        this.grau = grau;
-    }
+//    public int getGrau() {
+//        return grau;
+//    }
+//
+//    public void setGrau(int grau) {
+//        this.grau = grau;
+//    }
     
 }
