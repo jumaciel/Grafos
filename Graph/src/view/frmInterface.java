@@ -52,11 +52,10 @@ public class frmInterface extends javax.swing.JFrame {
     List<Edge> listaEdge = new ArrayList<Edge>();
     int w = 0;
     int h = 0;
-
+    int m;
     public frmInterface() {
-        graph.setEdgedefault("undirected");
 //        centralizarComponente();
-        this.setResizable(false);
+//        this.setResizable(false);
         initComponents();
     }
 
@@ -69,31 +68,77 @@ public class frmInterface extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenu2 = new javax.swing.JMenu();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         display = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
-        jSeparator1 = new javax.swing.JSeparator();
         iconNovo = new javax.swing.JLabel();
         iconAbrir = new javax.swing.JLabel();
         iconSalvar = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        btnMatrizAdj = new javax.swing.JButton();
+        btnMatrizInc = new javax.swing.JButton();
+        btnListaAdj = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         btnAdicionarVertice = new javax.swing.JButton();
         txtaddVertice = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        btnAlterarVertice = new javax.swing.JButton();
+        btnDeletarVertice = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        bgVertice = new javax.swing.JPanel();
+        txtNovoVertice = new javax.swing.JTextField();
+        lblNo = new javax.swing.JLabel();
+        btnConfirmarVertice = new javax.swing.JButton();
+        btnCancelarVertice = new javax.swing.JButton();
+        cbEditarVertice = new javax.swing.JComboBox<>();
+        lblNovo = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         btnAdicionarAresta = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        cbOrigem = new javax.swing.JComboBox<>();
         cbDestino = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
+        txtNomeAresta = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        btndeletarAresta = new javax.swing.JButton();
+        btnAlterarAresta = new javax.swing.JButton();
+        txtPesoAresta = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        cbOrigem = new javax.swing.JComboBox<>();
+        bgAresta = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        lblOrigem = new javax.swing.JLabel();
+        lblDestino = new javax.swing.JLabel();
+        cbEditarOrigem = new javax.swing.JComboBox<>();
+        cbEditarDestino = new javax.swing.JComboBox<>();
+        jPanel9 = new javax.swing.JPanel();
+        lblNovaOrigem = new javax.swing.JLabel();
+        lblNovoDestino = new javax.swing.JLabel();
+        cbNovaOrigem = new javax.swing.JComboBox<>();
+        cbNovoDestino = new javax.swing.JComboBox<>();
+        lblNovoNomeArco = new javax.swing.JLabel();
+        txtNovoNomeAresta = new javax.swing.JTextField();
+        lblNovoPeso = new javax.swing.JLabel();
+        txtNovoPeso = new javax.swing.JTextField();
+        lblArco = new javax.swing.JLabel();
+        lblNovaAresta = new javax.swing.JLabel();
+        btnConfirmarAresta = new javax.swing.JButton();
+        btnCancelarAresta = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
         btnMostrarVA = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+        btnGrau = new javax.swing.JButton();
+        btnOrdem = new javax.swing.JButton();
+        btnLimparTudo = new javax.swing.JButton();
+        btnLimpaArestas = new javax.swing.JButton();
+        btnGerarGrafico = new javax.swing.JButton();
+        imgGrafico = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuArquivo = new javax.swing.JMenu();
         menuNovo = new javax.swing.JMenuItem();
@@ -102,6 +147,22 @@ public class frmInterface extends javax.swing.JFrame {
         menuSair = new javax.swing.JMenuItem();
         menuExibir = new javax.swing.JMenu();
         menuInfo = new javax.swing.JMenuItem();
+        menuGrauRecepcao = new javax.swing.JMenuItem();
+        menuGrauEmissao = new javax.swing.JMenuItem();
+        menuMatriz = new javax.swing.JMenuItem();
+        menuFonte = new javax.swing.JMenuItem();
+        menuSumidouro = new javax.swing.JMenuItem();
+        menuIncidentes = new javax.swing.JMenuItem();
+        menuAdjacente = new javax.swing.JMenuItem();
+        menuConjunto = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        menuGrafico = new javax.swing.JMenu();
+        menuNome = new javax.swing.JMenuItem();
+        menuPeso = new javax.swing.JMenuItem();
+        menuAjustar = new javax.swing.JMenuItem();
+        menuNormalizar = new javax.swing.JMenuItem();
+
+        jMenu2.setText("jMenu2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -113,7 +174,6 @@ public class frmInterface extends javax.swing.JFrame {
         display.setBackground(new java.awt.Color(234, 234, 234));
         display.setColumns(20);
         display.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        display.setLineWrap(true);
         display.setRows(5);
         display.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jScrollPane1.setViewportView(display);
@@ -144,6 +204,45 @@ public class frmInterface extends javax.swing.JFrame {
             }
         });
 
+        btnMatrizAdj.setBackground(new java.awt.Color(255, 255, 255));
+        btnMatrizAdj.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnMatrizAdj.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ma.png"))); // NOI18N
+        btnMatrizAdj.setText("Matriz Adj");
+        btnMatrizAdj.setBorder(null);
+        btnMatrizAdj.setContentAreaFilled(false);
+        btnMatrizAdj.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMatrizAdj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMatrizAdjActionPerformed(evt);
+            }
+        });
+
+        btnMatrizInc.setBackground(new java.awt.Color(255, 255, 255));
+        btnMatrizInc.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnMatrizInc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/mi.png"))); // NOI18N
+        btnMatrizInc.setText("Matriz Inc");
+        btnMatrizInc.setBorder(null);
+        btnMatrizInc.setContentAreaFilled(false);
+        btnMatrizInc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMatrizInc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMatrizIncActionPerformed(evt);
+            }
+        });
+
+        btnListaAdj.setBackground(new java.awt.Color(255, 255, 255));
+        btnListaAdj.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnListaAdj.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/la.png"))); // NOI18N
+        btnListaAdj.setText("Lista Adj");
+        btnListaAdj.setBorder(null);
+        btnListaAdj.setContentAreaFilled(false);
+        btnListaAdj.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnListaAdj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListaAdjActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -151,27 +250,31 @@ public class frmInterface extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(iconNovo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(iconAbrir)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(iconSalvar)
+                .addGap(18, 18, 18)
+                .addComponent(btnMatrizAdj, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnMatrizInc, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(btnListaAdj, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jSeparator2)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(iconSalvar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(iconAbrir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(iconNovo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)))
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(iconSalvar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(iconAbrir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(iconNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnListaAdj, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                    .addComponent(btnMatrizAdj, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnMatrizInc, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel3.setBackground(new java.awt.Color(229, 229, 229));
@@ -187,11 +290,11 @@ public class frmInterface extends javax.swing.JFrame {
         btnAdicionarVertice.setContentAreaFilled(false);
         btnAdicionarVertice.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAdicionarVertice.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnAdicionarVerticeMouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnAdicionarVerticeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAdicionarVerticeMouseExited(evt);
             }
         });
         btnAdicionarVertice.addActionListener(new java.awt.event.ActionListener() {
@@ -206,6 +309,46 @@ public class frmInterface extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel4.setText("Nome");
 
+        btnAlterarVertice.setBackground(new java.awt.Color(255, 255, 255));
+        btnAlterarVertice.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnAlterarVertice.setText("Alterar");
+        btnAlterarVertice.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnAlterarVertice.setContentAreaFilled(false);
+        btnAlterarVertice.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAlterarVertice.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnAlterarVerticeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAlterarVerticeMouseExited(evt);
+            }
+        });
+        btnAlterarVertice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarVerticeActionPerformed(evt);
+            }
+        });
+
+        btnDeletarVertice.setBackground(new java.awt.Color(255, 255, 255));
+        btnDeletarVertice.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnDeletarVertice.setText("Deletar");
+        btnDeletarVertice.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnDeletarVertice.setContentAreaFilled(false);
+        btnDeletarVertice.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDeletarVertice.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnDeletarVerticeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnDeletarVerticeMouseExited(evt);
+            }
+        });
+        btnDeletarVertice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeletarVerticeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -216,19 +359,115 @@ public class frmInterface extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtaddVertice, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAdicionarVertice)
+                .addComponent(btnAdicionarVertice, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnDeletarVertice, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAlterarVertice, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtaddVertice, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
-                    .addComponent(btnAdicionarVertice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtaddVertice, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                    .addComponent(btnAdicionarVertice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDeletarVertice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAlterarVertice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+        );
+
+        jLabel11.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel11.setText("Editar");
+
+        bgVertice.setBackground(new java.awt.Color(255, 255, 255));
+        bgVertice.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        txtNovoVertice.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        txtNovoVertice.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        lblNo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblNo.setText("Nome");
+
+        btnConfirmarVertice.setBackground(new java.awt.Color(255, 255, 255));
+        btnConfirmarVertice.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnConfirmarVertice.setText("Confirmar");
+        btnConfirmarVertice.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnConfirmarVertice.setContentAreaFilled(false);
+        btnConfirmarVertice.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConfirmarVertice.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnConfirmarVerticeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnConfirmarVerticeMouseExited(evt);
+            }
+        });
+        btnConfirmarVertice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarVerticeActionPerformed(evt);
+            }
+        });
+
+        btnCancelarVertice.setBackground(new java.awt.Color(255, 255, 255));
+        btnCancelarVertice.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnCancelarVertice.setText("Cancelar");
+        btnCancelarVertice.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnCancelarVertice.setContentAreaFilled(false);
+        btnCancelarVertice.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelarVertice.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCancelarVerticeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCancelarVerticeMouseExited(evt);
+            }
+        });
+        btnCancelarVertice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarVerticeActionPerformed(evt);
+            }
+        });
+
+        lblNovo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblNovo.setText("Novo nome");
+
+        javax.swing.GroupLayout bgVerticeLayout = new javax.swing.GroupLayout(bgVertice);
+        bgVertice.setLayout(bgVerticeLayout);
+        bgVerticeLayout.setHorizontalGroup(
+            bgVerticeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bgVerticeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(bgVerticeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblNo)
+                    .addComponent(cbEditarVertice, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(bgVerticeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblNovo, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
+                    .addComponent(txtNovoVertice))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnConfirmarVertice, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCancelarVertice, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(88, Short.MAX_VALUE))
+        );
+        bgVerticeLayout.setVerticalGroup(
+            bgVerticeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgVerticeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(bgVerticeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNovo)
+                    .addComponent(lblNo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(bgVerticeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbEditarVertice, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(btnConfirmarVertice, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNovoVertice, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnCancelarVertice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -237,7 +476,13 @@ public class frmInterface extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(bgVertice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -245,12 +490,17 @@ public class frmInterface extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bgVertice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel3.setText("Vertice");
 
+        jLabel6.setBackground(new java.awt.Color(102, 255, 102));
         jLabel6.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel6.setText("Aresta");
 
@@ -283,17 +533,60 @@ public class frmInterface extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel5.setText("Origem");
 
-        jLabel7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel7.setText("No2");
+        jLabel9.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel9.setText("Destino");
 
-        cbOrigem.addActionListener(new java.awt.event.ActionListener() {
+        txtNomeAresta.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        txtNomeAresta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel10.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel10.setText("Nome");
+
+        btndeletarAresta.setBackground(new java.awt.Color(255, 255, 255));
+        btndeletarAresta.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btndeletarAresta.setText("Deletar");
+        btndeletarAresta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btndeletarAresta.setContentAreaFilled(false);
+        btndeletarAresta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btndeletarAresta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btndeletarArestaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btndeletarArestaMouseExited(evt);
+            }
+        });
+        btndeletarAresta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbOrigemActionPerformed(evt);
+                btndeletarArestaActionPerformed(evt);
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel9.setText("Destino");
+        btnAlterarAresta.setBackground(new java.awt.Color(255, 255, 255));
+        btnAlterarAresta.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnAlterarAresta.setText("Alterar");
+        btnAlterarAresta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnAlterarAresta.setContentAreaFilled(false);
+        btnAlterarAresta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAlterarAresta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnAlterarArestaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAlterarArestaMouseExited(evt);
+            }
+        });
+        btnAlterarAresta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarArestaActionPerformed(evt);
+            }
+        });
+
+        txtPesoAresta.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        txtPesoAresta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel13.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel13.setText("Peso");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -301,21 +594,33 @@ public class frmInterface extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cbOrigem, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbOrigem, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(cbDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(txtNomeAresta, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                        .addGap(94, 94, 94))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPesoAresta, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(cbDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAdicionarAresta, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btndeletarAresta, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAlterarAresta, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -324,18 +629,235 @@ public class frmInterface extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
+                            .addComponent(jLabel5)
                             .addComponent(jLabel9))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbDestino)
-                            .addComponent(btnAdicionarAresta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbOrigem, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                            .addComponent(cbDestino)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel13))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbOrigem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(11, 11, 11))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNomeAresta)
+                            .addComponent(txtPesoAresta))))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btndeletarAresta, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addComponent(btnAdicionarAresta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAlterarAresta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
+
+        bgAresta.setBackground(new java.awt.Color(255, 255, 255));
+        bgAresta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        lblOrigem.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblOrigem.setText("Origem");
+
+        lblDestino.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblDestino.setText("Destino");
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cbEditarOrigem, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblOrigem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cbEditarDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDestino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(lblDestino)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbEditarDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(lblOrigem)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbEditarOrigem, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        cbEditarOrigem.getAccessibleContext().setAccessibleName("");
+
+        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        lblNovaOrigem.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblNovaOrigem.setText("Origem");
+
+        lblNovoDestino.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblNovoDestino.setText("Destino");
+
+        lblNovoNomeArco.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblNovoNomeArco.setText("Nome");
+
+        txtNovoNomeAresta.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        txtNovoNomeAresta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        lblNovoPeso.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblNovoPeso.setText("Peso");
+
+        txtNovoPeso.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        txtNovoPeso.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cbNovaOrigem, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNovaOrigem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cbNovoDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNovoDestino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(lblNovoNomeArco))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNovoNomeAresta)))
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(lblNovoPeso))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNovoPeso)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(lblNovoNomeArco)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNovoNomeAresta))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel9Layout.createSequentialGroup()
+                            .addComponent(lblNovoDestino)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(cbNovoDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel9Layout.createSequentialGroup()
+                            .addComponent(lblNovaOrigem)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(cbNovaOrigem, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(lblNovoPeso)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNovoPeso)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        lblArco.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblArco.setText("Arco");
+
+        lblNovaAresta.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblNovaAresta.setText("Novo");
+
+        btnConfirmarAresta.setBackground(new java.awt.Color(255, 255, 255));
+        btnConfirmarAresta.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnConfirmarAresta.setText("Confirmar");
+        btnConfirmarAresta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnConfirmarAresta.setContentAreaFilled(false);
+        btnConfirmarAresta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConfirmarAresta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnConfirmarArestaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnConfirmarArestaMouseExited(evt);
+            }
+        });
+        btnConfirmarAresta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarArestaActionPerformed(evt);
+            }
+        });
+
+        btnCancelarAresta.setBackground(new java.awt.Color(255, 255, 255));
+        btnCancelarAresta.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnCancelarAresta.setText("Cancelar");
+        btnCancelarAresta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnCancelarAresta.setContentAreaFilled(false);
+        btnCancelarAresta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelarAresta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCancelarArestaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCancelarArestaMouseExited(evt);
+            }
+        });
+        btnCancelarAresta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarArestaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout bgArestaLayout = new javax.swing.GroupLayout(bgAresta);
+        bgAresta.setLayout(bgArestaLayout);
+        bgArestaLayout.setHorizontalGroup(
+            bgArestaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bgArestaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(bgArestaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(bgArestaLayout.createSequentialGroup()
+                        .addGroup(bgArestaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblArco)
+                            .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(bgArestaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNovaAresta)
+                            .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(bgArestaLayout.createSequentialGroup()
+                        .addComponent(btnConfirmarAresta, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCancelarAresta, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        bgArestaLayout.setVerticalGroup(
+            bgArestaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bgArestaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(bgArestaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblArco, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblNovaAresta, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(bgArestaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(bgArestaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnConfirmarAresta, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelarAresta, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        jLabel12.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel12.setText("Editar");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -343,14 +865,21 @@ public class frmInterface extends javax.swing.JFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel12)
+                    .addComponent(bgAresta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bgAresta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -377,6 +906,114 @@ public class frmInterface extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel8.setText("Display");
 
+        btnGrau.setBackground(new java.awt.Color(255, 255, 255));
+        btnGrau.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnGrau.setText("Grau");
+        btnGrau.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnGrau.setContentAreaFilled(false);
+        btnGrau.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGrau.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnGrauMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnGrauMouseExited(evt);
+            }
+        });
+        btnGrau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGrauActionPerformed(evt);
+            }
+        });
+
+        btnOrdem.setBackground(new java.awt.Color(255, 255, 255));
+        btnOrdem.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnOrdem.setText("Ordem");
+        btnOrdem.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnOrdem.setContentAreaFilled(false);
+        btnOrdem.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnOrdem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnOrdemMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnOrdemMouseExited(evt);
+            }
+        });
+        btnOrdem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOrdemActionPerformed(evt);
+            }
+        });
+
+        btnLimparTudo.setBackground(new java.awt.Color(255, 255, 255));
+        btnLimparTudo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnLimparTudo.setText("Limpar V/A");
+        btnLimparTudo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnLimparTudo.setContentAreaFilled(false);
+        btnLimparTudo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLimparTudo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnLimparTudoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnLimparTudoMouseExited(evt);
+            }
+        });
+        btnLimparTudo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparTudoActionPerformed(evt);
+            }
+        });
+
+        btnLimpaArestas.setBackground(new java.awt.Color(255, 255, 255));
+        btnLimpaArestas.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnLimpaArestas.setText("Limpar arestas");
+        btnLimpaArestas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnLimpaArestas.setContentAreaFilled(false);
+        btnLimpaArestas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLimpaArestas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnLimpaArestasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnLimpaArestasMouseExited(evt);
+            }
+        });
+        btnLimpaArestas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpaArestasActionPerformed(evt);
+            }
+        });
+
+        btnGerarGrafico.setBackground(new java.awt.Color(255, 255, 255));
+        btnGerarGrafico.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnGerarGrafico.setText("Gerar grafico");
+        btnGerarGrafico.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnGerarGrafico.setContentAreaFilled(false);
+        btnGerarGrafico.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGerarGrafico.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnGerarGraficoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnGerarGraficoMouseExited(evt);
+            }
+        });
+        btnGerarGrafico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGerarGraficoActionPerformed(evt);
+            }
+        });
+
+        imgGrafico.setBackground(new java.awt.Color(255, 255, 255));
+        imgGrafico.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        imgGrafico.setText("                                                                     Imagem...");
+        imgGrafico.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+
+        jLabel14.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel14.setText("Grafico");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -384,39 +1021,69 @@ public class frmInterface extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel6)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel8)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnOrdem, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnGrau, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnGerarGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnLimparTudo, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(btnLimpaArestas, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnMostrarVA, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(btnMostrarVA, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(72, Short.MAX_VALUE))
+                    .addComponent(imgGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(1, 1, 1)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(imgGrafico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnMostrarVA, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(btnMostrarVA, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnLimpaArestas, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnLimparTudo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(btnOrdem, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnGrau, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnGerarGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 11, Short.MAX_VALUE))))
         );
 
         menuArquivo.setText("Arquivo");
@@ -465,8 +1132,7 @@ public class frmInterface extends javax.swing.JFrame {
 
         menuExibir.setText("Exibir");
 
-        menuInfo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_MASK));
-        menuInfo.setText("Todas info...");
+        menuInfo.setText("Tipo do grafo");
         menuInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuInfoActionPerformed(evt);
@@ -474,7 +1140,111 @@ public class frmInterface extends javax.swing.JFrame {
         });
         menuExibir.add(menuInfo);
 
+        menuGrauRecepcao.setText("Grau de recepção");
+        menuGrauRecepcao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuGrauRecepcaoActionPerformed(evt);
+            }
+        });
+        menuExibir.add(menuGrauRecepcao);
+
+        menuGrauEmissao.setText("Grau de emissão");
+        menuGrauEmissao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuGrauEmissaoActionPerformed(evt);
+            }
+        });
+        menuExibir.add(menuGrauEmissao);
+
+        menuMatriz.setText("Matrizes");
+        menuMatriz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuMatrizActionPerformed(evt);
+            }
+        });
+        menuExibir.add(menuMatriz);
+
+        menuFonte.setText("Fonte");
+        menuFonte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuFonteActionPerformed(evt);
+            }
+        });
+        menuExibir.add(menuFonte);
+
+        menuSumidouro.setText("Sumidouro");
+        menuSumidouro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSumidouroActionPerformed(evt);
+            }
+        });
+        menuExibir.add(menuSumidouro);
+
+        menuIncidentes.setText("Incidentes");
+        menuIncidentes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuIncidentesActionPerformed(evt);
+            }
+        });
+        menuExibir.add(menuIncidentes);
+
+        menuAdjacente.setText("Adjacentes");
+        menuAdjacente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuAdjacenteActionPerformed(evt);
+            }
+        });
+        menuExibir.add(menuAdjacente);
+
+        menuConjunto.setText("Conjunto");
+        menuConjunto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuConjuntoActionPerformed(evt);
+            }
+        });
+        menuExibir.add(menuConjunto);
+
         jMenuBar1.add(menuExibir);
+
+        jMenu1.setText("Ferramentas");
+
+        menuGrafico.setText("Grafico");
+
+        menuNome.setText("Mostrar nome");
+        menuNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuNomeActionPerformed(evt);
+            }
+        });
+        menuGrafico.add(menuNome);
+
+        menuPeso.setText("Mostrar peso");
+        menuPeso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuPesoActionPerformed(evt);
+            }
+        });
+        menuGrafico.add(menuPeso);
+
+        menuAjustar.setText("Ajustar");
+        menuAjustar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuAjustarActionPerformed(evt);
+            }
+        });
+        menuGrafico.add(menuAjustar);
+
+        menuNormalizar.setText("Normalizar");
+        menuNormalizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuNormalizarActionPerformed(evt);
+            }
+        });
+        menuGrafico.add(menuNormalizar);
+
+        jMenu1.add(menuGrafico);
+
+        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -482,7 +1252,7 @@ public class frmInterface extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -493,7 +1263,22 @@ public class frmInterface extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAdicionarVerticeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarVerticeActionPerformed
-        display.setText("\t==========Vertice==========\n\n" + adicionarVertice(txtaddVertice.getText()));
+        if(txtaddVertice.getText().isEmpty()){
+            display.setText("Campo vertice está vazio!\nColoqueum nome valido");
+        }else{
+            if(graph.addNodes(txtaddVertice.getText()).equals("erro")){
+                display.setText("Vertice " + txtaddVertice.getText() + " existente!");
+            }else{
+                display.setText(graph.ImprimeNode());
+                cbOrigem.addItem(txtaddVertice.getText());
+                cbDestino.addItem(txtaddVertice.getText());
+                cbEditarOrigem.addItem(txtaddVertice.getText());
+                cbEditarDestino.addItem(txtaddVertice.getText());
+                cbNovoDestino.addItem(txtaddVertice.getText());
+                cbNovaOrigem.addItem(txtaddVertice.getText());
+                cbEditarVertice.addItem(txtaddVertice.getText());
+            }
+        }
         txtaddVertice.setText("");
     }//GEN-LAST:event_btnAdicionarVerticeActionPerformed
 
@@ -516,8 +1301,13 @@ public class frmInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAdicionarArestaMouseExited
 
     private void btnAdicionarArestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarArestaActionPerformed
-        graph.AddEdges((String) cbOrigem.getSelectedItem(), (String) cbDestino.getSelectedItem());
+       if(graph.addEdges((String) cbOrigem.getSelectedItem(), (String) cbDestino.getSelectedItem(),Float.parseFloat(txtPesoAresta.getText()),txtNomeAresta.getText()).equals("erro")){
+           display.setText("Existe uma aresta com esse nome!");
+       }else{
         ImprimeEdge();
+       }
+       txtNomeAresta.setText("");
+       txtPesoAresta.setText("");
     }//GEN-LAST:event_btnAdicionarArestaActionPerformed
 
     private void menuAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAbrirActionPerformed
@@ -533,16 +1323,22 @@ public class frmInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_menuSairActionPerformed
 
     private void menuInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuInfoActionPerformed
-        imprimeInfo();
+    if(graph.getEdgedefault().equals("uderected")){
+        if(graph.completo() == true){
+            display.setText("Grafo Completo");
+        }else if(graph.regular() == true){
+            display.setText("Grafo Regular");
+        }else if(graph.multigrafo() == true){
+            display.setText("Multigrafo");
+        }
+    }else{
+        display.setText("implementar");
+    }
     }//GEN-LAST:event_menuInfoActionPerformed
 
     private void menuNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNovoActionPerformed
         novoArquivo();
     }//GEN-LAST:event_menuNovoActionPerformed
-
-    private void iconSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iconSalvarMouseClicked
-        salvarArquivo();
-    }//GEN-LAST:event_iconSalvarMouseClicked
 
     private void btnMostrarVAMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMostrarVAMouseEntered
         btnMostrarVA.setContentAreaFilled(true);
@@ -554,10 +1350,180 @@ public class frmInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMostrarVAMouseExited
 
     private void btnMostrarVAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarVAActionPerformed
-//        ImprimeEdge();
-//        ImprimeNode();
-        imprimeInfo();
+        display.setText(graph.imprimeListas());
     }//GEN-LAST:event_btnMostrarVAActionPerformed
+
+    private void btnGrauMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGrauMouseExited
+        btnGrau.setContentAreaFilled(false);
+    }//GEN-LAST:event_btnGrauMouseExited
+
+    private void btnGrauMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGrauMouseEntered
+        btnGrau.setContentAreaFilled(true);
+        btnGrau.setBackground(Color.gray);
+    }//GEN-LAST:event_btnGrauMouseEntered
+
+    private void btnGrauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrauActionPerformed
+        display.setText("\t========== Grau ==========\n"+graph.getGrau(graph));
+    }//GEN-LAST:event_btnGrauActionPerformed
+
+    private void btnOrdemMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrdemMouseExited
+        btnOrdem.setContentAreaFilled(false);
+    }//GEN-LAST:event_btnOrdemMouseExited
+
+    private void btnOrdemMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrdemMouseEntered
+        btnOrdem.setContentAreaFilled(true);
+        btnOrdem.setBackground(Color.gray);
+    }//GEN-LAST:event_btnOrdemMouseEntered
+
+    private void btnOrdemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdemActionPerformed
+       display.setText("\t========== Ordem ==========\n\nOrdem do Grafo é: "+graph.getNodes().size());
+    }//GEN-LAST:event_btnOrdemActionPerformed
+
+    private void btnLimparTudoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimparTudoMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLimparTudoMouseEntered
+
+    private void btnLimparTudoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimparTudoMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLimparTudoMouseExited
+
+    private void btnLimparTudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparTudoActionPerformed
+        cbEditarOrigem.removeAllItems();
+        cbEditarDestino.removeAllItems();
+        cbOrigem.removeAllItems();
+        cbDestino.removeAllItems();
+        cbNovoDestino.removeAllItems();
+        cbNovaOrigem.removeAllItems();
+        cbEditarVertice.removeAllItems();
+        
+        graph.getNodes().clear();
+        graph.getEdges().clear();
+        
+    }//GEN-LAST:event_btnLimparTudoActionPerformed
+
+    private void btnLimpaArestasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpaArestasMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLimpaArestasMouseEntered
+
+    private void btnLimpaArestasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpaArestasMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLimpaArestasMouseExited
+
+    private void btnLimpaArestasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpaArestasActionPerformed
+         graph.getEdges().clear();
+         display.setText(graph.imprimeListas());
+    }//GEN-LAST:event_btnLimpaArestasActionPerformed
+
+    private void btnConfirmarVerticeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmarVerticeMouseEntered
+        btnConfirmarVertice.setContentAreaFilled(true);
+        btnConfirmarVertice.setBackground(Color.gray);
+    }//GEN-LAST:event_btnConfirmarVerticeMouseEntered
+
+    private void btnConfirmarVerticeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmarVerticeMouseExited
+        btnConfirmarVertice.setContentAreaFilled(false);
+    }//GEN-LAST:event_btnConfirmarVerticeMouseExited
+
+    private void btnConfirmarVerticeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarVerticeActionPerformed
+        confirmarAlteracao();
+        alterar(0);
+        txtNovoVertice.setText("");
+    }//GEN-LAST:event_btnConfirmarVerticeActionPerformed
+
+    private void btnCancelarVerticeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarVerticeMouseEntered
+        btnCancelarVertice.setContentAreaFilled(true);
+        btnCancelarVertice.setBackground(Color.gray);
+    }//GEN-LAST:event_btnCancelarVerticeMouseEntered
+
+    private void btnCancelarVerticeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarVerticeMouseExited
+        btnCancelarVertice.setContentAreaFilled(false);
+    }//GEN-LAST:event_btnCancelarVerticeMouseExited
+
+    private void btnCancelarVerticeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarVerticeActionPerformed
+        txtNovoVertice.setText("");
+        alterar(1);
+    }//GEN-LAST:event_btnCancelarVerticeActionPerformed
+
+    private void btnAlterarVerticeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterarVerticeMouseEntered
+        btnAlterarVertice.setContentAreaFilled(true);
+        btnAlterarVertice.setBackground(Color.gray);
+    }//GEN-LAST:event_btnAlterarVerticeMouseEntered
+
+    private void btnAlterarVerticeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterarVerticeMouseExited
+        btnAlterarVertice.setContentAreaFilled(false);
+    }//GEN-LAST:event_btnAlterarVerticeMouseExited
+
+    private void btnAlterarVerticeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarVerticeActionPerformed
+        alterar(3);
+    }//GEN-LAST:event_btnAlterarVerticeActionPerformed
+
+    private void btnDeletarVerticeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeletarVerticeMouseEntered
+        btnDeletarVertice.setContentAreaFilled(true);
+        btnDeletarVertice.setBackground(Color.gray);
+    }//GEN-LAST:event_btnDeletarVerticeMouseEntered
+
+    private void btnDeletarVerticeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeletarVerticeMouseExited
+        btnDeletarVertice.setContentAreaFilled(false);
+    }//GEN-LAST:event_btnDeletarVerticeMouseExited
+
+    private void btnDeletarVerticeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarVerticeActionPerformed
+        cbOrigem.removeItem(txtaddVertice.getText());
+        cbDestino.removeItem(txtaddVertice.getText());
+        cbEditarVertice.removeItem(txtaddVertice.getText());
+        display.setText("\t==========Remover==========\n\n"+graph.removerNode(txtaddVertice.getText()));
+        txtaddVertice.setText("");
+    }//GEN-LAST:event_btnDeletarVerticeActionPerformed
+
+    private void btndeletarArestaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btndeletarArestaMouseEntered
+        btndeletarAresta.setContentAreaFilled(true);
+        btndeletarAresta.setBackground(Color.gray);
+    }//GEN-LAST:event_btndeletarArestaMouseEntered
+
+    private void btndeletarArestaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btndeletarArestaMouseExited
+        btndeletarAresta.setContentAreaFilled(false);
+    }//GEN-LAST:event_btndeletarArestaMouseExited
+
+    private void btndeletarArestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeletarArestaActionPerformed
+        display.setText("\t==========Aresta==========\n\n"+graph.removerEdge((String)cbOrigem.getSelectedItem(),
+            (String)cbDestino.getSelectedItem()));
+    }//GEN-LAST:event_btndeletarArestaActionPerformed
+
+    private void btnConfirmarArestaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmarArestaMouseEntered
+        btnConfirmarAresta.setContentAreaFilled(true);
+        btnConfirmarAresta.setBackground(Color.gray);
+    }//GEN-LAST:event_btnConfirmarArestaMouseEntered
+
+    private void btnConfirmarArestaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmarArestaMouseExited
+        btnConfirmarAresta.setContentAreaFilled(false);
+    }//GEN-LAST:event_btnConfirmarArestaMouseExited
+
+    private void btnConfirmarArestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarArestaActionPerformed
+        if(graph.removerEdge((String)cbEditarOrigem.getSelectedItem(),(String)cbEditarDestino.getSelectedItem()).equals("Não foi possivel remover")){
+            display.setText("\t==========Alterar==========\n\nNão foi possivel realizar a alteração!\n"
+                + "Verifique as arestas e tente novamente...");
+        }else{
+            display.setText("\t==========Alterar==========\n\n"
+                +graph.addEdges((String)cbNovaOrigem.getSelectedItem(),(String)cbNovoDestino.getSelectedItem(),Float.parseFloat(txtNovoPeso.getText()),txtNovoNomeAresta.getText()));
+        }
+        txtNomeAresta.setText("");
+        alterar(0);
+    }//GEN-LAST:event_btnConfirmarArestaActionPerformed
+
+    private void btnCancelarArestaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarArestaMouseEntered
+        btnCancelarAresta.setContentAreaFilled(true);
+        btnCancelarAresta.setBackground(Color.gray);
+    }//GEN-LAST:event_btnCancelarArestaMouseEntered
+
+    private void btnCancelarArestaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarArestaMouseExited
+        btnCancelarAresta.setContentAreaFilled(false);
+    }//GEN-LAST:event_btnCancelarArestaMouseExited
+
+    private void btnCancelarArestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarArestaActionPerformed
+        alterar(2);
+    }//GEN-LAST:event_btnCancelarArestaActionPerformed
+
+    private void iconSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iconSalvarMouseClicked
+        salvarArquivo();
+    }//GEN-LAST:event_iconSalvarMouseClicked
 
     private void iconAbrirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iconAbrirMouseClicked
         abrirArquivo();
@@ -567,68 +1533,188 @@ public class frmInterface extends javax.swing.JFrame {
         novoArquivo();
     }//GEN-LAST:event_iconNovoMouseClicked
 
-    private void cbOrigemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOrigemActionPerformed
+    private void btnAlterarArestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarArestaActionPerformed
+        alterar(4);
+        ImprimeEdge();
+    }//GEN-LAST:event_btnAlterarArestaActionPerformed
+
+    private void btnAlterarArestaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterarArestaMouseExited
+        btnAlterarAresta.setContentAreaFilled(false);
+    }//GEN-LAST:event_btnAlterarArestaMouseExited
+
+    private void btnAlterarArestaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterarArestaMouseEntered
+        btnAlterarAresta.setContentAreaFilled(true);
+        btnAlterarAresta.setBackground(Color.gray);
+    }//GEN-LAST:event_btnAlterarArestaMouseEntered
+
+    private void btnMatrizAdjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMatrizAdjActionPerformed
+        display.setText("\t==========Matriz Adjacência==========\n\n"+graph.matrizAdjacencia(graph));
+    }//GEN-LAST:event_btnMatrizAdjActionPerformed
+
+    private void btnMatrizIncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMatrizIncActionPerformed
+        display.setText("\t==========Matriz Incidência==========\n\n"+graph.matrizIncidencia(graph));
+    }//GEN-LAST:event_btnMatrizIncActionPerformed
+
+    private void btnListaAdjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListaAdjActionPerformed
+        display.setText("\t==========Lista Adjacência==========\n\n"+graph.listaAdjacencia(graph));
+    }//GEN-LAST:event_btnListaAdjActionPerformed
+
+    private void menuMatrizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMatrizActionPerformed
+        display.setText("\t==========Matriz Adjacência==========\n\n"+graph.matrizAdjacencia(graph)+"\n\n\n"
+        +"\t==========Matriz Incidência==========\n\n"+graph.matrizIncidencia(graph)+"\n\n\n"
+        +"\t==========Lista Adjacência==========\n\n"+graph.listaAdjacencia(graph));
+    }//GEN-LAST:event_menuMatrizActionPerformed
+
+    private void btnGerarGraficoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGerarGraficoMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbOrigemActionPerformed
+    }//GEN-LAST:event_btnGerarGraficoMouseEntered
+
+    private void btnGerarGraficoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGerarGraficoMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGerarGraficoMouseExited
+
+    private void btnGerarGraficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarGraficoActionPerformed
+        gerarGraph();
+    }//GEN-LAST:event_btnGerarGraficoActionPerformed
+
+    private void menuIncidentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuIncidentesActionPerformed
+       display.setText("\t==========Incidentes==========\n\n"+graph.getIncidentes());
+    }//GEN-LAST:event_menuIncidentesActionPerformed
+
+    private void menuAdjacenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAdjacenteActionPerformed
+        display.setText("\t==========Adjacentes==========\n\n"+graph.getAdjacentes());
+    }//GEN-LAST:event_menuAdjacenteActionPerformed
+
+    private void menuConjuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuConjuntoActionPerformed
+         display.setText("\t==========Conjunto==========\n\n"+graph.conjunto(graph));
+    }//GEN-LAST:event_menuConjuntoActionPerformed
+
+    private void menuPesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPesoActionPerformed
+        m = 1;
+        gerarGraph();
+    }//GEN-LAST:event_menuPesoActionPerformed
+
+    private void menuNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNomeActionPerformed
+        m = 0;
+        gerarGraph();
+    }//GEN-LAST:event_menuNomeActionPerformed
+
+    private void menuAjustarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAjustarActionPerformed
+        imgGrafico.setSize(300,555);
+        gerarGraph();
+    }//GEN-LAST:event_menuAjustarActionPerformed
+
+    private void menuNormalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNormalizarActionPerformed
+        gerarGraph();
+    }//GEN-LAST:event_menuNormalizarActionPerformed
+
+    private void menuGrauRecepcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGrauRecepcaoActionPerformed
+        if(graph.getEdgedefault().equals("directed")){
+            display.setText(graph.grauRecepcao(graph));
+        }else{
+            display.setText("Não se aplica em grafo  não orientado");
+        }
+    }//GEN-LAST:event_menuGrauRecepcaoActionPerformed
+
+    private void menuGrauEmissaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGrauEmissaoActionPerformed
+        if(graph.getEdgedefault().equals("directed")){
+            display.setText(graph.grauEmissao(graph));
+        }else{
+            display.setText("Não se aplica em grafo  não orientado");
+        }
+    }//GEN-LAST:event_menuGrauEmissaoActionPerformed
+
+    private void menuFonteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFonteActionPerformed
+        if(graph.getEdgedefault().equals("directed")){
+            display.setText(graph.fonte(graph));
+        }else{
+            display.setText("Não se aplica em grafo  não orientado");
+        }
+    }//GEN-LAST:event_menuFonteActionPerformed
+
+    private void menuSumidouroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSumidouroActionPerformed
+        if(graph.getEdgedefault().equals("directed")){
+            display.setText(graph.sumidouro(graph));
+        }else{
+            display.setText("Não se aplica em grafo  não orientado");
+        }
+    }//GEN-LAST:event_menuSumidouroActionPerformed
+    
+    public void confirmarAlteracao(){
+    int i;
+        if(txtNovoVertice.getText().equals("")){
+            display.setText("\t==========ATENÇÂO==========\n"
+            + "\n\n\t Ocorreu um errou ao tentar ALTERAR!!\n"
+            + "\t               VERTICE INVALIDO... \n"
+            + "\t Coloque somente nomes validos."
+            + "\n\n\t TENTE NOVAMENTE!!");
+        }else{
+            display.setText(graph.EditarNode(graph,cbEditarVertice.getSelectedItem().toString(),txtNovoVertice.getText()));
+   
+            cbEditarOrigem.removeItem(cbEditarVertice.getSelectedItem().toString());
+            cbEditarDestino.removeItem(cbEditarVertice.getSelectedItem().toString());
+            cbOrigem.removeItem(cbEditarVertice.getSelectedItem().toString());
+            cbDestino.removeItem(cbEditarVertice.getSelectedItem().toString());
+            cbNovoDestino.removeItem(cbEditarVertice.getSelectedItem().toString());
+            cbNovaOrigem.removeItem(cbEditarVertice.getSelectedItem().toString());
+            cbEditarVertice.removeItem(cbEditarVertice.getSelectedItem().toString());
+                        
+            cbEditarOrigem.addItem(txtNovoVertice.getText());
+            cbEditarDestino.addItem(txtNovoVertice.getText());
+            cbOrigem.addItem(txtNovoVertice.getText());
+            cbDestino.addItem(txtNovoVertice.getText());
+            cbNovoDestino.addItem(txtNovoVertice.getText());
+            cbNovaOrigem.addItem(txtNovoVertice.getText());
+            cbEditarVertice.addItem(txtNovoVertice.getText());
+            
+
+        }
+}
     public void novoArquivo() {
         frmCriarGrafo fcg = new frmCriarGrafo();
         fcg.setVisible(true);
     }
-
+    public void ImprimeEdge() {
+        String r = "\t========== Aresta ==========\n\n Id\tOrigem\tDestino\n";
+        
+        for (int i = 0; i < graph.getEdges().size(); i++) {
+                r += " "+graph.getEdges().get(i).getId()+"\t"+graph.getEdges().get(i).getNode1().getId() + "\t" +  graph.getEdges().get(i).getNode2().getId()+"\n";
+            }       
+       display.setText(r);
+    }
     public void setNomeGrafo(String nome) {
         display.setText(nome);
         graph.setId(nome);
     }
-
+    //Recebe os dados da tela frmCriarGrafo
     public void setAbrirGrafo(List<Node> node, List<Edge> edge, String nome, String tipo) {
-        String r = "", r2 = "";
         graph.setNodes(node);
         graph.setEdges(edge);
         graph.setId(nome);
+        System.out.println(tipo);
         graph.setEdgedefault(tipo);
-
-        for (int i = 0; i < graph.getNodes().size(); i++) {
-
-            cbOrigem.addItem(graph.getNodes().get(i).getId());
-            cbDestino.addItem(graph.getNodes().get(i).getId());
-
+//        lblNomeGrafo.setText(graph.getId());
+//        lblTipo.setText(graph.getEdgedefault());
+        for (int i = 0; i < graph.getNodes().size(); i++) { //Adiciona o vertice no combobox    
+          cbEditarVertice.addItem(graph.getNodes().get(i).getId());
+          cbOrigem.addItem(graph.getNodes().get(i).getId());
+          cbDestino.addItem(graph.getNodes().get(i).getId());
+          cbNovaOrigem.addItem(graph.getNodes().get(i).getId());
+          cbNovoDestino.addItem(graph.getNodes().get(i).getId());
+          cbEditarOrigem.addItem(graph.getNodes().get(i).getId());
+          cbEditarDestino.addItem(graph.getNodes().get(i).getId());
         }
-        display.setText("Arquivo carregado com sucesso!!");
-
-    }
-
-    public void centralizarComponente() {
-        Dimension ds = Toolkit.getDefaultToolkit().getScreenSize();
-        Dimension dw = getSize();
-        setLocation((ds.width - dw.width) / 4, (ds.height - dw.height) / 4);
-    }
-
-    public String adicionarVertice(String n) {
+        display.setText(graph.imprimeListas());
+//        lblNomeGrafo.setText(graph.getId());
+//        lblTipo.setText(graph.getEdgedefault());
         
-        if (txtaddVertice.getText().isEmpty()) {
-            
-            return "Escolha vertice válido.";
-            
-        } else {
-            
-            for (int i = 0; i < graph.getNodes().size(); i++) {
-                
-                if (graph.getNodes().get(i).getId().equals(n)) {
-                    
-                    return "Vertice " + graph.getNodes().get(i).getId() + " existente!";
-                }
-            }
-
-            cbOrigem.addItem(n);
-            cbDestino.addItem(n);
-
-            graph.AddNodes(n);
-        }
-        return "Vértice " + n + " adicionado";
+        JOptionPane.showMessageDialog(null, "Arquivo carregado com sucesso..."); 
+        alterar(0);
     }
 
     public void salvarArquivo() {
-        display.setForeground(Color.black);
+        graph.getGrau(graph);
+        graphml.getGraph();
         JFileChooser arquivo = new JFileChooser();
         FileNameExtensionFilter filtroXML = new FileNameExtensionFilter("Arquivos XML", "xml");
         arquivo.addChoosableFileFilter(filtroXML);
@@ -653,6 +1739,8 @@ public class frmInterface extends javax.swing.JFrame {
         xstream.useAttributeFor("source", String.class);
         xstream.useAttributeFor("target", String.class);
         xstream.useAttributeFor("xmlns", String.class);
+        xstream.useAttributeFor("degree", int.class);
+        xstream.useAttributeFor("weight", float.class);
         xstream.addImplicitArray(Graph.class, "nodes");
         xstream.addImplicitArray(Graph.class, "edges");
         graphml.setGraph(graph);
@@ -672,6 +1760,13 @@ public class frmInterface extends javax.swing.JFrame {
     }
 
     public void abrirArquivo() {
+        cbOrigem.removeAllItems();
+        cbDestino.removeAllItems();
+        cbEditarDestino.removeAllItems();
+        cbEditarOrigem.removeAllItems();
+        cbNovaOrigem.removeAllItems();
+        cbNovoDestino.removeAllItems();
+        
         JFileChooser arquivo = new JFileChooser();
         FileNameExtensionFilter filtroXML = new FileNameExtensionFilter("Arquivos XML", "xml");
         arquivo.addChoosableFileFilter(filtroXML);
@@ -695,6 +1790,8 @@ public class frmInterface extends javax.swing.JFrame {
                 xstream.useAttributeFor("target", String.class);
                 xstream.useAttributeFor("xmlns", String.class);
                 xstream.useAttributeFor("id", String.class);
+                xstream.useAttributeFor("degree", int.class);
+                xstream.useAttributeFor("weight", float.class);
                 xstream.addImplicitArray(Graph.class, "nodes");
                 xstream.addImplicitArray(Graph.class, "edges");
 
@@ -714,7 +1811,7 @@ public class frmInterface extends javax.swing.JFrame {
 
                 for (Edge edge : graphml.getGraph().getEdges()) {
                     for (Node no : graphml.getGraph().getNodes()) {
-                        if (no.getId().equals(edge.getSource())) {
+                        if (no.getId().equals(edge.getSoucer())) {
                             edge.setNode1(no);
                         }
                         if (no.getId().equals(edge.getTarget())) {
@@ -727,114 +1824,155 @@ public class frmInterface extends javax.swing.JFrame {
 
                 graph.setNodes(listaNode);
                 graph.setEdges(listaEdge);
-
+                
                 String r = "", r2 = "";
                 for (int i = 0; i < graph.getNodes().size(); i++) {
                     cbOrigem.addItem(graph.getNodes().get(i).getId());
                     cbDestino.addItem(graph.getNodes().get(i).getId());
+                    cbEditarVertice.addItem(graph.getNodes().get(i).getId());
+                    cbNovaOrigem.addItem(graph.getNodes().get(i).getId());
+                    cbNovoDestino.addItem(graph.getNodes().get(i).getId());
+                    cbEditarOrigem.addItem(graph.getNodes().get(i).getId());
+                    cbEditarDestino.addItem(graph.getNodes().get(i).getId());
                 }
                 graph.setId(graphml.getGraph().getId());
-                imprimeInfo();
+                graph.setEdgedefault(graphml.getGraph().getEdgedefault());
+//                lblNomeGrafo.setText(graph.getId());
+//                lblTipo.setText(graph.getEdgedefault());
+                
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(frmInterface.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
 
-    public void ImprimeNode() {
-        String r = " Vertice: {";
-        display.setForeground(Color.black);
-
-        for (int i = 0; i < graph.getNodes().size(); i++) {
-            r += graph.getNodes().get(i).getId();
-
-            if (i < graph.getNodes().size() - 1) {
-                r += ",";
-            }
-        }
-        r += "}";
-        display.setText(r);
-    }
-
-    public void ImprimeEdge() {
-        String r = " Aresta: {";
-        display.setForeground(Color.black);
-        
-            for (int i = 0; i < graph.getEdges().size(); i++) {
-                r += "(" + graph.getEdges().get(i).getNode1().getId() + "," + graph.getEdges().get(i).getNode2().getId() + ")";
-                if (i < graph.getEdges().size() - 1) {
-                    r += ",";
-                }
-            }
-            
-        r += "}";
-        display.setText(r);
-    }
-
-    public void imprimeInfo() {
-        String r = "";
-        display.setForeground(Color.black);
-        
-        if (graph.getNodes().size() != 0) {
-            r += "Listas:\n";
-            r += " Vertice: {";
-
-            for (int i = 0; i < graph.getNodes().size(); i++) {
-                r += graph.getNodes().get(i).getId();
-
-                if (i < graph.getNodes().size() - 1) {
-                    r += ",";
-                }
-            }
-            r += "}";
-        } else {
-            r += "\t==========ATENÇÂO==========\n INFORMAÇÂO:\n*****************\n";
-            display.setForeground(Color.red);
-            r += " Vertice: Lista vazia";
-        }
-        if (graph.getEdges().size() != 0) {
-            r += "\n Aresta: {";
-
-            for (int i = 0; i < graph.getEdges().size(); i++) {
-                r += "(" + graph.getEdges().get(i).getNode1().getId() + "," + graph.getEdges().get(i).getNode2().getId() + ")";
-                if (i < graph.getEdges().size() - 1) {
-                    r += ",";
-                }
-            }
-            r += "}";
-        } else {
-            display.setForeground(Color.red);
-            r += "\n Aresta: Lista vazia";
-        }
-        display.setText(r);
-    }
-
     public void setNovoGrafo(String nome, String qt, int tipo) {
-        String r = "";
-        r += "Nome: " + nome + "\n"
-                + "Vertices: " + qt + "\n";
-
         if (tipo == 1) {
-            r += "Tipo: Direcionado";
-            graph.setEdgedefault("directed");
+            graph.setEdgedefault(graphml.getGraph().getEdgedefault());
         } else {
-            r += "Tipo: Não direcionado";
             graph.setEdgedefault("undirected");
         }
-
-        display.setText(r);
         graph.setId(nome);
+        
         for (int i = 0; i < Integer.parseInt(qt); i++) {
             Node node = new Node();
             node.setId(Integer.toString(i + 1));
             graph.addNode(node);
             cbOrigem.addItem(Integer.toString(i + 1));
             cbDestino.addItem(Integer.toString(i + 1));
+            cbEditarOrigem.addItem(Integer.toString(i + 1));
+            cbEditarDestino.addItem(Integer.toString(i + 1));
+            cbNovoDestino.addItem(Integer.toString(i + 1));
+            cbNovaOrigem.addItem(Integer.toString(i + 1));
+            cbEditarVertice.addItem(Integer.toString(i + 1));
         }
-//    alterar(0);
+//        lblNomeGrafo.setText(graph.getId());
+//        lblTipo.setText(graph.getEdgedefault());
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);  //Fecha o jframe sem fechar tudo
+    alterar(0);
 
     }
-
+public void alterar(int i){
+    if(i == 0){
+        //Vertice
+        lblNovo.setForeground(Color.gray);
+        lblNo.setForeground(Color.gray);
+        txtNovoVertice.setEditable(false);
+        txtNovoVertice.setBorder(new LineBorder(Color.gray));
+        cbEditarVertice.setEditable(false);
+        btnConfirmarVertice.setEnabled(false);
+        btnConfirmarVertice.setForeground(Color.gray);
+        btnCancelarVertice.setEnabled(false);
+        btnCancelarVertice.setForeground(Color.gray);
+        bgVertice.setBorder(new LineBorder(Color.gray));
+        bgVertice.setBackground(Color.lightGray);
+        //Aresta
+        lblArco.setForeground(Color.gray);
+        lblNovoDestino.setForeground(Color.gray);
+        lblNovaAresta.setForeground(Color.gray);
+        lblNovaOrigem.setForeground(Color.gray);
+        lblNovoDestino.setForeground(Color.gray);
+        lblNovaOrigem.setForeground(Color.gray);
+        lblOrigem.setForeground(Color.gray);
+        lblDestino.setForeground(Color.gray);
+//        lblNomeArco.setForeground(Color.gray);
+        lblNovoNomeArco.setForeground(Color.gray);
+        btnCancelarAresta.setEnabled(false);
+        btnCancelarAresta.setForeground(Color.gray);
+        btnConfirmarAresta.setEnabled(false);
+        btnConfirmarAresta.setForeground(Color.gray);
+        cbNovoDestino.setEditable(false);
+        cbNovaOrigem.setEditable(false);
+        cbEditarOrigem.setEditable(false);
+        cbEditarDestino.setEditable(false);
+        bgAresta.setBackground(Color.lightGray);
+    }else if(i == 1){
+        //Vertice
+        lblNovo.setForeground(Color.gray);
+        lblNo.setForeground(Color.gray);
+        txtNovoVertice.setEditable(false);
+        txtNovoVertice.setBorder(new LineBorder(Color.gray));
+        cbEditarVertice.setEditable(false);
+        btnConfirmarVertice.setEnabled(false);
+        btnConfirmarVertice.setForeground(Color.gray);
+        btnCancelarVertice.setEnabled(false);
+        btnCancelarVertice.setForeground(Color.gray);
+        bgVertice.setBorder(new LineBorder(Color.gray));
+        bgVertice.setBackground(Color.lightGray);
+    }else if(i==2){
+        //Aresta
+        lblArco.setForeground(Color.gray);
+        lblDestino.setForeground(Color.gray);
+        lblNovaAresta.setForeground(Color.gray);
+        lblNovaOrigem.setForeground(Color.gray);
+        lblNovoDestino.setForeground(Color.gray);
+        lblOrigem.setForeground(Color.gray);
+//        lblNomeArco.setForeground(Color.gray);
+        lblNovoNomeArco.setForeground(Color.gray);
+        btnCancelarAresta.setEnabled(false);
+        btnCancelarAresta.setForeground(Color.gray);
+        btnConfirmarAresta.setEnabled(false);
+        btnConfirmarAresta.setForeground(Color.gray);
+        cbNovoDestino.setEditable(false);
+        cbNovaOrigem.setEditable(false);
+        cbEditarOrigem.setEditable(false);
+        cbEditarDestino.setEditable(false);
+        bgAresta.setBackground(Color.lightGray);
+    }else if(i == 3){
+        //Vertice
+        lblNovo.setForeground(Color.black);
+        lblNo.setForeground(Color.black);
+        txtNovoVertice.setEditable(true);
+        txtNovoVertice.setBorder(new LineBorder(Color.black));
+        cbEditarVertice.setEditable(true);
+        btnConfirmarVertice.setEnabled(true);
+        btnConfirmarVertice.setForeground(Color.black);
+        btnCancelarVertice.setEnabled(true);
+        btnCancelarVertice.setForeground(Color.black);
+        bgVertice.setBorder(new LineBorder(Color.black));
+        bgVertice.setBackground(Color.white);
+    }else{
+        //Aresta
+        lblArco.setForeground(Color.black);
+        lblDestino.setForeground(Color.black);
+        lblNovaAresta.setForeground(Color.black);
+        lblNovaOrigem.setForeground(Color.black);
+        lblNovoDestino.setForeground(Color.black);
+        lblOrigem.setForeground(Color.black);
+//        lblNomeArco.setForeground(Color.black);
+        lblNovoNomeArco.setForeground(Color.black);
+        btnCancelarAresta.setEnabled(true);
+        btnCancelarAresta.setForeground(Color.black);
+        btnConfirmarAresta.setEnabled(true);
+        btnConfirmarAresta.setForeground(Color.black);
+//        cbNovoDestino.setEditable(true);
+//        cbNovaOrigem.setEditable(true);
+//        cbEditarOrigem.setEditable(true);
+//        cbEditarDestino.setEditable(true);
+        bgAresta.setBackground(Color.white);
+        
+    }
+}
     public Image ImageScale(Image img, int w, int h) {
         BufferedImage image = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
         Graphics2D g2 = image.createGraphics();
@@ -844,7 +1982,49 @@ public class frmInterface extends javax.swing.JFrame {
         return image;
 
     }
+public void gerarGraph(){
+    
+        graph.setEdgedefault(graph.getEdgedefault());
+        graph.setNodes(graph.getNodes());
+        graph.setEdges(graph.getEdges()); 
 
+            graph.geraGraphUndirected(m);
+
+            for(int i=0; i< graph.getEdges().size();i++){
+                try {
+                    Process p;
+                    File arquivo = new File("src\\os\\dot\\fileS.dot");
+                    try (FileWriter fw = new FileWriter(arquivo)) {
+
+                        fw.write(""+graph.geraGraphUndirected(m));
+
+                        fw.flush();
+                    } catch (IOException ex) {
+                        System.out.println("Erro ao Criar Arquivo: " + ex.getMessage());
+                    }
+
+                    String commandLine = "dot -Tpng " + arquivo.getCanonicalPath() + " -o src\\os\\img\\fileS.png";
+
+                    p = Runtime.getRuntime().exec(commandLine);
+                    while (p.isAlive()) {
+                    }
+
+                    String path = "src\\os\\img\\fileS.png";
+                    BufferedImage img = ImageIO.read(new File(path));
+                    ImageIcon image = new ImageIcon(ImageScale(img,imgGrafico.getWidth(),imgGrafico.getHeight()));
+                    imgGrafico.setIcon(image);
+                    imgGrafico.setText("");
+
+                } catch (IOException ex) {
+                    System.out.println("Erro do Executar Comando: " + ex.getMessage());
+                }
+            }
+}
+    public void centralizarComponente() {
+        Dimension ds = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension dw = getSize();
+        setLocation((ds.width - dw.width) / 4, (ds.height - dw.height) / 4);
+    }
     /**
      * @param args the command line arguments
      */
@@ -888,22 +2068,52 @@ public class frmInterface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel bgAresta;
+    private javax.swing.JPanel bgVertice;
     private javax.swing.JButton btnAdicionarAresta;
     private javax.swing.JButton btnAdicionarVertice;
+    private javax.swing.JButton btnAlterarAresta;
+    private javax.swing.JButton btnAlterarVertice;
+    private javax.swing.JButton btnCancelarAresta;
+    private javax.swing.JButton btnCancelarVertice;
+    private javax.swing.JButton btnConfirmarAresta;
+    private javax.swing.JButton btnConfirmarVertice;
+    private javax.swing.JButton btnDeletarVertice;
+    private javax.swing.JButton btnGerarGrafico;
+    private javax.swing.JButton btnGrau;
+    private javax.swing.JButton btnLimpaArestas;
+    private javax.swing.JButton btnLimparTudo;
+    private javax.swing.JButton btnListaAdj;
+    private javax.swing.JButton btnMatrizAdj;
+    private javax.swing.JButton btnMatrizInc;
     private javax.swing.JButton btnMostrarVA;
+    private javax.swing.JButton btnOrdem;
+    private javax.swing.JButton btndeletarAresta;
     private javax.swing.JComboBox<String> cbDestino;
+    private javax.swing.JComboBox<String> cbEditarDestino;
+    private javax.swing.JComboBox<String> cbEditarOrigem;
+    private javax.swing.JComboBox<String> cbEditarVertice;
+    private javax.swing.JComboBox<String> cbNovaOrigem;
+    private javax.swing.JComboBox<String> cbNovoDestino;
     private javax.swing.JComboBox<String> cbOrigem;
     private javax.swing.JTextArea display;
     private javax.swing.JLabel iconAbrir;
     private javax.swing.JLabel iconNovo;
     private javax.swing.JLabel iconSalvar;
+    private javax.swing.JLabel imgGrafico;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -911,15 +2121,45 @@ public class frmInterface extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel lblArco;
+    private javax.swing.JLabel lblDestino;
+    private javax.swing.JLabel lblNo;
+    private javax.swing.JLabel lblNovaAresta;
+    private javax.swing.JLabel lblNovaOrigem;
+    private javax.swing.JLabel lblNovo;
+    private javax.swing.JLabel lblNovoDestino;
+    private javax.swing.JLabel lblNovoNomeArco;
+    private javax.swing.JLabel lblNovoPeso;
+    private javax.swing.JLabel lblOrigem;
     private javax.swing.JMenuItem menuAbrir;
+    private javax.swing.JMenuItem menuAdjacente;
+    private javax.swing.JMenuItem menuAjustar;
     private javax.swing.JMenu menuArquivo;
+    private javax.swing.JMenuItem menuConjunto;
     private javax.swing.JMenu menuExibir;
+    private javax.swing.JMenuItem menuFonte;
+    private javax.swing.JMenu menuGrafico;
+    private javax.swing.JMenuItem menuGrauEmissao;
+    private javax.swing.JMenuItem menuGrauRecepcao;
+    private javax.swing.JMenuItem menuIncidentes;
     private javax.swing.JMenuItem menuInfo;
+    private javax.swing.JMenuItem menuMatriz;
+    private javax.swing.JMenuItem menuNome;
+    private javax.swing.JMenuItem menuNormalizar;
     private javax.swing.JMenuItem menuNovo;
+    private javax.swing.JMenuItem menuPeso;
     private javax.swing.JMenuItem menuSair;
     private javax.swing.JMenuItem menuSalvar;
+    private javax.swing.JMenuItem menuSumidouro;
+    private javax.swing.JTextField txtNomeAresta;
+    private javax.swing.JTextField txtNovoNomeAresta;
+    private javax.swing.JTextField txtNovoPeso;
+    private javax.swing.JTextField txtNovoVertice;
+    private javax.swing.JTextField txtPesoAresta;
     private javax.swing.JTextField txtaddVertice;
     // End of variables declaration//GEN-END:variables
 }

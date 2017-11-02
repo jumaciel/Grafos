@@ -1,0 +1,13 @@
+digraph G {
+Isadora -> Emerson[label=a1]
+Alfredo -> Emerson[label=a2]
+Alfredo -> Antonio[label=a3]
+Cecilia -> Antonio[label=a4]
+Antonio -> Renata[label=a5]
+Renata;
+Antonio;
+Emerson;
+Isadora;
+Alfredo;
+Cecilia;
+}

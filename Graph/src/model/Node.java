@@ -12,7 +12,7 @@ import java.util.List;
 public class Node {
         
    public String id;
-   private int grau;
+   private int degree;
    
    public Node() {
         
@@ -27,11 +27,11 @@ public class Node {
    }
 
     public int getGrau() {
-        return grau;
+        return degree;
     }
 
     public void setGrau(int grau) {
-        this.grau = grau;
+        this.degree = grau;
     }
     
 }

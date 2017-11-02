@@ -11,11 +11,12 @@ package model;
  */
 public class Edge {
 
-    Node node1;
-    Node node2;
-    String id;
+    private Node node1;
+    private Node node2;
+    private String id;
     private String source;
     private String target;
+    private float weight;
 
     public Edge() {
     }
@@ -34,7 +35,7 @@ public class Edge {
 
     public void setNode1(Node node1) {
         this.node1 = node1;
-//        this.source = node1.getId();
+        this.source = node1.getId();
     }
 
     public Node getNode2() {
@@ -43,14 +44,14 @@ public class Edge {
 
     public void setNode2(Node node2) {
         this.node2 = node2;
-//        this.target = node2.getId();
+        this.target = node2.getId();
     }
 
-    public String getSource() {
+    public String getSoucer() {
         return source;
     }
 
-    public void setSource(String source) {
+    public void setSoucer(String source) {
         this.source = source;
     }
 
@@ -60,6 +61,14 @@ public class Edge {
 
     public void setTarget(String target) {
         this.target = target;
+    }
+
+    public float getPeso() {
+        return weight;
+    }
+
+    public void setPeso(float peso) {
+        this.weight = peso;
     }
 
 }

@@ -63,8 +63,9 @@ public class frmCriarGrafo extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         btnConfirmarGrafo = new javax.swing.JButton();
-        btnConfirmarGrafo1 = new javax.swing.JButton();
+        btnCancelarGrafo = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -101,12 +102,25 @@ public class frmCriarGrafo extends javax.swing.JFrame {
 
         jLabel2.setText("Criar um novo grafo.");
 
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logo.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(jLabel3)))
+                .addContainerGap(31, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel11)
@@ -116,20 +130,20 @@ public class frmCriarGrafo extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtQtVertice, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbDigrafo)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(44, 44, 44))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -143,7 +157,7 @@ public class frmCriarGrafo extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbDigrafo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
-                .addGap(63, 63, 63))
+                .addContainerGap())
         );
 
         btnConfirmarGrafo.setBackground(new java.awt.Color(255, 255, 255));
@@ -153,11 +167,11 @@ public class frmCriarGrafo extends javax.swing.JFrame {
         btnConfirmarGrafo.setContentAreaFilled(false);
         btnConfirmarGrafo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConfirmarGrafo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnConfirmarGrafoMouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnConfirmarGrafoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnConfirmarGrafoMouseExited(evt);
             }
         });
         btnConfirmarGrafo.addActionListener(new java.awt.event.ActionListener() {
@@ -166,23 +180,23 @@ public class frmCriarGrafo extends javax.swing.JFrame {
             }
         });
 
-        btnConfirmarGrafo1.setBackground(new java.awt.Color(255, 255, 255));
-        btnConfirmarGrafo1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnConfirmarGrafo1.setText("Cancelar");
-        btnConfirmarGrafo1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnConfirmarGrafo1.setContentAreaFilled(false);
-        btnConfirmarGrafo1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnConfirmarGrafo1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnConfirmarGrafo1MouseExited(evt);
-            }
+        btnCancelarGrafo.setBackground(new java.awt.Color(255, 255, 255));
+        btnCancelarGrafo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnCancelarGrafo.setText("Cancelar");
+        btnCancelarGrafo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnCancelarGrafo.setContentAreaFilled(false);
+        btnCancelarGrafo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelarGrafo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnConfirmarGrafo1MouseEntered(evt);
+                btnCancelarGrafoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCancelarGrafoMouseExited(evt);
             }
         });
-        btnConfirmarGrafo1.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelarGrafo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConfirmarGrafo1ActionPerformed(evt);
+                btnCancelarGrafoActionPerformed(evt);
             }
         });
 
@@ -218,26 +232,23 @@ public class frmCriarGrafo extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(btnConfirmarGrafo, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(btnConfirmarGrafo1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnConfirmarGrafo, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(btnCancelarGrafo, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(64, 64, 64))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnConfirmarGrafo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(189, 189, 189)
-                        .addComponent(btnConfirmarGrafo1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 12, Short.MAX_VALUE))
+                    .addComponent(btnConfirmarGrafo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelarGrafo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -259,7 +270,7 @@ public class frmCriarGrafo extends javax.swing.JFrame {
     private void btnConfirmarGrafoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarGrafoActionPerformed
         if (txtNomeDoGrafo.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Nome do Grafo não pode ser em branco\n"
-                    + "coloque um nome e Tente novamente...");
+                    + "coloque um nome e tente novamente...");
         } else {
             if (fp == null) {
                 fp = new frmInterface();
@@ -303,17 +314,18 @@ public class frmCriarGrafo extends javax.swing.JFrame {
         abrirArquivo();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void btnConfirmarGrafo1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmarGrafo1MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnConfirmarGrafo1MouseExited
+    private void btnCancelarGrafoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarGrafoMouseExited
+        btnCancelarGrafo.setContentAreaFilled(true);
+        btnCancelarGrafo.setBackground(Color.gray);
+    }//GEN-LAST:event_btnCancelarGrafoMouseExited
 
-    private void btnConfirmarGrafo1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmarGrafo1MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnConfirmarGrafo1MouseEntered
+    private void btnCancelarGrafoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarGrafoMouseEntered
+        btnCancelarGrafo.setContentAreaFilled(false);
+    }//GEN-LAST:event_btnCancelarGrafoMouseEntered
 
-    private void btnConfirmarGrafo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarGrafo1ActionPerformed
-        this.dispose();        // TODO add your handling code here:
-    }//GEN-LAST:event_btnConfirmarGrafo1ActionPerformed
+    private void btnCancelarGrafoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarGrafoActionPerformed
+        this.dispose();       
+    }//GEN-LAST:event_btnCancelarGrafoActionPerformed
     public void abrirArquivo() {
         JFileChooser arquivo = new JFileChooser();
         FileNameExtensionFilter filtroXML = new FileNameExtensionFilter("Arquivos XML", "xml");
@@ -338,6 +350,8 @@ public class frmCriarGrafo extends javax.swing.JFrame {
                 xstream.useAttributeFor("target", String.class);
                 xstream.useAttributeFor("xmlns", String.class);
                 xstream.useAttributeFor("id", String.class);
+                xstream.useAttributeFor("degree", int.class);
+                xstream.useAttributeFor("weight", float.class);
                 xstream.addImplicitArray(Graph.class, "nodes");
                 xstream.addImplicitArray(Graph.class, "edges");
 
@@ -356,7 +370,7 @@ public class frmCriarGrafo extends javax.swing.JFrame {
 
                 for (Edge edge : graphml.getGraph().getEdges()) {
                     for (Node no : graphml.getGraph().getNodes()) {
-                        if (no.getId().equals(edge.getSource())) {
+                        if (no.getId().equals(edge.getSoucer())) {
                             edge.setNode1(no);
                         }
                         if (no.getId().equals(edge.getTarget())) {
@@ -367,24 +381,25 @@ public class frmCriarGrafo extends javax.swing.JFrame {
                 listaNode = (ArrayList<Node>) graphml.getGraph().getNodes();
                 listaEdge = (ArrayList<Edge>) graphml.getGraph().getEdges();
                 graph.setId(graphml.getGraph().getId());
+                graph.setEdgedefault(graphml.getGraph().getEdgedefault());
 
                 if (fp == null) {
                     fp = new frmInterface();
                     fp.setVisible(true);
 
-                    if (graph.getId() == "direction") {
-                        fp.setAbrirGrafo(listaNode, listaEdge, graph.getId(), "direction");
+                    if (graph.getEdgedefault().equals("directed")) {
+                        fp.setAbrirGrafo(listaNode, listaEdge, graph.getId(), "directed");
                     } else {
-                        fp.setAbrirGrafo(listaNode, listaEdge, graph.getId(), "undirection");
+                        fp.setAbrirGrafo(listaNode, listaEdge, graph.getId(), "undirected");
                     }
                 } else {
                     fp.setVisible(true);
                     fp.setState(frmInterface.NORMAL);
 
-                    if (graph.getId() == "direction") {
-                        fp.setAbrirGrafo(listaNode, listaEdge, graph.getId(), "direction");
+                    if (graph.getEdgedefault().equals("directed")) {
+                        fp.setAbrirGrafo(listaNode, listaEdge, graph.getId(), "directed");
                     } else {
-                        fp.setAbrirGrafo(listaNode, listaEdge, graph.getId(), "undirection");
+                        fp.setAbrirGrafo(listaNode, listaEdge, graph.getId(), "undirected");
                     }
                 }
                 this.dispose();
@@ -398,7 +413,7 @@ public class frmCriarGrafo extends javax.swing.JFrame {
     public void centralizarComponente() {
         Dimension ds = Toolkit.getDefaultToolkit().getScreenSize();
         Dimension dw = getSize();
-        setLocation((ds.width - dw.width) / 3, (ds.height - dw.height) / 3);
+        setLocation((ds.width - dw.width) / 3, (ds.height - dw.height) / 4);
     }
 
     /**
@@ -438,13 +453,14 @@ public class frmCriarGrafo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelarGrafo;
     private javax.swing.JButton btnConfirmarGrafo;
-    private javax.swing.JButton btnConfirmarGrafo1;
     private javax.swing.JCheckBox cbDigrafo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
