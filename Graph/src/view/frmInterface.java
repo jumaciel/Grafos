@@ -102,9 +102,9 @@ public class frmInterface extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         bgVertice1 = new javax.swing.JPanel();
         lblNo1 = new javax.swing.JLabel();
-        btnConfirmarVertice1 = new javax.swing.JButton();
-        cbEditarVertice1 = new javax.swing.JComboBox<>();
-        cbEditarVertice2 = new javax.swing.JComboBox<>();
+        btnVerificar = new javax.swing.JButton();
+        cbVerificarOrigem = new javax.swing.JComboBox<>();
+        cbVerificarDestino = new javax.swing.JComboBox<>();
         lblNo2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -554,30 +554,30 @@ public class frmInterface extends javax.swing.JFrame {
         bgVertice1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lblNo1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lblNo1.setText("Nome");
+        lblNo1.setText("Origem");
 
-        btnConfirmarVertice1.setBackground(new java.awt.Color(255, 255, 255));
-        btnConfirmarVertice1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnConfirmarVertice1.setText("Confirmar");
-        btnConfirmarVertice1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnConfirmarVertice1.setContentAreaFilled(false);
-        btnConfirmarVertice1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnConfirmarVertice1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnVerificar.setBackground(new java.awt.Color(255, 255, 255));
+        btnVerificar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnVerificar.setText("Confirmar");
+        btnVerificar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnVerificar.setContentAreaFilled(false);
+        btnVerificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVerificar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnConfirmarVertice1MouseEntered(evt);
+                btnVerificarMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnConfirmarVertice1MouseExited(evt);
+                btnVerificarMouseExited(evt);
             }
         });
-        btnConfirmarVertice1.addActionListener(new java.awt.event.ActionListener() {
+        btnVerificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConfirmarVertice1ActionPerformed(evt);
+                btnVerificarActionPerformed(evt);
             }
         });
 
         lblNo2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lblNo2.setText("Nome");
+        lblNo2.setText("Destino");
 
         javax.swing.GroupLayout bgVertice1Layout = new javax.swing.GroupLayout(bgVertice1);
         bgVertice1.setLayout(bgVertice1Layout);
@@ -587,14 +587,14 @@ public class frmInterface extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(bgVertice1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNo1)
-                    .addComponent(cbEditarVertice1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbVerificarOrigem, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(bgVertice1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNo2)
                     .addGroup(bgVertice1Layout.createSequentialGroup()
-                        .addComponent(cbEditarVertice2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbVerificarDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnConfirmarVertice1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnVerificar, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         bgVertice1Layout.setVerticalGroup(
@@ -606,9 +606,9 @@ public class frmInterface extends javax.swing.JFrame {
                     .addComponent(lblNo2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(bgVertice1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbEditarVertice1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnConfirmarVertice1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbEditarVertice2))
+                    .addComponent(cbVerificarOrigem, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnVerificar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbVerificarDestino))
                 .addContainerGap())
         );
 
@@ -1334,6 +1334,8 @@ public class frmInterface extends javax.swing.JFrame {
                 cbNovoDestino.addItem(txtaddVertice.getText());
                 cbNovaOrigem.addItem(txtaddVertice.getText());
                 cbEditarVertice.addItem(txtaddVertice.getText());
+                cbVerificarOrigem.addItem(txtaddVertice.getText());
+                cbVerificarDestino.addItem(txtaddVertice.getText());
             }
         }
         txtaddVertice.setText("");
@@ -1603,7 +1605,7 @@ public class frmInterface extends javax.swing.JFrame {
         if(graph.getEdges().isEmpty()){
             imgGrafico.setSize(300,80);
         }else{
-        imgGrafico.setSize(300,555);
+            imgGrafico.setSize(300,555);
         }
         gerarGraph();
     }//GEN-LAST:event_menuAjustarActionPerformed
@@ -1652,6 +1654,8 @@ public class frmInterface extends javax.swing.JFrame {
         cbNovoDestino.removeAllItems();
         cbNovaOrigem.removeAllItems();
         cbEditarVertice.removeAllItems();
+        cbVerificarOrigem.removeAllItems();
+        cbVerificarDestino.removeAllItems();
         
         graph.getNodes().clear();
         graph.getEdges().clear();
@@ -1679,17 +1683,21 @@ public class frmInterface extends javax.swing.JFrame {
         display.setText("\t========== Grau ==========\n"+graph.getGrau());
     }//GEN-LAST:event_menuGrauActionPerformed
 
-    private void btnConfirmarVertice1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmarVertice1MouseEntered
+    private void btnVerificarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVerificarMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnConfirmarVertice1MouseEntered
+    }//GEN-LAST:event_btnVerificarMouseEntered
 
-    private void btnConfirmarVertice1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmarVertice1MouseExited
+    private void btnVerificarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVerificarMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnConfirmarVertice1MouseExited
+    }//GEN-LAST:event_btnVerificarMouseExited
 
-    private void btnConfirmarVertice1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarVertice1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnConfirmarVertice1ActionPerformed
+    private void btnVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed
+        if(graph.getEdgedefault().equals("directed")){
+            
+        }else{
+            display.setText(graph.verificaCadeia((String)cbVerificarOrigem.getSelectedItem(),(String)cbVerificarDestino.getSelectedItem()));
+        }
+    }//GEN-LAST:event_btnVerificarActionPerformed
     
     public void confirmarAlteracao(){
     int i;
@@ -1709,6 +1717,8 @@ public class frmInterface extends javax.swing.JFrame {
             cbNovoDestino.removeItem(cbEditarVertice.getSelectedItem().toString());
             cbNovaOrigem.removeItem(cbEditarVertice.getSelectedItem().toString());
             cbEditarVertice.removeItem(cbEditarVertice.getSelectedItem().toString());
+            cbVerificarOrigem.removeItem(cbEditarVertice.getSelectedItem().toString());
+            cbVerificarDestino.removeItem(cbEditarVertice.getSelectedItem().toString());
                         
             cbEditarOrigem.addItem(txtNovoVertice.getText());
             cbEditarDestino.addItem(txtNovoVertice.getText());
@@ -1717,6 +1727,8 @@ public class frmInterface extends javax.swing.JFrame {
             cbNovoDestino.addItem(txtNovoVertice.getText());
             cbNovaOrigem.addItem(txtNovoVertice.getText());
             cbEditarVertice.addItem(txtNovoVertice.getText());
+            cbVerificarOrigem.addItem(txtNovoVertice.getText());
+            cbVerificarDestino.addItem(txtNovoVertice.getText());
             
 
         }
@@ -1764,12 +1776,14 @@ public class frmInterface extends javax.swing.JFrame {
           cbNovoDestino.addItem(graph.getNodes().get(i).getId());
           cbEditarOrigem.addItem(graph.getNodes().get(i).getId());
           cbEditarDestino.addItem(graph.getNodes().get(i).getId());
+          cbVerificarOrigem.addItem(graph.getNodes().get(i).getId());
+          cbVerificarDestino.addItem(graph.getNodes().get(i).getId());
+          
         }        
         lblNomeGrafo.setText(graph.getId());
         lblTipoGrafo.setText(graph.getEdgedefault());
         display.setText(graph.imprimeListas());
-
-        
+  
         JOptionPane.showMessageDialog(null, "Arquivo carregado com sucesso..."); 
         alterar(0);
     }
@@ -1829,6 +1843,8 @@ public class frmInterface extends javax.swing.JFrame {
         cbEditarOrigem.removeAllItems();
         cbNovaOrigem.removeAllItems();
         cbNovoDestino.removeAllItems();
+        cbVerificarOrigem.removeAllItems();
+        cbVerificarDestino.removeAllItems();
         
         JFileChooser arquivo = new JFileChooser();
         FileNameExtensionFilter filtroXML = new FileNameExtensionFilter("Arquivos XML", "xml");
@@ -1897,6 +1913,8 @@ public class frmInterface extends javax.swing.JFrame {
                     cbNovoDestino.addItem(graph.getNodes().get(i).getId());
                     cbEditarOrigem.addItem(graph.getNodes().get(i).getId());
                     cbEditarDestino.addItem(graph.getNodes().get(i).getId());
+                    cbVerificarOrigem.addItem(graph.getNodes().get(i).getId());
+                    cbVerificarDestino.addItem(graph.getNodes().get(i).getId());
                 }
                 graph.setId(graphml.getGraph().getId());
                 graph.setEdgedefault(graphml.getGraph().getEdgedefault());
@@ -1949,6 +1967,8 @@ public class frmInterface extends javax.swing.JFrame {
             cbNovoDestino.addItem(Integer.toString(i + 1));
             cbNovaOrigem.addItem(Integer.toString(i + 1));
             cbEditarVertice.addItem(Integer.toString(i + 1));
+            cbVerificarOrigem.addItem(Integer.toString(i + 1));
+            cbVerificarDestino.addItem(Integer.toString(i + 1));
         }
         lblNomeGrafo.setText(graph.getId());
         lblTipoGrafo.setText(graph.getEdgedefault());
@@ -2072,7 +2092,7 @@ public void gerarGraph(){
         graph.setNodes(graph.getNodes());
         graph.setEdges(graph.getEdges()); 
 
-            display.setText(graph.geraGraphUndirected(m));
+            display.setText(graph.geraGraph(m));
 
             for(int i=0; i< graph.getNodes().size();i++){
                 try {
@@ -2080,7 +2100,7 @@ public void gerarGraph(){
                     File arquivo = new File("src\\os\\dot\\fileS.dot");
                     try (FileWriter fw = new FileWriter(arquivo)) {
 
-                        fw.write(""+graph.geraGraphUndirected(m));
+                        fw.write(""+graph.geraGraph(m));
 
                         fw.flush();
                     } catch (IOException ex) {
@@ -2163,7 +2183,6 @@ public void gerarGraph(){
     private javax.swing.JButton btnCancelarVertice;
     private javax.swing.JButton btnConfirmarAresta;
     private javax.swing.JButton btnConfirmarVertice;
-    private javax.swing.JButton btnConfirmarVertice1;
     private javax.swing.JButton btnDeletarVertice;
     private javax.swing.JButton btnListaAdj;
     private javax.swing.JButton btnListaAdj1;
@@ -2172,16 +2191,17 @@ public void gerarGraph(){
     private javax.swing.JButton btnListaAdj4;
     private javax.swing.JButton btnMatrizAdj;
     private javax.swing.JButton btnMatrizInc;
+    private javax.swing.JButton btnVerificar;
     private javax.swing.JButton btndeletarAresta;
     private javax.swing.JComboBox<String> cbDestino;
     private javax.swing.JComboBox<String> cbEditarDestino;
     private javax.swing.JComboBox<String> cbEditarOrigem;
     private javax.swing.JComboBox<String> cbEditarVertice;
-    private javax.swing.JComboBox<String> cbEditarVertice1;
-    private javax.swing.JComboBox<String> cbEditarVertice2;
     private javax.swing.JComboBox<String> cbNovaOrigem;
     private javax.swing.JComboBox<String> cbNovoDestino;
     private javax.swing.JComboBox<String> cbOrigem;
+    private javax.swing.JComboBox<String> cbVerificarDestino;
+    private javax.swing.JComboBox<String> cbVerificarOrigem;
     private javax.swing.JTextArea display;
     private javax.swing.JLabel iconAbrir;
     private javax.swing.JLabel iconNovo;

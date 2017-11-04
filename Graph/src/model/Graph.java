@@ -384,6 +384,33 @@ public class Graph {
       return lista;  
     
     }
+    public String verificaCadeia(String origem, String destino){
+        List<Node> auxGrau= new ArrayList<Node>();
+        
+        if(!origem.equals(destino)){
+            for (Edge e : getEdges()) {  //Varre a lista de aresta contando quantas vezes o vertice aparece
+                    e.getNode1().setGrau(e.getNode1().getGrau() * 0);
+                    e.getNode2().setGrau(e.getNode2().getGrau() * 0);
+            }
+            for (Edge e : getEdges()) {  //Varre a lista de aresta contando quantas vezes o vertice aparece
+                e.getNode1().setGrau(e.getNode1().getGrau() + 1);
+                e.getNode2().setGrau(e.getNode2().getGrau() + 1);
+            }
+            for (Node no : getNodes()) {
+                auxGrau.add(no);
+            }
+            for (Node no : auxGrau) {
+                if(no.getId().equals(origem) && no.getGrau()!= 0){
+                    for (Node no2 : auxGrau) {
+                        if(no2.getId().equals(destino) && no2.getGrau()!= 0){
+                            return "Existe";
+                        }
+                    }
+                }
+            }
+        }
+        return "Não existe";
+    }
     public String ImprimeNode() {
         String r = " Vertice: {";
 
@@ -444,7 +471,7 @@ public class Graph {
         }
         return r;
     }
-public String geraGraphUndirected(int m){
+public String geraGraph(int m){
         String espaco = " ";
         String lista = "digraph G {\n";
         int i,v;
