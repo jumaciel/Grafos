@@ -1,0 +1,14 @@
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns">
+  <graph id="teste5" edgedefault="undirected">
+    <node id="1" degree="2"/>
+    <node id="2" degree="3"/>
+    <node id="3" degree="1"/>
+    <node id="4" degree="2"/>
+    <node id="5" degree="2"/>
+    <edge id="a1" source="1" target="2" weight="10.0"/>
+    <edge id="a2" source="1" target="4" weight="20.0"/>
+    <edge id="a3" source="2" target="3" weight="30.0"/>
+    <edge id="a4" source="2" target="5" weight="50.0"/>
+    <edge id="a5" source="5" target="4" weight="60.0"/>
+  </graph>
+</graphml>

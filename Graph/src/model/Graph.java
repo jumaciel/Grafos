@@ -55,65 +55,63 @@ public class Graph {
 
     }
 
-    public String addNodes(String node) {
+    public boolean addNodes(String node) {
         Node n = new Node();
         
-        for (int i = 0; i < getNodes().size(); i++) {  // O laço verifica se o vertice já existe se não exite retorna erro
-            if (getNodes().get(i).getId().equals(node)) {
-                return "erro";
+        for (int i = 0; i < getNodes().size(); i++) {  // Varre a lista de vertice
+            if (getNodes().get(i).getId().equals(node)) { //Verifica se o vertice  i  é igual o parametro passado
+                return true;
             }
         }
         n.setId(node);
         addNode(n);
-        return "Vértice " + n + " adicionado";
+        return false;
      }
-    public String removerNode(String node){
+    public boolean removerNode(String node){
     String r="";
-    for(int i = 0; i < getNodes().size();i++){
-        if(getNodes().get(i).id.equals(node)){
-            getNodes().remove(i);
-            for(int a = 0; a < getEdges().size();a++){
-                if(getEdges().get(a).getNode1().getId().equals(node)){
-                    r+="Aresta ("
-                    +getEdges().get(a).getNode1().getId()+","+getEdges().get(a).getNode2().getId()
-                    +") removida com sucesso!\n";
-                    getEdges().remove(a); 
+    
+    for(int i = 0; i < getNodes().size();i++){ //Varre a lista de vertices 
+        if(getNodes().get(i).id.equals(node)){ // Verifica se o vertice na posição i é igual o passado pelo parametro
+            getNodes().remove(i); // Remove o vertice na posição de i
+            
+            for(int a = 0; a < getEdges().size();a++){ // Varre a lista de arestas
+                // Verifica se a aresta na posição de i é igual o passado pelo paramentro
+                if(getEdges().get(a).getNode1().getId().equals(node)){ 
+                    getEdges().remove(a);  // Remove a aresta na posição de i
                     a--;
                 }
             }
-            for(int a2 = 0; a2 < getEdges().size();a2++){
+            for(int a2 = 0; a2 < getEdges().size();a2++){ // Varre a lista de arestas
+                // Verifica se a aresta na posição de i é igual o passado pelo paramentro
                 if(getEdges().get(a2).getNode2().getId().equals(node)){
-                    r+="Aresta ("
-                    +getEdges().get(a2).getNode1().getId()+","+getEdges().get(a2).getNode2().getId()
-                    +") removida com sucesso!\n";
-                    getEdges().remove(a2);
+                    getEdges().remove(a2); // Remove a aresta na posição de i2
                     a2--;
                 }
             }
-            return "Vertice "+ node+" removido com sucesso!\n\n"+r;
+            return true;
             }
         }
-        return "Erro! não foi possivel remover  ";
+        return false;
     }
-    public String EditarNode(Graph graph,String node, String novo){
+    public String EditarNode(String node, String novo){
         String r="";
         String b= node;
         
-        for(int i = 0; i < graph.getNodes().size();i++){
-            if(graph.getNodes().get(i).getId().equals(node)){
-                graph.getNodes().get(i).setId(novo);
+        for(int i = 0; i < getNodes().size();i++){
+            if(getNodes().get(i).getId().equals(node)){
+                getNodes().get(i).setId(novo);
                 r+= "Vertice alterado com sucesso.\n\n"
                 + "Vertice "+node+" ============== > "+novo+"\n\n"
                 + "Edges atualizadas com sucesso.\n\n";
             }
         }
-        for(int a = 0; a < graph.getEdges().size();a++){
+        for(int a = 0; a < getEdges().size();a++){
             if(getEdges().get(a).getSoucer().equals(b)){
                 getEdges().get(a).setSoucer(novo);
 //                a--;
             }
         }
-        for(int a2 = 0; a2 < graph.getEdges().size();a2++){
+        for(int a2 = 0; a2 < getEdges().size();a2++){
             if(getEdges().get(a2).getTarget().equals(b)){
                 r+="Edge ("+getEdges().get(a2).getSoucer()+","+getEdges().get(a2).getTarget()+") ============== > ("
                 +getEdges().get(a2).getNode1().getId()+","+getEdges().get(a2).getNode2().getId()+")\n";
@@ -137,7 +135,7 @@ public class Graph {
                 e.setNode2(getNodes().get(i)); //Seta o vertice na posição de i
             }
         }
-        e.setPeso(peso);
+        e.setPeso(peso); //seta o peso da aresta
         e.setId(nome); //Seta o nome da aresta
         addEdge(e); //adiciona o objeto na lista de arestas
 
@@ -152,10 +150,10 @@ public class Graph {
         }
         return "Não foi possivel remover";
     }
-    public String getGrau(Graph graph) {
+    public String getGrau() {
         String listaGrau = "";
-        if(graph.getEdgedefault().equals("directed")){
-            for (Edge e : graph.getEdges()) {  //Varre a lista de aresta contando quantas vezes o vertice aparece
+        if(getEdgedefault().equals("directed")){
+            for (Edge e : getEdges()) {  //Varre a lista de aresta contando quantas vezes o vertice aparece
                 e.getNode1().setGrau(e.getNode1().getGrau() * 0);
                 e.getNode2().setGrau(e.getNode2().getGrau() * 0);
             }
@@ -167,7 +165,7 @@ public class Graph {
                 listaGrau += "\n Grau Vertice " + no.getId() + " é " + no.getGrau();
             } 
         }else{
-            for (Edge e : graph.getEdges()) {  //Varre a lista de aresta contando quantas vezes o vertice aparece
+            for (Edge e : getEdges()) {  //Varre a lista de aresta contando quantas vezes o vertice aparece
                 e.getNode1().setGrau(e.getNode1().getGrau() * 0);
                 e.getNode2().setGrau(e.getNode2().getGrau() * 0);
             }
@@ -181,24 +179,24 @@ public class Graph {
         }
         return listaGrau;
     }
-    public String matrizAdjacencia(Graph graph) {
+    public String matrizAdjacencia() {
         String espaco = "    ";
         String matrizTotal = "  ";
         int i, j;
-        int matriz[][] = new int[graph.getNodes().size()][graph.getNodes().size()];
+        int matriz[][] = new int[getNodes().size()][getNodes().size()];
         
-        for (Edge e : graph.getEdges()) {
-            int no1 = graph.getNodes().indexOf(e.getNode1());
-            int no2 = graph.getNodes().indexOf(e.getNode2());
+        for (Edge e : getEdges()) {
+            int no1 = getNodes().indexOf(e.getNode1());
+            int no2 = getNodes().indexOf(e.getNode2());
             matriz[no1][no2] = 1;
             matriz[no2][no1] = 1;
         }
-        for (int a = 0; a < graph.getNodes().size(); a++) {
-            matrizTotal += espaco + graph.getNodes().get(a).getId();
+        for (int a = 0; a < getNodes().size(); a++) {
+            matrizTotal += espaco + getNodes().get(a).getId();
         }
-        for (i = 0; i < graph.getNodes().size(); i++) {
-            matrizTotal += "\n" + graph.getNodes().get(i).getId();
-            for (j = 0; j < graph.getNodes().size(); j++) {
+        for (i = 0; i < getNodes().size(); i++) {
+            matrizTotal += "\n" + getNodes().get(i).getId();
+            for (j = 0; j < getNodes().size(); j++) {
                 matrizTotal += espaco + matriz[i][j];
             }
         }
@@ -307,16 +305,17 @@ public class Graph {
         }
         return false;
     }
-    public String grauRecepcao(Graph graph){
+    public String grauRecepcao(){
         String lista = "Grau Recepção\n********************\n";
         int i, j,grauR = 0;
-        List<Node> auxQr = new ArrayList<Node>();
-        for (i = 0; i < graph.getEdges().size(); i++) {
-                auxQr.add(graph.getEdges().get(i).getNode2());
+        List<Node> auxGrauR = new ArrayList<Node>();
+        
+        for (i = 0; i < getEdges().size(); i++) {//adiciona todas os detisno na lista auxiliar
+                auxGrauR.add(getEdges().get(i).getNode2());
             }
-        for (i = 0; i < graph.getNodes().size(); i++) {
-            for(int i2 = 0; i2 < auxQr.size();i2++){
-                if(auxQr.get(i2).getId().equals(graph.getNodes().get(i).getId())){
+        for (i = 0; i < getNodes().size(); i++) {
+            for(int i2 = 0; i2 < auxGrauR.size();i2++){ // conta quantas vezes o vertice aparece na lista auxiliar
+                if(auxGrauR.get(i2).getId().equals(getNodes().get(i).getId())){
                     grauR++;
                 }
             }
@@ -325,16 +324,16 @@ public class Graph {
         }
       return lista;  
     }
-    public String grauEmissao(Graph graph){
+    public String grauEmissao(){
         String lista = "Grau de Emissão\n********************\n";
         int i, j,grauE = 0;
         List<Node> auxQr = new ArrayList<Node>();
-        for (i = 0; i < graph.getEdges().size(); i++) {
-                auxQr.add(graph.getEdges().get(i).getNode1());
+        for (i = 0; i < getEdges().size(); i++) {
+                auxQr.add(getEdges().get(i).getNode1());
             }
-        for (i = 0; i < graph.getNodes().size(); i++) {
+        for (i = 0; i < getNodes().size(); i++) {
             for(int i2 = 0; i2 < auxQr.size();i2++){
-                if(auxQr.get(i2).getId().equals(graph.getNodes().get(i).getId())){
+                if(auxQr.get(i2).getId().equals(getNodes().get(i).getId())){
                     grauE++;
                 }
             }
@@ -344,16 +343,16 @@ public class Graph {
 
       return lista;  
     }
-    public String fonte(Graph graph){
+    public String fonte(){
           String lista = "Fontes\n********\n";
         int i, j,grauR = 0;
         List<Node> auxQr = new ArrayList<Node>();
-        for (i = 0; i < graph.getEdges().size(); i++) {
-                auxQr.add(graph.getEdges().get(i).getNode2());
+        for (i = 0; i < getEdges().size(); i++) {
+                auxQr.add(getEdges().get(i).getNode2());
             }
-        for (i = 0; i < graph.getNodes().size(); i++) {
+        for (i = 0; i < getNodes().size(); i++) {
             for(int i2 = 0; i2 < auxQr.size();i2++){
-                if(auxQr.get(i2).getId().equals(graph.getNodes().get(i).getId())){
+                if(auxQr.get(i2).getId().equals(getNodes().get(i).getId())){
                     grauR++;
                 }
             }
@@ -364,16 +363,16 @@ public class Graph {
         }
       return lista;  
     }
-    public String sumidouro(Graph graph){
+    public String sumidouro(){
           String lista = "Sumidouro\n********\n";
         int i, j,grauR = 0;
         List<Node> auxQr = new ArrayList<Node>();
-        for (i = 0; i < graph.getEdges().size(); i++) {
-                auxQr.add(graph.getEdges().get(i).getNode1());
+        for (i = 0; i < getEdges().size(); i++) {
+                auxQr.add(getEdges().get(i).getNode1());
             }
-        for (i = 0; i < graph.getNodes().size(); i++) {
+        for (i = 0; i < getNodes().size(); i++) {
             for(int i2 = 0; i2 < auxQr.size();i2++){
-                if(auxQr.get(i2).getId().equals(graph.getNodes().get(i).getId())){
+                if(auxQr.get(i2).getId().equals(getNodes().get(i).getId())){
                     grauR++;
                 }
             }

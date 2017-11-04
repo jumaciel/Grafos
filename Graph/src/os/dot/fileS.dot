@@ -1,13 +1,12 @@
 digraph G {
-Isadora -> Emerson[label=a1]
-Alfredo -> Emerson[label=a2]
-Alfredo -> Antonio[label=a3]
-Cecilia -> Antonio[label=a4]
-Antonio -> Renata[label=a5]
-Renata;
-Antonio;
-Emerson;
-Isadora;
-Alfredo;
-Cecilia;
+1 -> 2 [dir=none][label=a1]
+1 -> 4 [dir=none][label=a2]
+2 -> 3 [dir=none][label=a3]
+2 -> 5 [dir=none][label=a4]
+5 -> 4 [dir=none][label=a5]
+1;
+2;
+3;
+4;
+5;
 }

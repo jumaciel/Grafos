@@ -77,11 +77,6 @@ public class frmCriarGrafo extends javax.swing.JFrame {
 
         txtNomeDoGrafo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         txtNomeDoGrafo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txtNomeDoGrafo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtNomeDoGrafoKeyPressed(evt);
-            }
-        });
 
         jLabel10.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel10.setText("Tipo:");
@@ -254,10 +249,6 @@ public class frmCriarGrafo extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNomeDoGrafoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeDoGrafoKeyPressed
-
-    }//GEN-LAST:event_txtNomeDoGrafoKeyPressed
-
     private void btnConfirmarGrafoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmarGrafoMouseEntered
         btnConfirmarGrafo.setContentAreaFilled(true);
         btnConfirmarGrafo.setBackground(Color.gray);
@@ -268,42 +259,7 @@ public class frmCriarGrafo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConfirmarGrafoMouseExited
 
     private void btnConfirmarGrafoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarGrafoActionPerformed
-        if (txtNomeDoGrafo.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Nome do Grafo não pode ser em branco\n"
-                    + "coloque um nome e tente novamente...");
-        } else {
-            if (fp == null) {
-                fp = new frmInterface();
-                fp.setVisible(true);
-                if (cbDigrafo.isSelected()) {
-                    if (txtQtVertice.getText().equals("")) {
-                        fp.setNovoGrafo(txtNomeDoGrafo.getText(), "0", 1);
-                    } else {
-                        fp.setNovoGrafo(txtNomeDoGrafo.getText(), txtQtVertice.getText(), 1);
-                    }
-                } else if (txtQtVertice.getText().equals("")) {
-                    fp.setNovoGrafo(txtNomeDoGrafo.getText(), "0", 0);
-                } else {
-                    fp.setNovoGrafo(txtNomeDoGrafo.getText(), txtQtVertice.getText(), 0);
-                }
-            } else {
-                fp.setVisible(true);
-                fp.setState(frmInterface.NORMAL);
-
-                if (cbDigrafo.isSelected()) {
-                    if (txtQtVertice.getText().equals("")) {
-                        fp.setNovoGrafo(txtNomeDoGrafo.getText(), "0", 1);
-                    } else {
-                        fp.setNovoGrafo(txtNomeDoGrafo.getText(), txtQtVertice.getText(), 1);
-                    }
-                } else if (txtQtVertice.getText().equals("")) {
-                    fp.setNovoGrafo(txtNomeDoGrafo.getText(), "0", 0);
-                } else {
-                    fp.setNovoGrafo(txtNomeDoGrafo.getText(), txtQtVertice.getText(), 0);
-                }
-            }
-            this.dispose();
-        }
+        criarGrafo();
     }//GEN-LAST:event_btnConfirmarGrafoActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -326,6 +282,44 @@ public class frmCriarGrafo extends javax.swing.JFrame {
     private void btnCancelarGrafoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarGrafoActionPerformed
         this.dispose();       
     }//GEN-LAST:event_btnCancelarGrafoActionPerformed
+    public void criarGrafo(){
+        if (txtNomeDoGrafo.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Nome do Grafo não pode ser em branco\n"
+                    + "coloque um nome e tente novamente...");
+        } else {
+            if (fp == null) {
+                fp = new frmInterface();
+                fp.setVisible(true);
+                if (cbDigrafo.isSelected()) {
+                    if (txtQtVertice.getText().equals("")) {
+                        fp.setNovoGrafo(txtNomeDoGrafo.getText(),"0","directed");
+                    } else {
+                        fp.setNovoGrafo(txtNomeDoGrafo.getText(), txtQtVertice.getText(),"directed");
+                    }
+                } else if (txtQtVertice.getText().equals("")) {
+                    fp.setNovoGrafo(txtNomeDoGrafo.getText(), "0","undirected");
+                } else {
+                    fp.setNovoGrafo(txtNomeDoGrafo.getText(), txtQtVertice.getText(),"undirected");
+                }
+            } else {
+                fp.setVisible(true);
+                fp.setState(frmInterface.NORMAL);
+
+                if (cbDigrafo.isSelected()) {
+                    if (txtQtVertice.getText().equals("")) {
+                        fp.setNovoGrafo(txtNomeDoGrafo.getText(), "0","directed");
+                    } else {
+                        fp.setNovoGrafo(txtNomeDoGrafo.getText(), txtQtVertice.getText(),"directed");
+                    }
+                } else if (txtQtVertice.getText().equals("")) {
+                    fp.setNovoGrafo(txtNomeDoGrafo.getText(), "0","undirected");
+                } else {
+                    fp.setNovoGrafo(txtNomeDoGrafo.getText(), txtQtVertice.getText(),"undirected");
+                }
+            }
+            this.dispose();
+        }
+    }
     public void abrirArquivo() {
         JFileChooser arquivo = new JFileChooser();
         FileNameExtensionFilter filtroXML = new FileNameExtensionFilter("Arquivos XML", "xml");
