@@ -385,6 +385,22 @@ public class Graph {
     
     }
     public String verificaCadeia(String origem, String destino){
+        
+        /*
+        CADEIA
+        Uma cadeia é uma sequência qualquer de arestas adjacentes que ligam dois vértices.
+        
+        O conceito de cadeia vale também para grafos orientados, bastando que se ignore o
+        sentido da orientação dos arcos. A seqüência de vértices (x6, x5, x4, x1)
+        é um exemplo de cadeia em G11.
+        
+        Uma cadeia é dita ser elementar se não passa duas vezes pelo mesmo vértice.
+        
+        É dita ser simples se não passa duas vezes pela mesma aresta (arco).
+        
+        O comprimento de uma cadeia é o número de arestas (arcos) que a compõe.
+        */
+        
         List<Node> auxGrau= new ArrayList<Node>();
         
         if(!origem.equals(destino)){
