@@ -1693,7 +1693,11 @@ public class frmInterface extends javax.swing.JFrame {
 
     private void btnVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed
         if(graph.getEdgedefault().equals("directed")){
-            
+            if(graph.verificaCaminho((String)cbVerificarOrigem.getSelectedItem(),(String)cbVerificarDestino.getSelectedItem()).equals("Não existe caminho")){
+                display.setText(graph.verificaCaminho((String)cbVerificarDestino.getSelectedItem(),(String)cbVerificarOrigem.getSelectedItem()));
+            }else{
+                display.setText(graph.verificaCaminho((String)cbVerificarOrigem.getSelectedItem(),(String)cbVerificarDestino.getSelectedItem()));
+            }
         }else{
             display.setText(graph.verificaCadeia((String)cbVerificarOrigem.getSelectedItem(),(String)cbVerificarDestino.getSelectedItem()));
         }

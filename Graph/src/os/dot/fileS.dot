@@ -1,12 +1,13 @@
 digraph G {
-1 -> 2 [dir=none][label=a1]
-1 -> 4 [dir=none][label=a2]
-2 -> 3 [dir=none][label=a3]
-2 -> 5 [dir=none][label=a4]
-5 -> 4 [dir=none][label=a5]
-1;
-2;
-3;
-4;
-5;
+x2 -> x5[label=a2]
+x5 -> x4[label=a3]
+x5 -> x6[label=a4]
+x6 -> x3[label=a6]
+x3 -> x6[label=a7]
+x3 -> x2[label=a8]
+x2;
+x3;
+x4;
+x5;
+x6;
 }
