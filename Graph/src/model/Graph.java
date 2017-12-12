@@ -1,6 +1,8 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -190,7 +192,6 @@ public class Graph {
         String matrizTotal = "  ";
         int i, j;
         int matriz[][] = new int[getNodes().size()][getNodes().size()];
-
         if (getEdgedefault().equals("directed")) {
             for (Edge e : getEdges()) {
                 int no1 = getNodes().indexOf(e.getNode1());
@@ -232,6 +233,24 @@ public class Graph {
         int index = 0, i, j;
         int matriz[][] = new int[graph.getNodes().size()][graph.getEdges().size()];
 
+        if (getEdgedefault().equals("directed")) {
+            for (Edge e : graph.getEdges()) {
+                int no1 = graph.getNodes().indexOf(e.getNode1());
+                int no2 = graph.getNodes().indexOf(e.getNode2());
+
+                matriz[no1][index] = 1;
+                index++;
+            }
+            for (int a = 1; a < graph.getEdges().size() + 1; a++) {
+                incidencia += espaco + graph.getEdges().get(a - 1).getId();
+            }
+            for (i = 0; i < graph.getNodes().size(); i++) {
+                incidencia += "\n" + getNodes().get(i).getId();
+                for (j = 0; j < graph.getEdges().size(); j++) {
+                    incidencia += espaco + matriz[i][j];
+                }
+            }
+        }
         for (Edge e : graph.getEdges()) {
             int no1 = graph.getNodes().indexOf(e.getNode1());
             int no2 = graph.getNodes().indexOf(e.getNode2());
@@ -256,6 +275,7 @@ public class Graph {
         String lista = "";
         int i, j;
         int matriz[][] = new int[graph.getNodes().size()][graph.getNodes().size()];
+
         if (getEdgedefault().equals("directed")) {
             for (Edge e : graph.getEdges()) {
                 int no1 = graph.getNodes().indexOf(e.getNode1());
@@ -270,19 +290,18 @@ public class Graph {
                     }
                 }
             }
-        } else {
-            for (Edge e : graph.getEdges()) {
-                int no1 = graph.getNodes().indexOf(e.getNode1());
-                int no2 = graph.getNodes().indexOf(e.getNode2());
-                matriz[no1][no2] = 1;
-                matriz[no2][no1] = 1;
-            }
-            for (i = 0; i < graph.getNodes().size(); i++) {
-                lista += "\n[ " + graph.getNodes().get(i).getId() + " ]";
-                for (j = 0; j < graph.getNodes().size(); j++) {
-                    if (matriz[i][j] == 1) {
-                        lista += " =>[ " + graph.getNodes().get(j).getId() + " ]";
-                    }
+        }
+        for (Edge e : graph.getEdges()) {
+            int no1 = graph.getNodes().indexOf(e.getNode1());
+            int no2 = graph.getNodes().indexOf(e.getNode2());
+            matriz[no1][no2] = 1;
+            matriz[no2][no1] = 1;
+        }
+        for (i = 0; i < graph.getNodes().size(); i++) {
+            lista += "\n[ " + graph.getNodes().get(i).getId() + " ]";
+            for (j = 0; j < graph.getNodes().size(); j++) {
+                if (matriz[i][j] == 1) {
+                    lista += " =>[ " + graph.getNodes().get(j).getId() + " ]";
                 }
             }
         }
@@ -436,59 +455,232 @@ public class Graph {
 
     }
 
-    public String verificaCadeia(String origem, String destino) {
-        List<Node> auxGrau = new ArrayList<Node>();
+    public String verificaCadeia(String origem, String destino, int o, List<Node> visitado) {
 
-        if (!origem.equals(destino)) {
-            for (Edge e : getEdges()) {  //Varre a lista de aresta contando quantas vezes o vertice aparece
-                e.getNode1().setGrau(e.getNode1().getGrau() * 0);
-                e.getNode2().setGrau(e.getNode2().getGrau() * 0);
-            }
-            for (Edge e : getEdges()) {  //Varre a lista de aresta contando quantas vezes o vertice aparece
-                e.getNode1().setGrau(e.getNode1().getGrau() + 1);
-                e.getNode2().setGrau(e.getNode2().getGrau() + 1);
-            }
-            for (Node no : getNodes()) {
-                auxGrau.add(no);
-            }
-            for (Node no : auxGrau) {
-                if (no.getId().equals(origem) && no.getGrau() != 0) {
-                    for (Node no2 : auxGrau) {
-                        if (no2.getId().equals(destino) && no2.getGrau() != 0) {
-                            return "Existe";
-                        }
-                    }
-                }
+        List<Node> auxVisitado = new ArrayList<Node>();
+        List<Node> auxVisita = new ArrayList<Node>();
+        auxVisitado = (List<Node>) visitado;
+        String result = "{", auxOrigem = "";
+        int prox = o, posicao = 0;
+        int matriz[][] = new int[getNodes().size()][getNodes().size()];
+
+        if (origem.equals(destino)) {
+            return "Cadeia: não existe";
+        }
+
+        for (Edge e : getEdges()) {
+            int no1 = getNodes().indexOf(e.getNode1());
+            int no2 = getNodes().indexOf(e.getNode2());
+            matriz[no1][no2] = 1;
+            matriz[no2][no1] = 1;
+        }
+
+        for (int i6 = 0; i6 < auxVisitado.size(); i6++) { // varre a lista de visitado
+            if (auxVisitado.get(i6).getId().equals(origem)) { // verifica se a origem esta na lista 
+                verificaCadeia(auxVisita.get(prox++).getId(), destino, prox, auxVisitado);// passa para o proximo da lista que ira ser visitado
             }
         }
-        return "Não existe";
+
+        for (int i = 0; i < getNodes().size(); i++) {//varra a lista de vertice
+            if (getNodes().get(i).getId().equals(origem)) { //verifica se encontrou 
+                posicao = i; //guardando a posição do vertice
+                auxVisita.clear(); //limpa a lista
+                auxVisitado.add(getNodes().get(i));//adiciona na lista de visitado
+            }
+        }
+
+        for (int j = 0; j < getNodes().size(); j++) {//varre a lista de vertice
+            if (matriz[posicao][j] == 1) {
+                auxVisita.add(getNodes().get(j));//adiciona na lista que ira ser visitado
+
+            }
+        }
+
+        for (int i2 = 0; i2 < auxVisita.size(); i2++) {//varre a lista de visita
+            if (auxVisita.get(i2).getId().equals(destino)) {//verifica se na lista que ira visitar encontra-se o destino
+                for (int j2 = 0; j2 < auxVisitado.size(); j2++) {//varre a lista de visita
+                    result += auxVisitado.get(j2).getId() + ",";//pega o resultado da lista de visitado
+                }
+                return result + destino + "}";
+            }
+            auxOrigem = auxVisita.get(0).getId(); // pega o primeiro elemento da lista
+        }
+
+        return verificaCadeia(auxOrigem, destino, prox, auxVisitado);
     }
 
-    public String verificaCaminho(String origem, String destino) {
-        int i, j, o = 0;
+    public String verificaCaminho(String origem, String destino, int o, List<Node> visitado) {
+
+        List<Node> auxVisitado = new ArrayList<Node>();
+        List<Node> auxVisita = new ArrayList<Node>();
+        auxVisitado = (List<Node>) visitado;
+        String result = "{", auxOrigem = "";
+        int prox = o, posicao = 0;
         int matriz[][] = new int[getNodes().size()][getNodes().size()];
+
+        if (origem.equals(destino)) {
+            return "Caminho: não existe";
+        }
 
         for (Edge e : getEdges()) {
             int no1 = getNodes().indexOf(e.getNode1());
             int no2 = getNodes().indexOf(e.getNode2());
             matriz[no1][no2] = 1;
         }
-        for (i = 0; i < getNodes().size(); i++) {
-            if (getNodes().get(i).getId().equals(origem)) {
-                o = i;
+
+        for (int i6 = 0; i6 < auxVisitado.size(); i6++) { // varre a lista de visitado
+            if (auxVisitado.get(i6).getId().equals(origem)) { // verifica se a origem esta na lista 
+                verificaCadeia(auxVisita.get(prox++).getId(), destino, prox, auxVisitado);// passa para o proximo da lista que ira ser visitado
             }
         }
-        for (i = o; i < getNodes().size(); i++) {
-            for (j = 0; j < getNodes().size(); j++) {
-                if (matriz[i][j] == 1) {
-                    if (getNodes().get(j).getId().equals(destino)) {
-                        return "Existe Caminho";
+
+        for (int i = 0; i < getNodes().size(); i++) {//varra a lista de vertice
+            if (getNodes().get(i).getId().equals(origem)) { //verifica se encontrou 
+                posicao = i; //guardando a posição do vertice
+                auxVisita.clear(); //limpa a lista
+                auxVisitado.add(getNodes().get(i));//adiciona na lista de visitado
+            }
+        }
+
+        for (int j = 0; j < getNodes().size(); j++) {//varre a lista de vertice
+            if (matriz[posicao][j] == 1) {
+                auxVisita.add(getNodes().get(j));//adiciona na lista que ira ser visitado
+
+            }
+        }
+
+        for (int i2 = 0; i2 < auxVisita.size(); i2++) {//varre a lista de visita
+            if (auxVisita.get(i2).getId().equals(destino)) {//verifica se na lista que ira visitar encontra-se o destino
+                for (int j2 = 0; j2 < auxVisitado.size(); j2++) {//varre a lista de visita
+                    result += auxVisitado.get(j2).getId() + ",";//pega o resultado da lista de visitado
+                }
+                return result + destino + "}";
+            }
+            auxOrigem = auxVisita.get(0).getId(); // pega o primeiro elemento da lista
+        }
+
+        return verificaCaminho(auxOrigem, destino, prox, auxVisitado);
+    }
+
+    public List<Node> Kruskal() { 
+        String r = "";
+        int cont = 0, pos = 0;
+        float menor = getEdges().get(0).getPeso();
+        String auxMatriz = "";
+        List<Node> lista = new ArrayList<Node>();
+        String matriz[][] = new String[getNodes().size()][getNodes().size()];//matriz do algoritmos
+
+        
+        //laço consiste em criar uma matriz nxm agrupando os vertices
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < getNodes().size(); j++) {
+                if (i == 0) {
+                    matriz[i][j] = getNodes().get(j).getId();//laço p pegar os id dos vertices adc na matriz do algoritmo
+                } else {
+                    matriz[i][j] = "" + (j + 1); 
+                }
+            }
+        }
+        while (cont < getEdges().size()) {
+            for (int i = 0; i < getEdges().size(); i++) {//percore as arestas e verifica o menor peso guardando a posição
+                if (getEdges().get(i).getPeso() < menor) {
+                    menor = getEdges().get(i).getPeso();
+                    pos = i;
+                }
+            }
+            if (cont == 0) {
+                for (int i = 0; i < 3; i++) {
+                    for (int j = 0; j < getNodes().size(); j++) {// percore os vertices , verifica se o primeiro grupo da matriz ...
+                        //guardando a posição da matriz numa nova chamada auxiliar
+                        if (getEdges().get(pos).getNode1().getId().equals(matriz[0][j])) {
+                            auxMatriz = matriz[1][j]; 
+                            for (int j2 = 0; j2 < getNodes().size(); j2++) { // laço p verificar se o destino faz parte do grupo, se n adc ao grupo da matriz.
+                                //Adc um nova lista que guarda posição dos vertices de origem e destino
+                                if (getEdges().get(pos).getNode2().getId().equals(matriz[0][j2])) {
+                                    matriz[2][j2] = auxMatriz;
+                                    lista.add(getEdges().get(pos).getNode1());
+                                    lista.add(getEdges().get(pos).getNode2());
+                                    i = 2;
+                                }
+                            }
+                        }
+                    }
+                }
+                getEdges().remove(pos); // removemos o vertice da posição analisada
+            }
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < getNodes().size(); j++) {
+                    if (getEdges().get(pos).getNode1().getId().equals(matriz[0][j])
+                            && !matriz[2][j].equals(auxMatriz)) {
+                        matriz[2][j] = auxMatriz;
+                        lista.add(getEdges().get(pos).getNode1());
+                        i = 2;
                     }
                 }
             }
-
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < getNodes().size(); j++) {
+                    if (getEdges().get(pos).getNode2().getId().equals(matriz[0][j])
+                            && !matriz[2][j].equals(auxMatriz)) {
+                        matriz[2][j] = auxMatriz;
+                        lista.add(getEdges().get(pos).getNode2());
+                        i = 2;
+                    }
+                }
+            }
+            getEdges().remove(pos);
+            cont++;
         }
-        return "Não existe caminho";
+        return lista;
+    }
+
+    public List<Node> Prim() {
+        List<Node> lista = new ArrayList<Node>();
+        int cont = 0, pos = 0;
+        float menor = getEdges().get(0).getPeso();
+        boolean existe = false;
+
+        while (cont < getEdges().size() - 1) {
+            for (int i = 0; i < getEdges().size(); i++) {
+                if (getEdges().get(i).getPeso() < menor) {
+                    menor = getEdges().get(i).getPeso();
+                    pos = i;
+                }
+            }
+
+            if (lista.isEmpty()) {
+                lista.add(getEdges().get(pos).getNode1());
+                lista.add(getEdges().get(pos).getNode2());
+                getEdges().remove(pos);
+                menor = getEdges().get(0).getPeso();
+
+            } else {
+                for (int i = 0; i < lista.size(); i++) {
+                    if (lista.get(i).getId().equals(getEdges().get(pos).getNode1().getId())) {
+
+                        for (int i2 = 0; i2 < lista.size(); i2++) {
+                            if (lista.get(i2).getId().equals(getEdges().get(pos).getNode2().getId())) {
+                                existe = true;//se existe o vertice na lista
+                            }
+                        }
+                    }
+                }
+                if (existe == false) {
+                    lista.add(getEdges().get(pos).getNode1());
+                    lista.add(getEdges().get(pos).getNode2());
+                    getEdges().remove(pos);
+                    menor = getEdges().get(0).getPeso();
+                    pos = 0;
+
+                } else {
+                    getEdges().remove(pos);
+                    menor = getEdges().get(0).getPeso();
+                    pos = 0;
+                }
+            }
+            cont++;
+        }
+        return lista;
     }
 
     public String ImprimeNode() {
@@ -553,33 +745,33 @@ public class Graph {
         return r;
     }
 
-    public String geraGraph(int m) {
+    public String geraGraph(int m) {// m para verificar se é ou n direcionado
         String espaco = " ";
         String lista = "digraph G {\n";
         int i, v;
-
+//verifica se é direcionado
         if (getEdgedefault().equals("directed")) {
-            if (m == 0) {
-                for (i = 0; i < getEdges().size(); i++) {
+            if (m == 0) {//se é valorado, mostrando o id das arestas
+                for (i = 0; i < getEdges().size(); i++) {//fez um laço nas arestas p pegar os ids source=origem target=destino
                     lista += getEdges().get(i).getSoucer() + " -> " + getEdges().get(i).getTarget() + "[label=" + getEdges().get(i).getId() + "]\n";
                 }
             } else {
-                for (i = 0; i < getEdges().size(); i++) {
+                for (i = 0; i < getEdges().size(); i++) { // peso
                     lista += getEdges().get(i).getSoucer() + " -> " + getEdges().get(i).getTarget() + "[label=" + getEdges().get(i).getPeso() + "]\n";
                 }
             }
-        } else {
-            if (m == 0) {
+        } else {// para n direcionado
+            if (m == 0) { //m na hora q escolhe o grafo... abrir ou criar
                 for (i = 0; i < getEdges().size(); i++) {
                     lista += getEdges().get(i).getSoucer() + " -> " + getEdges().get(i).getTarget() + " [dir=none][label=" + getEdges().get(i).getId() + "]\n";
-                }
+                }//qd não direcionado usa dir=nome
             } else {
                 for (i = 0; i < getEdges().size(); i++) {
                     lista += getEdges().get(i).getSoucer() + " -> " + getEdges().get(i).getTarget() + " [dir=none][label=" + getEdges().get(i).getPeso() + "]\n";
                 }
             }
         }
-        for (v = 0; v < getNodes().size(); v++) {
+        for (v = 0; v < getNodes().size(); v++) {//laço nos nós, para IMPRIMIR vertice sem conexão(ligação)
             lista += getNodes().get(v).getId() + ";\n";
 
         }
