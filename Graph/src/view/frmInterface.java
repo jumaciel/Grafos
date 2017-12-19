@@ -1,14 +1,12 @@
 package view;
 
+import br.com.davesmartins.graphviewlib.ViewGraph;
+import br.com.davesmartins.graphviewlib.erro.EGraphViewExcpetion;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.RenderingHints;
 import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -19,11 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import model.Edge;
 import model.Graph;
@@ -51,10 +46,6 @@ public class frmInterface extends javax.swing.JFrame {
     List<Node> listaNode = new ArrayList<Node>();
     List<Edge> listaEdge = new ArrayList<Edge>();
     List<Edge> listaRec = new ArrayList<Edge>();
-    frmEditarNode edn;
-    frmEditarAresta ede;
-    frmCadeia vcad;
-    frmCaminho vcam;
     int w = 0;
     int h = 0;
     int m;
@@ -93,6 +84,21 @@ public class frmInterface extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         btnAlterarVertice = new javax.swing.JButton();
         btnDeletarVertice = new javax.swing.JButton();
+        verticeAlterar = new javax.swing.JPanel();
+        cbEditarVertice = new javax.swing.JComboBox<>();
+        txtNovoVertice = new javax.swing.JTextField();
+        lblNo = new javax.swing.JLabel();
+        lblNovo = new javax.swing.JLabel();
+        btnConfirmarVertice = new javax.swing.JButton();
+        btnCancelarVertice = new javax.swing.JButton();
+        jPanel8 = new javax.swing.JPanel();
+        cbVerificaOrigem = new javax.swing.JComboBox<>();
+        lblNo1 = new javax.swing.JLabel();
+        lblNo3 = new javax.swing.JLabel();
+        cbVerificaDestino = new javax.swing.JComboBox<>();
+        btnConfirmarVertice1 = new javax.swing.JButton();
+        btnCancelarVertice1 = new javax.swing.JButton();
+        lblNo2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -108,6 +114,25 @@ public class frmInterface extends javax.swing.JFrame {
         txtPesoAresta = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         cbOrigem = new javax.swing.JComboBox<>();
+        arestaAlterar = new javax.swing.JPanel();
+        lblArco = new javax.swing.JLabel();
+        arco = new javax.swing.JPanel();
+        lblOrigem = new javax.swing.JLabel();
+        lblDestino = new javax.swing.JLabel();
+        cbEditarOrigem = new javax.swing.JComboBox<>();
+        cbEditarDestino = new javax.swing.JComboBox<>();
+        novoArco = new javax.swing.JPanel();
+        lblNovaOrigem = new javax.swing.JLabel();
+        lblNovoDestino = new javax.swing.JLabel();
+        cbNovaOrigem = new javax.swing.JComboBox<>();
+        cbNovoDestino = new javax.swing.JComboBox<>();
+        lblNovoNomeArco = new javax.swing.JLabel();
+        txtNovoNomeAresta = new javax.swing.JTextField();
+        lblNovoPeso = new javax.swing.JLabel();
+        txtNovoPeso = new javax.swing.JTextField();
+        lblArco1 = new javax.swing.JLabel();
+        btnConfirmarAresta = new javax.swing.JButton();
+        btnCancelarAresta = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         lblNomeGrafo = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
@@ -116,8 +141,6 @@ public class frmInterface extends javax.swing.JFrame {
         btnLimpaAresta = new javax.swing.JButton();
         btnMostrarVA = new javax.swing.JButton();
         btnGerarGrafico = new javax.swing.JButton();
-        lblGrafico = new javax.swing.JLabel();
-        imgGrafico = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuArquivo = new javax.swing.JMenu();
         menuNovo = new javax.swing.JMenuItem();
@@ -132,8 +155,6 @@ public class frmInterface extends javax.swing.JFrame {
         menuMatriz = new javax.swing.JMenuItem();
         menuFonte = new javax.swing.JMenuItem();
         menuSumidouro = new javax.swing.JMenuItem();
-        menuCaminho = new javax.swing.JMenuItem();
-        menuCadeia = new javax.swing.JMenuItem();
         menuIncidentes = new javax.swing.JMenuItem();
         menuInfo = new javax.swing.JMenuItem();
         menuAdjacente = new javax.swing.JMenuItem();
@@ -141,12 +162,6 @@ public class frmInterface extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         menuKruskal = new javax.swing.JMenuItem();
         menuPrim = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
-        menuGrafico = new javax.swing.JMenu();
-        menuNome = new javax.swing.JMenuItem();
-        menuPeso = new javax.swing.JMenuItem();
-        menuAjustar = new javax.swing.JMenuItem();
-        menuNormalizar = new javax.swing.JMenuItem();
 
         jMenu2.setText("jMenu2");
 
@@ -232,27 +247,29 @@ public class frmInterface extends javax.swing.JFrame {
                 .addComponent(iconAbrir)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(iconSalvar)
-                .addGap(22, 22, 22)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnMatrizAdj, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnMatrizInc, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnListaAdj, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 467, Short.MAX_VALUE)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(iconAbrir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(iconSalvar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnMatrizInc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnListaAdj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnMatrizAdj))
+                    .addComponent(iconNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(btnListaAdj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnMatrizInc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnMatrizAdj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(iconSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(iconAbrir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(iconNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jScrollPane1.setBackground(new java.awt.Color(0, 0, 0));
@@ -360,13 +377,198 @@ public class frmInterface extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAdicionarVertice, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-                    .addComponent(txtaddVertice, javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnAlterarVertice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnDeletarVertice, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnDeletarVertice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAdicionarVertice, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                    .addComponent(txtaddVertice))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        verticeAlterar.setBackground(java.awt.Color.gray);
+        verticeAlterar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        txtNovoVertice.setEditable(false);
+        txtNovoVertice.setBackground(java.awt.Color.gray);
+        txtNovoVertice.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        txtNovoVertice.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        lblNo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblNo.setText("Nome");
+
+        lblNovo.setBackground(new java.awt.Color(204, 204, 204));
+        lblNovo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblNovo.setText("Novo nome");
+
+        btnConfirmarVertice.setBackground(new java.awt.Color(255, 255, 255));
+        btnConfirmarVertice.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnConfirmarVertice.setText("Confirmar");
+        btnConfirmarVertice.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnConfirmarVertice.setContentAreaFilled(false);
+        btnConfirmarVertice.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConfirmarVertice.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnConfirmarVerticeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnConfirmarVerticeMouseExited(evt);
+            }
+        });
+        btnConfirmarVertice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarVerticeActionPerformed(evt);
+            }
+        });
+
+        btnCancelarVertice.setBackground(new java.awt.Color(255, 255, 255));
+        btnCancelarVertice.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnCancelarVertice.setText("Cancelar");
+        btnCancelarVertice.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnCancelarVertice.setContentAreaFilled(false);
+        btnCancelarVertice.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelarVertice.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCancelarVerticeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCancelarVerticeMouseExited(evt);
+            }
+        });
+        btnCancelarVertice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarVerticeActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout verticeAlterarLayout = new javax.swing.GroupLayout(verticeAlterar);
+        verticeAlterar.setLayout(verticeAlterarLayout);
+        verticeAlterarLayout.setHorizontalGroup(
+            verticeAlterarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(verticeAlterarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(verticeAlterarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(verticeAlterarLayout.createSequentialGroup()
+                        .addComponent(cbEditarVertice, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNovoVertice, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnConfirmarVertice, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCancelarVertice, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(verticeAlterarLayout.createSequentialGroup()
+                        .addComponent(lblNo)
+                        .addGap(33, 33, 33)
+                        .addComponent(lblNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
+        verticeAlterarLayout.setVerticalGroup(
+            verticeAlterarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, verticeAlterarLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(verticeAlterarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblNo, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblNovo, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(verticeAlterarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(verticeAlterarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(cbEditarVertice)
+                        .addComponent(txtNovoVertice, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(verticeAlterarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnCancelarVertice, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, verticeAlterarLayout.createSequentialGroup()
+                            .addGap(2, 2, 2)
+                            .addComponent(btnConfirmarVertice, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
+        );
+
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        lblNo1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblNo1.setText("Origem");
+
+        lblNo3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblNo3.setText("Destino");
+
+        btnConfirmarVertice1.setBackground(new java.awt.Color(255, 255, 255));
+        btnConfirmarVertice1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnConfirmarVertice1.setText("Confirmar");
+        btnConfirmarVertice1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnConfirmarVertice1.setContentAreaFilled(false);
+        btnConfirmarVertice1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConfirmarVertice1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnConfirmarVertice1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnConfirmarVertice1MouseExited(evt);
+            }
+        });
+        btnConfirmarVertice1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarVertice1ActionPerformed(evt);
+            }
+        });
+
+        btnCancelarVertice1.setBackground(new java.awt.Color(255, 255, 255));
+        btnCancelarVertice1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnCancelarVertice1.setText("Cancelar");
+        btnCancelarVertice1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnCancelarVertice1.setContentAreaFilled(false);
+        btnCancelarVertice1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelarVertice1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCancelarVertice1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCancelarVertice1MouseExited(evt);
+            }
+        });
+        btnCancelarVertice1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarVertice1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbVerificaOrigem, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNo1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbVerificaDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNo3))
+                .addGap(30, 30, 30)
+                .addComponent(btnConfirmarVertice1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCancelarVertice1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNo1)
+                    .addComponent(lblNo3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnCancelarVertice1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnConfirmarVertice1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cbVerificaOrigem, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbVerificaDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+
+        lblNo2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblNo2.setText("Caminho \\ Cadeia");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -374,15 +576,27 @@ public class frmInterface extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(lblNo2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 260, Short.MAX_VALUE))
+                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(verticeAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(verticeAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblNo2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -426,6 +640,11 @@ public class frmInterface extends javax.swing.JFrame {
 
         txtNomeAresta.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         txtNomeAresta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtNomeAresta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNomeArestaActionPerformed(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel10.setText("Nome");
@@ -480,10 +699,13 @@ public class frmInterface extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(214, 214, 214)
+                        .addComponent(txtPesoAresta, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbOrigem, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -499,15 +721,14 @@ public class frmInterface extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPesoAresta, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(btnAdicionarAresta, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btndeletarAresta, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btndeletarAresta, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAlterarAresta, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnAlterarAresta, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -516,28 +737,238 @@ public class frmInterface extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel9))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbDestino)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(cbOrigem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10)
                             .addComponent(jLabel13))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNomeAresta)
-                            .addComponent(txtPesoAresta))))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNomeAresta, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                            .addComponent(txtPesoAresta)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cbOrigem, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                            .addComponent(cbDestino))
+                        .addGap(17, 17, 17)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAdicionarAresta, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btndeletarAresta, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAlterarAresta, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(13, Short.MAX_VALUE))
+        );
+
+        arestaAlterar.setBackground(java.awt.Color.gray);
+        arestaAlterar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        lblArco.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblArco.setText("Arco");
+
+        arco.setBackground(java.awt.Color.gray);
+        arco.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        lblOrigem.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblOrigem.setText("Origem");
+
+        lblDestino.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblDestino.setText("Destino");
+
+        javax.swing.GroupLayout arcoLayout = new javax.swing.GroupLayout(arco);
+        arco.setLayout(arcoLayout);
+        arcoLayout.setHorizontalGroup(
+            arcoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(arcoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(arcoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cbEditarOrigem, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblOrigem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnAdicionarAresta, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-                    .addComponent(btndeletarAresta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAlterarAresta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(arcoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cbEditarDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDestino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        arcoLayout.setVerticalGroup(
+            arcoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(arcoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(arcoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(arcoLayout.createSequentialGroup()
+                        .addComponent(lblDestino)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbEditarDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(arcoLayout.createSequentialGroup()
+                        .addComponent(lblOrigem)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbEditarOrigem, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        novoArco.setBackground(java.awt.Color.gray);
+        novoArco.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        lblNovaOrigem.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblNovaOrigem.setText("Origem");
+
+        lblNovoDestino.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblNovoDestino.setText("Destino");
+
+        lblNovoNomeArco.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblNovoNomeArco.setText("Nome");
+
+        txtNovoNomeAresta.setEditable(false);
+        txtNovoNomeAresta.setBackground(java.awt.Color.gray);
+        txtNovoNomeAresta.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        txtNovoNomeAresta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtNovoNomeAresta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNovoNomeArestaActionPerformed(evt);
+            }
+        });
+
+        lblNovoPeso.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblNovoPeso.setText("Peso");
+
+        txtNovoPeso.setEditable(false);
+        txtNovoPeso.setBackground(java.awt.Color.gray);
+        txtNovoPeso.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        txtNovoPeso.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout novoArcoLayout = new javax.swing.GroupLayout(novoArco);
+        novoArco.setLayout(novoArcoLayout);
+        novoArcoLayout.setHorizontalGroup(
+            novoArcoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(novoArcoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(novoArcoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cbNovaOrigem, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNovaOrigem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(novoArcoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cbNovoDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNovoDestino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(novoArcoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(novoArcoLayout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(lblNovoNomeArco))
+                    .addGroup(novoArcoLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNovoNomeAresta)))
+                .addGroup(novoArcoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(novoArcoLayout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(lblNovoPeso))
+                    .addGroup(novoArcoLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNovoPeso)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        novoArcoLayout.setVerticalGroup(
+            novoArcoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(novoArcoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(novoArcoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(novoArcoLayout.createSequentialGroup()
+                        .addComponent(lblNovoNomeArco)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNovoNomeAresta))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, novoArcoLayout.createSequentialGroup()
+                        .addComponent(lblNovoDestino)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbNovoDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, novoArcoLayout.createSequentialGroup()
+                        .addComponent(lblNovaOrigem)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbNovaOrigem, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(novoArcoLayout.createSequentialGroup()
+                        .addComponent(lblNovoPeso)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNovoPeso)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        lblArco1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblArco1.setText("Novo");
+
+        btnConfirmarAresta.setBackground(new java.awt.Color(255, 255, 255));
+        btnConfirmarAresta.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnConfirmarAresta.setText("Confirmar");
+        btnConfirmarAresta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnConfirmarAresta.setContentAreaFilled(false);
+        btnConfirmarAresta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConfirmarAresta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnConfirmarArestaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnConfirmarArestaMouseExited(evt);
+            }
+        });
+        btnConfirmarAresta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarArestaActionPerformed(evt);
+            }
+        });
+
+        btnCancelarAresta.setBackground(new java.awt.Color(255, 255, 255));
+        btnCancelarAresta.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnCancelarAresta.setText("Cancelar");
+        btnCancelarAresta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnCancelarAresta.setContentAreaFilled(false);
+        btnCancelarAresta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelarAresta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCancelarArestaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCancelarArestaMouseExited(evt);
+            }
+        });
+        btnCancelarAresta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarArestaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout arestaAlterarLayout = new javax.swing.GroupLayout(arestaAlterar);
+        arestaAlterar.setLayout(arestaAlterarLayout);
+        arestaAlterarLayout.setHorizontalGroup(
+            arestaAlterarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(arestaAlterarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(arestaAlterarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(arestaAlterarLayout.createSequentialGroup()
+                        .addComponent(btnConfirmarAresta, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnCancelarAresta, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(arestaAlterarLayout.createSequentialGroup()
+                        .addGroup(arestaAlterarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(arco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblArco))
+                        .addGap(18, 18, 18)
+                        .addGroup(arestaAlterarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblArco1)
+                            .addComponent(novoArco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+        arestaAlterarLayout.setVerticalGroup(
+            arestaAlterarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(arestaAlterarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(arestaAlterarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(novoArco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(arestaAlterarLayout.createSequentialGroup()
+                        .addGroup(arestaAlterarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblArco)
+                            .addComponent(lblArco1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(arco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addGroup(arestaAlterarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancelarAresta, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnConfirmarAresta, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -545,17 +976,21 @@ public class frmInterface extends javax.swing.JFrame {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(arestaAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap()
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(arestaAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         jLabel15.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -650,84 +1085,74 @@ public class frmInterface extends javax.swing.JFrame {
             }
         });
 
-        lblGrafico.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lblGrafico.setText("Grafico");
-
-        imgGrafico.setBackground(new java.awt.Color(255, 255, 255));
-        imgGrafico.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        imgGrafico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/os/img/fileB.png"))); // NOI18N
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(2, 2, 2)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel6)
-                                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addComponent(jLabel3)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(btnLimpaVA, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnLimpaAresta, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnMostrarVA, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnGerarGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblNomeGrafo, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblTipoGrafo, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblGrafico)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(imgGrafico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addComponent(lblTipoGrafo, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(432, 432, 432))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnLimpaVA, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnLimpaAresta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnMostrarVA, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnGerarGrafico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTipoGrafo, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNomeGrafo, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblNomeGrafo, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnLimpaVA, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLimpaAresta, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnMostrarVA, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnGerarGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnLimpaVA, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnLimpaAresta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnMostrarVA, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnGerarGrafico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(imgGrafico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -833,22 +1258,6 @@ public class frmInterface extends javax.swing.JFrame {
         });
         menuExibir.add(menuSumidouro);
 
-        menuCaminho.setText("Caminho");
-        menuCaminho.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuCaminhoActionPerformed(evt);
-            }
-        });
-        menuExibir.add(menuCaminho);
-
-        menuCadeia.setText("Cadeia");
-        menuCadeia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuCadeiaActionPerformed(evt);
-            }
-        });
-        menuExibir.add(menuCadeia);
-
         menuIncidentes.setText("Incidentes");
         menuIncidentes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -903,57 +1312,17 @@ public class frmInterface extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
-        jMenu1.setText("Ferramentas");
-
-        menuGrafico.setText("Grafico");
-
-        menuNome.setText("Mostrar nome");
-        menuNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuNomeActionPerformed(evt);
-            }
-        });
-        menuGrafico.add(menuNome);
-
-        menuPeso.setText("Mostrar peso");
-        menuPeso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuPesoActionPerformed(evt);
-            }
-        });
-        menuGrafico.add(menuPeso);
-
-        menuAjustar.setText("Ajustar");
-        menuAjustar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuAjustarActionPerformed(evt);
-            }
-        });
-        menuGrafico.add(menuAjustar);
-
-        menuNormalizar.setText("Normalizar");
-        menuNormalizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuNormalizarActionPerformed(evt);
-            }
-        });
-        menuGrafico.add(menuNormalizar);
-
-        jMenu1.add(menuGrafico);
-
-        jMenuBar1.add(jMenu1);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 790, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -1003,29 +1372,6 @@ public class frmInterface extends javax.swing.JFrame {
         display.setText("\t==========Conjunto==========\n\n" + graph.conjunto(graph));
     }//GEN-LAST:event_menuConjuntoActionPerformed
 
-    private void menuPesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPesoActionPerformed
-        m = 99;
-        gerarGraph();
-    }//GEN-LAST:event_menuPesoActionPerformed
-
-    private void menuNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNomeActionPerformed
-        m = 0;
-        gerarGraph();
-    }//GEN-LAST:event_menuNomeActionPerformed
-
-    private void menuAjustarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAjustarActionPerformed
-        if (graph.getEdges().isEmpty()) {
-            imgGrafico.setSize(300, 80);
-        } else {
-            imgGrafico.setSize(300, 555);
-        }
-        gerarGraph();
-    }//GEN-LAST:event_menuAjustarActionPerformed
-
-    private void menuNormalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNormalizarActionPerformed
-        gerarGraph();
-    }//GEN-LAST:event_menuNormalizarActionPerformed
-
     private void menuGrauRecepcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGrauRecepcaoActionPerformed
         if (graph.getEdgedefault().equals("directed")) {
             display.setText(graph.grauRecepcao());
@@ -1067,16 +1413,16 @@ public class frmInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_menuGrauActionPerformed
 
     private void btnAlterarArestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarArestaActionPerformed
-        if (ede == null) {
-            ede = new frmEditarAresta();
-            ede.setVisible(true);
+        txtNovoNomeAresta.setBackground(Color.white);
+        txtNovoPeso.setBackground(Color.white);
 
-            ede.setAlteracao(graph.getNodes(), graph.getEdges(), graph.getId(), graph.getEdgedefault());
-        } else {
-            ede.setVisible(true);
-            ede.setState(frmEditarAresta.NORMAL);
-            ede.setAlteracao(graph.getNodes(), graph.getEdges(), graph.getId(), graph.getEdgedefault());
-        }
+        txtNovoNomeAresta.setEditable(true);
+        txtNovoPeso.setEditable(true);
+
+        arestaAlterar.setBackground(Color.white);
+        arco.setBackground(Color.white);
+        novoArco.setBackground(Color.white);
+
     }//GEN-LAST:event_btnAlterarArestaActionPerformed
 
     private void btnAlterarArestaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterarArestaMouseExited
@@ -1103,7 +1449,7 @@ public class frmInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_btndeletarArestaMouseEntered
 
     private void btnAdicionarArestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarArestaActionPerformed
-        if (txtNomeAresta.getText().isEmpty()) {//verifica se é vazio
+        if (txtNomeAresta.getText().isEmpty()) {
             display.setText("Nome invalido");
         } else {
             if (txtPesoAresta.getText().isEmpty()) {
@@ -1137,23 +1483,22 @@ public class frmInterface extends javax.swing.JFrame {
                 display.setText(graph.ImprimeNode());
                 gerarGraph();
             } else {
-                String path = "src\\os\\img\\fileB.png";
-                BufferedImage img = null;
-                try {
-                    img = ImageIO.read(new File(path));
-                } catch (IOException ex) {
-                    Logger.getLogger(frmInterface.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                ImageIcon image = new ImageIcon(ImageScale(img, imgGrafico.getWidth(), imgGrafico.getHeight()));
-                imgGrafico.setIcon(image);
                 display.setText("Lista: vazia");
             }
         } else {
             display.setForeground(Color.red);
             display.setText("Erro! não foi possivel remover\n\nCausas\n1ª - vertice inexistente\n2ª - Parametro vazio");
         }
+        cbEditarOrigem.removeItem(txtaddVertice.getText());
+        cbEditarDestino.removeItem(txtaddVertice.getText());
+        cbVerificaOrigem.removeItem(txtaddVertice.getText());
+        cbVerificaDestino.removeItem(txtaddVertice.getText());
         cbOrigem.removeItem(txtaddVertice.getText());
         cbDestino.removeItem(txtaddVertice.getText());
+        cbNovaOrigem.removeItem(txtaddVertice.getText());
+        cbNovoDestino.removeItem(txtaddVertice.getText());
+        cbEditarVertice.removeItem(txtaddVertice.getText());
+
         txtaddVertice.setText("");
     }//GEN-LAST:event_btnDeletarVerticeActionPerformed
 
@@ -1167,21 +1512,9 @@ public class frmInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeletarVerticeMouseEntered
 
     private void btnAlterarVerticeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarVerticeActionPerformed
-        if (edn == null) {
-            edn = new frmEditarNode();
-            edn.setVisible(true);
-
-            edn.setAlteracao(graph.getNodes(), graph.getEdges(), graph.getId(), graph.getEdgedefault());
-        } else {
-            edn.setVisible(true);
-            edn.setState(frmEditarNode.NORMAL);
-            edn.setAlteracao(graph.getNodes(), graph.getEdges(), graph.getId(), graph.getEdgedefault());
-        }
-        //        cbOrigem.removeAllItems();
-        //        cbDestino.removeAllItems();
-
-        //        graph.getNodes().clear();
-        //        graph.getEdges().clear();
+        verticeAlterar.setBackground(Color.white);
+        txtNovoVertice.setBackground(Color.white);
+        txtNovoVertice.setEditable(true);
     }//GEN-LAST:event_btnAlterarVerticeActionPerformed
 
     private void btnAlterarVerticeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterarVerticeMouseExited
@@ -1206,6 +1539,13 @@ public class frmInterface extends javax.swing.JFrame {
                 display.setText(graph.ImprimeNode());
                 cbOrigem.addItem(txtaddVertice.getText());
                 cbDestino.addItem(txtaddVertice.getText());
+                cbNovaOrigem.addItem(txtaddVertice.getText());
+                cbNovoDestino.addItem(txtaddVertice.getText());
+                cbEditarVertice.addItem(txtaddVertice.getText());
+                cbEditarDestino.addItem(txtaddVertice.getText());
+                cbEditarOrigem.addItem(txtaddVertice.getText());
+                cbVerificaOrigem.addItem(txtaddVertice.getText());
+                cbVerificaDestino.addItem(txtaddVertice.getText());
             }
         }
         txtaddVertice.setText("");
@@ -1245,6 +1585,35 @@ public class frmInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_iconNovoMouseClicked
 
     private void btnGerarGraficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarGraficoActionPerformed
+         XStream xstream = new XStream(new DomDriver());
+        String xml = null;
+
+        xstream.omitField(Edge.class, "node1");
+        xstream.omitField(Edge.class, "node2");
+        xstream.alias("graphml", Graphml.class);
+        xstream.alias("graph", Graph.class);
+        xstream.alias("node", Node.class);
+        xstream.alias("edge", Edge.class);
+        xstream.useAttributeFor("id", String.class);
+        xstream.useAttributeFor("edgedefault", String.class);
+        xstream.useAttributeFor("source", String.class);
+        xstream.useAttributeFor("target", String.class);
+        xstream.useAttributeFor("xmlns", String.class);
+        xstream.useAttributeFor("degree", int.class);
+        xstream.useAttributeFor("weight", float.class);
+        xstream.addImplicitArray(Graph.class, "nodes");
+        xstream.addImplicitArray(Graph.class, "edges");
+        graphml.setGraph(graph);
+
+        try {
+            xml = xstream.toXML(graphml);
+           File xmlFile = new File("resources\\arq.xml");
+           xstream.toXML(graphml, new FileWriter(xmlFile));
+            
+           display.setText("Gerado com sucesso!!");
+        } catch (IOException ex) {
+            display.setText("Erro ao gravar");
+        }
         gerarGraph();
     }//GEN-LAST:event_btnGerarGraficoActionPerformed
 
@@ -1300,34 +1669,6 @@ public class frmInterface extends javax.swing.JFrame {
         btnLimpaVA.setBackground(Color.gray);
     }//GEN-LAST:event_btnLimpaVAMouseEntered
 
-    private void menuCadeiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadeiaActionPerformed
-        if (graph.getEdgedefault().equals("undirected")) {
-            if (vcad == null) {
-                vcad = new frmCadeia();
-                vcad.setVisible(true);
-                vcad.setAlteracao(graph.getNodes(), graph.getEdges(), graph.getId(), graph.getEdgedefault());
-            } else {
-                vcad.setVisible(true);
-                vcad.setState(frmCadeia.NORMAL);
-                vcad.setAlteracao(graph.getNodes(), graph.getEdges(), graph.getId(), graph.getEdgedefault());
-            }
-        }
-    }//GEN-LAST:event_menuCadeiaActionPerformed
-
-    private void menuCaminhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCaminhoActionPerformed
-        if (graph.getEdgedefault().equals("directed")) {
-            if (vcam == null) {
-                vcam = new frmCaminho();
-                vcam.setVisible(true);
-                vcam.setAlteracao(graph.getNodes(), graph.getEdges(), graph.getId(), graph.getEdgedefault());
-            } else {
-                vcam.setVisible(true);
-                vcam.setState(frmCadeia.NORMAL);
-                vcam.setAlteracao(graph.getNodes(), graph.getEdges(), graph.getId(), graph.getEdgedefault());
-            }
-        }
-    }//GEN-LAST:event_menuCaminhoActionPerformed
-
     private void menuKruskalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuKruskalActionPerformed
         String r = "";
         List<Node> lista = new ArrayList<Node>();
@@ -1361,7 +1702,144 @@ public class frmInterface extends javax.swing.JFrame {
         graph.setNodes(lista);
         recuperaLista(1);
     }//GEN-LAST:event_menuPrimActionPerformed
-    public void recuperaLista(int n) { // para n perder a lista original
+
+    private void btnConfirmarVerticeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmarVerticeMouseEntered
+        btnConfirmarVertice.setContentAreaFilled(true);
+        btnConfirmarVertice.setBackground(Color.gray);
+    }//GEN-LAST:event_btnConfirmarVerticeMouseEntered
+
+    private void btnConfirmarVerticeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmarVerticeMouseExited
+        btnConfirmarVertice.setContentAreaFilled(false);
+    }//GEN-LAST:event_btnConfirmarVerticeMouseExited
+
+    private void btnConfirmarVerticeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarVerticeActionPerformed
+        verticeAlterar.setBackground(Color.gray);
+        txtNovoVertice.setBackground(Color.gray);
+        txtNovoVertice.setEditable(false);
+        display.setText(graph.EditarNode(cbEditarVertice.getSelectedItem().toString(), txtNovoVertice.getText()));
+        graph.removerNode(cbEditarVertice.getSelectedItem().toString());
+        graph.addNodes(cbEditarVertice.getSelectedItem().toString());
+
+        cbEditarOrigem.removeItem(cbEditarVertice.getSelectedItem());
+        cbEditarDestino.removeItem(cbEditarVertice.getSelectedItem());
+        cbVerificaOrigem.removeItem(cbEditarVertice.getSelectedItem());
+        cbVerificaDestino.removeItem(cbEditarVertice.getSelectedItem());
+        cbOrigem.removeItem(cbEditarVertice.getSelectedItem());
+        cbDestino.removeItem(cbEditarVertice.getSelectedItem());
+        cbNovaOrigem.removeItem(cbEditarVertice.getSelectedItem());
+        cbNovoDestino.removeItem(cbEditarVertice.getSelectedItem());
+        cbEditarVertice.removeItem(cbEditarVertice.getSelectedItem());
+
+        cbEditarOrigem.addItem(txtNovoVertice.getText());
+        cbEditarDestino.addItem(txtNovoVertice.getText());
+        cbVerificaOrigem.addItem(txtNovoVertice.getText());
+        cbVerificaDestino.addItem(txtNovoVertice.getText());
+        cbDestino.addItem(txtNovoVertice.getText());
+        cbEditarVertice.addItem(txtNovoVertice.getText());
+        cbOrigem.addItem(txtNovoVertice.getText());
+        cbNovaOrigem.addItem(txtNovoVertice.getText());
+        cbNovoDestino.addItem(txtNovoVertice.getText());
+
+        txtNovoVertice.setText("");
+    }//GEN-LAST:event_btnConfirmarVerticeActionPerformed
+
+    private void btnCancelarVerticeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarVerticeMouseEntered
+        btnCancelarVertice.setContentAreaFilled(true);
+        btnCancelarVertice.setBackground(Color.gray);
+    }//GEN-LAST:event_btnCancelarVerticeMouseEntered
+
+    private void btnCancelarVerticeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarVerticeMouseExited
+        btnCancelarVertice.setContentAreaFilled(false);
+    }//GEN-LAST:event_btnCancelarVerticeMouseExited
+
+    private void btnCancelarVerticeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarVerticeActionPerformed
+        verticeAlterar.setBackground(Color.gray);
+        txtNovoVertice.setBackground(Color.gray);
+        txtNovoVertice.setEditable(false);
+        txtNovoVertice.setText("");
+    }//GEN-LAST:event_btnCancelarVerticeActionPerformed
+
+    private void btnConfirmarVertice1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmarVertice1MouseEntered
+        btnConfirmarVertice.setContentAreaFilled(true);
+        btnConfirmarVertice.setBackground(Color.gray);
+    }//GEN-LAST:event_btnConfirmarVertice1MouseEntered
+
+    private void btnConfirmarVertice1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmarVertice1MouseExited
+        btnConfirmarVertice.setContentAreaFilled(false);
+    }//GEN-LAST:event_btnConfirmarVertice1MouseExited
+
+    private void btnConfirmarVertice1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarVertice1ActionPerformed
+        List<Node> a = new ArrayList<Node>();
+        if (graph.getEdgedefault().equals("undirected")) {
+            display.setText(graph.verificaCadeia((String) cbVerificaOrigem.getSelectedItem(), (String) cbVerificaDestino.getSelectedItem(), 0, a));
+        } else {
+            display.setText(graph.verificaCaminho((String) cbVerificaOrigem.getSelectedItem(), (String) cbVerificaDestino.getSelectedItem(), 0, a));
+
+        }
+    }//GEN-LAST:event_btnConfirmarVertice1ActionPerformed
+
+    private void btnCancelarVertice1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarVertice1MouseEntered
+        btnCancelarVertice.setContentAreaFilled(true);
+        btnCancelarVertice.setBackground(Color.gray);
+    }//GEN-LAST:event_btnCancelarVertice1MouseEntered
+
+    private void btnCancelarVertice1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarVertice1MouseExited
+        btnCancelarVertice.setContentAreaFilled(false);
+    }//GEN-LAST:event_btnCancelarVertice1MouseExited
+
+    private void btnCancelarVertice1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarVertice1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarVertice1ActionPerformed
+
+    private void txtNomeArestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeArestaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNomeArestaActionPerformed
+
+    private void txtNovoNomeArestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNovoNomeArestaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNovoNomeArestaActionPerformed
+
+    private void btnConfirmarArestaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmarArestaMouseEntered
+        btnConfirmarAresta.setContentAreaFilled(true);
+        btnConfirmarAresta.setBackground(Color.gray);
+    }//GEN-LAST:event_btnConfirmarArestaMouseEntered
+
+    private void btnConfirmarArestaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmarArestaMouseExited
+        btnConfirmarAresta.setContentAreaFilled(false);
+    }//GEN-LAST:event_btnConfirmarArestaMouseExited
+
+    private void btnConfirmarArestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarArestaActionPerformed
+        if (graph.removerEdge((String) cbEditarOrigem.getSelectedItem(), (String) cbEditarDestino.getSelectedItem()).equals("Não foi possivel remover")) {
+            display.setText("\t==========Alterar==========\n\nNão foi possivel realizar a alteração!\n"
+                    + "Verifique as arestas e tente novamente...");
+        } else {
+            display.setText(graph.addEdges((String) cbNovaOrigem.getSelectedItem(), (String) cbNovoDestino.getSelectedItem(), Float.parseFloat(txtNovoPeso.getText()), txtNovoNomeAresta.getText()));
+        }
+        txtNovoNomeAresta.setText("");
+        txtNovoPeso.setText("");
+    }//GEN-LAST:event_btnConfirmarArestaActionPerformed
+
+    private void btnCancelarArestaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarArestaMouseEntered
+        btnCancelarAresta.setContentAreaFilled(true);
+        btnCancelarAresta.setBackground(Color.gray);
+    }//GEN-LAST:event_btnCancelarArestaMouseEntered
+
+    private void btnCancelarArestaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarArestaMouseExited
+        btnCancelarAresta.setContentAreaFilled(false);
+    }//GEN-LAST:event_btnCancelarArestaMouseExited
+
+    private void btnCancelarArestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarArestaActionPerformed
+        txtNovoNomeAresta.setBackground(Color.gray);
+        txtNovoPeso.setBackground(Color.gray);
+
+        txtNovoNomeAresta.setEditable(false);
+        txtNovoPeso.setEditable(false);
+
+        arestaAlterar.setBackground(Color.gray);
+        arco.setBackground(Color.gray);
+        novoArco.setBackground(Color.gray);
+    }//GEN-LAST:event_btnCancelarArestaActionPerformed
+    public void recuperaLista(int n) {
         if (n == 1) {
             graph.getEdges().clear();
             for (int i = 0; i < listaRec.size(); i++) { //Adiciona os vertices no combobox    
@@ -1450,16 +1928,16 @@ public class frmInterface extends javax.swing.JFrame {
             menuGrauRecepcao.setEnabled(false);
             menuFonte.setEnabled(false);
             menuSumidouro.setEnabled(false);
-            menuCaminho.setEnabled(false);
-            menuCadeia.setEnabled(true);
+
+            lblTipoGrafo.setText("Não direcionado");
             m = 0;
         } else {
             menuGrauEmissao.setEnabled(true);
             menuGrauRecepcao.setEnabled(true);
             menuFonte.setEnabled(true);
             menuSumidouro.setEnabled(true);
-            menuCaminho.setEnabled(true);
-            menuCadeia.setEnabled(false);
+
+            lblTipoGrafo.setText("Direcionado");
             m = 1;
         }
         for (int i = 0; i < graph.getNodes().size(); i++) { //Adiciona os vertices no combobox    
@@ -1467,7 +1945,6 @@ public class frmInterface extends javax.swing.JFrame {
             cbDestino.addItem(graph.getNodes().get(i).getId());
         }
         lblNomeGrafo.setText(graph.getId());
-        lblTipoGrafo.setText(graph.getEdgedefault());
         display.setText(graph.imprimeListas());
 
         JOptionPane.showMessageDialog(null, "Arquivo carregado com sucesso...");
@@ -1591,7 +2068,7 @@ public class frmInterface extends javax.swing.JFrame {
                 graph.setId(graphml.getGraph().getId());
                 graph.setEdgedefault(graphml.getGraph().getEdgedefault());
                 lblNomeGrafo.setText(graph.getId());
-                lblTipoGrafo.setText(graph.getEdgedefault());
+//                lblTipoGrafo.setText(graph.getEdgedefault());
 
                 if (graph.getEdgedefault().equals("directed")) {
                     graph.setEdgedefault("directed");
@@ -1599,8 +2076,7 @@ public class frmInterface extends javax.swing.JFrame {
                     menuGrauRecepcao.setEnabled(true);
                     menuFonte.setEnabled(true);
                     menuSumidouro.setEnabled(true);
-                    menuCaminho.setEnabled(true);
-                    menuCadeia.setEnabled(false);
+                    lblTipoGrafo.setText("Direcionado");
                     m = 1;
                 } else {
                     graph.setEdgedefault("undirected");
@@ -1608,7 +2084,7 @@ public class frmInterface extends javax.swing.JFrame {
                     menuGrauRecepcao.setEnabled(false);
                     menuFonte.setEnabled(false);
                     menuSumidouro.setEnabled(false);
-                    menuCaminho.setEnabled(false);
+                    lblTipoGrafo.setText("Não direcionado");
                     m = 0;
                 }
             } catch (FileNotFoundException ex) {
@@ -1624,8 +2100,9 @@ public class frmInterface extends javax.swing.JFrame {
             menuGrauRecepcao.setEnabled(true);
             menuFonte.setEnabled(true);
             menuSumidouro.setEnabled(true);
-            menuCaminho.setEnabled(true);
-            menuCadeia.setEnabled(false);
+
+            lblTipoGrafo.setText("Direcionado");
+
             m = 1;
         } else {
             graph.setEdgedefault("undirected");
@@ -1633,7 +2110,9 @@ public class frmInterface extends javax.swing.JFrame {
             menuGrauRecepcao.setEnabled(false);
             menuFonte.setEnabled(false);
             menuSumidouro.setEnabled(false);
-            menuCaminho.setEnabled(false);
+
+            lblTipoGrafo.setText("Não direcionado");
+
             m = 0;
         }
         graph.setId(nome);
@@ -1644,58 +2123,24 @@ public class frmInterface extends javax.swing.JFrame {
             graph.addNode(node);
             cbOrigem.addItem(Integer.toString(i + 1));
             cbDestino.addItem(Integer.toString(i + 1));
+            cbEditarOrigem.addItem(Integer.toString(i + 1));
+            cbEditarDestino.addItem(Integer.toString(i + 1));
+            cbVerificaOrigem.addItem(Integer.toString(i + 1));
+            cbVerificaDestino.addItem(Integer.toString(i + 1));
+            cbEditarVertice.addItem(Integer.toString(i + 1));
+            cbNovaOrigem.addItem(Integer.toString(i + 1));
+            cbNovoDestino.addItem(Integer.toString(i + 1));
         }
         lblNomeGrafo.setText(graph.getId());
-        lblTipoGrafo.setText(graph.getEdgedefault());
+
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);  //Fecha o jframe sem fechar tudo
     }
 
-    public Image ImageScale(Image img, int w, int h) {
-        BufferedImage image = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
-        Graphics2D g2 = image.createGraphics();
-        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        g2.drawImage(img, 0, 0, w, h, this);
-        g2.dispose();
-        return image;
-
-    }
-
     public void gerarGraph() {
-
-//////        graph.setEdgedefault(graph.getEdgedefault());
-//////        graph.setNodes(graph.getNodes());
-//////        graph.setEdges(graph.getEdges());
-        display.setText(graph.geraGraph(m));
-
-        for (int i = 0; i < graph.getNodes().size(); i++) { 
-            //laço pegando a lista de nos
-            try {
-                Process p;
-                File arquivo = new File("src\\os\\dot\\fileS.dot");
-                try (FileWriter fw = new FileWriter(arquivo)) {
-
-                    fw.write("" + graph.geraGraph(m));
-
-                    fw.flush();
-                } catch (IOException ex) {
-                    System.out.println("Erro ao Criar Arquivo: " + ex.getMessage());
-                }
-
-                String commandLine = "dot -Tpng " + arquivo.getCanonicalPath() + " -o src\\os\\img\\fileS.png";
-
-                p = Runtime.getRuntime().exec(commandLine);
-                while (p.isAlive()) {
-                }
-
-                String path = "src\\os\\img\\fileS.png";
-                BufferedImage img = ImageIO.read(new File(path));
-                ImageIcon image = new ImageIcon(ImageScale(img, imgGrafico.getWidth(), imgGrafico.getHeight()));
-                imgGrafico.setIcon(image);
-                imgGrafico.setText("");
-
-            } catch (IOException ex) {
-                System.out.println("Erro do Executar Comando: " + ex.getMessage());
-            }
+        try {
+            ViewGraph.generateViewGraphByFrame("resources\\arq.xml");
+        } catch (EGraphViewExcpetion ex) {
+            System.out.println("-->" + ex.getMensagem());
         }
     }
 
@@ -1738,14 +2183,6 @@ public class frmInterface extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -1756,10 +2193,18 @@ public class frmInterface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel arco;
+    private javax.swing.JPanel arestaAlterar;
     private javax.swing.JButton btnAdicionarAresta;
     private javax.swing.JButton btnAdicionarVertice;
     private javax.swing.JButton btnAlterarAresta;
     private javax.swing.JButton btnAlterarVertice;
+    private javax.swing.JButton btnCancelarAresta;
+    private javax.swing.JButton btnCancelarVertice;
+    private javax.swing.JButton btnCancelarVertice1;
+    private javax.swing.JButton btnConfirmarAresta;
+    private javax.swing.JButton btnConfirmarVertice;
+    private javax.swing.JButton btnConfirmarVertice1;
     private javax.swing.JButton btnDeletarVertice;
     private javax.swing.JButton btnGerarGrafico;
     private javax.swing.JButton btnLimpaAresta;
@@ -1770,12 +2215,18 @@ public class frmInterface extends javax.swing.JFrame {
     private javax.swing.JButton btnMostrarVA;
     private javax.swing.JButton btndeletarAresta;
     private javax.swing.JComboBox<String> cbDestino;
+    private javax.swing.JComboBox<String> cbEditarDestino;
+    private javax.swing.JComboBox<String> cbEditarOrigem;
+    private javax.swing.JComboBox<String> cbEditarVertice;
+    private javax.swing.JComboBox<String> cbNovaOrigem;
+    private javax.swing.JComboBox<String> cbNovoDestino;
     private javax.swing.JComboBox<String> cbOrigem;
+    private javax.swing.JComboBox<String> cbVerificaDestino;
+    private javax.swing.JComboBox<String> cbVerificaOrigem;
     private javax.swing.JTextArea display;
     private javax.swing.JLabel iconAbrir;
     private javax.swing.JLabel iconNovo;
     private javax.swing.JLabel iconSalvar;
-    private javax.swing.JLabel imgGrafico;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
@@ -1785,7 +2236,6 @@ public class frmInterface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
@@ -1795,21 +2245,30 @@ public class frmInterface extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JLabel lblGrafico;
+    private javax.swing.JLabel lblArco;
+    private javax.swing.JLabel lblArco1;
+    private javax.swing.JLabel lblDestino;
+    private javax.swing.JLabel lblNo;
+    private javax.swing.JLabel lblNo1;
+    private javax.swing.JLabel lblNo2;
+    private javax.swing.JLabel lblNo3;
     private javax.swing.JLabel lblNomeGrafo;
+    private javax.swing.JLabel lblNovaOrigem;
+    private javax.swing.JLabel lblNovo;
+    private javax.swing.JLabel lblNovoDestino;
+    private javax.swing.JLabel lblNovoNomeArco;
+    private javax.swing.JLabel lblNovoPeso;
+    private javax.swing.JLabel lblOrigem;
     private javax.swing.JLabel lblTipoGrafo;
     private javax.swing.JMenuItem menuAbrir;
     private javax.swing.JMenuItem menuAdjacente;
-    private javax.swing.JMenuItem menuAjustar;
     private javax.swing.JMenu menuArquivo;
-    private javax.swing.JMenuItem menuCadeia;
-    private javax.swing.JMenuItem menuCaminho;
     private javax.swing.JMenuItem menuConjunto;
     private javax.swing.JMenu menuExibir;
     private javax.swing.JMenuItem menuFonte;
-    private javax.swing.JMenu menuGrafico;
     private javax.swing.JMenuItem menuGrau;
     private javax.swing.JMenuItem menuGrauEmissao;
     private javax.swing.JMenuItem menuGrauRecepcao;
@@ -1817,17 +2276,19 @@ public class frmInterface extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuInfo;
     private javax.swing.JMenuItem menuKruskal;
     private javax.swing.JMenuItem menuMatriz;
-    private javax.swing.JMenuItem menuNome;
-    private javax.swing.JMenuItem menuNormalizar;
     private javax.swing.JMenuItem menuNovo;
     private javax.swing.JMenuItem menuOrdem;
-    private javax.swing.JMenuItem menuPeso;
     private javax.swing.JMenuItem menuPrim;
     private javax.swing.JMenuItem menuSair;
     private javax.swing.JMenuItem menuSalvar;
     private javax.swing.JMenuItem menuSumidouro;
+    private javax.swing.JPanel novoArco;
     private javax.swing.JTextField txtNomeAresta;
+    private javax.swing.JTextField txtNovoNomeAresta;
+    private javax.swing.JTextField txtNovoPeso;
+    private javax.swing.JTextField txtNovoVertice;
     private javax.swing.JTextField txtPesoAresta;
     private javax.swing.JTextField txtaddVertice;
+    private javax.swing.JPanel verticeAlterar;
     // End of variables declaration//GEN-END:variables
 }

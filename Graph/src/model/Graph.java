@@ -105,7 +105,7 @@ public class Graph {
             if (getNodes().get(i).getId().equals(node)) {
                 getNodes().get(i).setId(novo);
                 r += "Vertice alterado com sucesso.\n\n"
-                        + "Vertice " + node + " ============== > " + novo + "\n\n"
+                        + "Vertice " + node + " === Trocado por === > " + novo + "\n\n"
                         + "Edges atualizadas com sucesso.\n\n";
             }
         }
@@ -187,6 +187,14 @@ public class Graph {
         return listaGrau;
     }
 
+    public int getGrauVertice(String vertice) {
+        int grau = 0;
+        for (Node no : getNodes()) {
+            grau++;
+        }
+        return grau;
+    }
+
     public String matrizAdjacencia() {
         String espaco = "    ";
         String matrizTotal = "  ";
@@ -239,8 +247,10 @@ public class Graph {
                 int no2 = graph.getNodes().indexOf(e.getNode2());
 
                 matriz[no1][index] = 1;
+                matriz[no2][index] = 1;
                 index++;
             }
+            
             for (int a = 1; a < graph.getEdges().size() + 1; a++) {
                 incidencia += espaco + graph.getEdges().get(a - 1).getId();
             }
@@ -268,6 +278,7 @@ public class Graph {
                 incidencia += espaco + matriz[i][j];
             }
         }
+
         return incidencia;
     }
 
@@ -464,7 +475,11 @@ public class Graph {
         int prox = o, posicao = 0;
         int matriz[][] = new int[getNodes().size()][getNodes().size()];
 
-        if (origem.equals(destino)) {
+        if (getEdges().isEmpty()) {
+            return "Cadeia: não existe";
+        } else if (origem.equals(destino)) {
+            return "Cadeia: não existe";
+        } else if (getGrauVertice(origem) == 0) {
             return "Cadeia: não existe";
         }
 
@@ -562,27 +577,25 @@ public class Graph {
         return verificaCaminho(auxOrigem, destino, prox, auxVisitado);
     }
 
-    public List<Node> Kruskal() { 
+    public List<Node> Kruskal() {
         String r = "";
         int cont = 0, pos = 0;
         float menor = getEdges().get(0).getPeso();
         String auxMatriz = "";
         List<Node> lista = new ArrayList<Node>();
-        String matriz[][] = new String[getNodes().size()][getNodes().size()];//matriz do algoritmos
+        String matriz[][] = new String[getNodes().size()][getNodes().size()];
 
-        
-        //laço consiste em criar uma matriz nxm agrupando os vertices
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < getNodes().size(); j++) {
                 if (i == 0) {
-                    matriz[i][j] = getNodes().get(j).getId();//laço p pegar os id dos vertices adc na matriz do algoritmo
+                    matriz[i][j] = getNodes().get(j).getId();
                 } else {
-                    matriz[i][j] = "" + (j + 1); 
+                    matriz[i][j] = "" + (j + 1);
                 }
             }
         }
         while (cont < getEdges().size()) {
-            for (int i = 0; i < getEdges().size(); i++) {//percore as arestas e verifica o menor peso guardando a posição
+            for (int i = 0; i < getEdges().size(); i++) {
                 if (getEdges().get(i).getPeso() < menor) {
                     menor = getEdges().get(i).getPeso();
                     pos = i;
@@ -590,12 +603,10 @@ public class Graph {
             }
             if (cont == 0) {
                 for (int i = 0; i < 3; i++) {
-                    for (int j = 0; j < getNodes().size(); j++) {// percore os vertices , verifica se o primeiro grupo da matriz ...
-                        //guardando a posição da matriz numa nova chamada auxiliar
+                    for (int j = 0; j < getNodes().size(); j++) {
                         if (getEdges().get(pos).getNode1().getId().equals(matriz[0][j])) {
-                            auxMatriz = matriz[1][j]; 
-                            for (int j2 = 0; j2 < getNodes().size(); j2++) { // laço p verificar se o destino faz parte do grupo, se n adc ao grupo da matriz.
-                                //Adc um nova lista que guarda posição dos vertices de origem e destino
+                            auxMatriz = matriz[1][j];
+                            for (int j2 = 0; j2 < getNodes().size(); j2++) {
                                 if (getEdges().get(pos).getNode2().getId().equals(matriz[0][j2])) {
                                     matriz[2][j2] = auxMatriz;
                                     lista.add(getEdges().get(pos).getNode1());
@@ -606,7 +617,7 @@ public class Graph {
                         }
                     }
                 }
-                getEdges().remove(pos); // removemos o vertice da posição analisada
+                getEdges().remove(pos);
             }
             for (int i = 0; i < 3; i++) {
                 for (int j = 0; j < getNodes().size(); j++) {
@@ -660,7 +671,7 @@ public class Graph {
 
                         for (int i2 = 0; i2 < lista.size(); i2++) {
                             if (lista.get(i2).getId().equals(getEdges().get(pos).getNode2().getId())) {
-                                existe = true;//se existe o vertice na lista
+                                existe = true;
                             }
                         }
                     }
@@ -745,33 +756,33 @@ public class Graph {
         return r;
     }
 
-    public String geraGraph(int m) {// m para verificar se é ou n direcionado
+    public String geraGraph(int m) {
         String espaco = " ";
         String lista = "digraph G {\n";
         int i, v;
-//verifica se é direcionado
+
         if (getEdgedefault().equals("directed")) {
-            if (m == 0) {//se é valorado, mostrando o id das arestas
-                for (i = 0; i < getEdges().size(); i++) {//fez um laço nas arestas p pegar os ids source=origem target=destino
+            if (m == 0) {
+                for (i = 0; i < getEdges().size(); i++) {
                     lista += getEdges().get(i).getSoucer() + " -> " + getEdges().get(i).getTarget() + "[label=" + getEdges().get(i).getId() + "]\n";
                 }
             } else {
-                for (i = 0; i < getEdges().size(); i++) { // peso
+                for (i = 0; i < getEdges().size(); i++) {
                     lista += getEdges().get(i).getSoucer() + " -> " + getEdges().get(i).getTarget() + "[label=" + getEdges().get(i).getPeso() + "]\n";
                 }
             }
-        } else {// para n direcionado
-            if (m == 0) { //m na hora q escolhe o grafo... abrir ou criar
+        } else {
+            if (m == 0) {
                 for (i = 0; i < getEdges().size(); i++) {
                     lista += getEdges().get(i).getSoucer() + " -> " + getEdges().get(i).getTarget() + " [dir=none][label=" + getEdges().get(i).getId() + "]\n";
-                }//qd não direcionado usa dir=nome
+                }
             } else {
                 for (i = 0; i < getEdges().size(); i++) {
                     lista += getEdges().get(i).getSoucer() + " -> " + getEdges().get(i).getTarget() + " [dir=none][label=" + getEdges().get(i).getPeso() + "]\n";
                 }
             }
         }
-        for (v = 0; v < getNodes().size(); v++) {//laço nos nós, para IMPRIMIR vertice sem conexão(ligação)
+        for (v = 0; v < getNodes().size(); v++) {
             lista += getNodes().get(v).getId() + ";\n";
 
         }

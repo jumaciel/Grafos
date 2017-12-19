@@ -23,6 +23,7 @@ import model.Edge;
 import model.Graph;
 import model.Graphml;
 import model.Node;
+import view.frmInterface;
 
 /**
  *
