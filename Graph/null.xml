@@ -1,19 +1,8 @@
 <graphml xmlns="http://graphml.graphdrawing.org/xmlns">
-  <graph id="6" edgedefault="undirected">
-    <node id="x1" degree="2"/>
-    <node id="x2" degree="3"/>
-    <node id="x3" degree="3"/>
-    <node id="x4" degree="2"/>
-    <node id="x5" degree="3"/>
-    <node id="x6" degree="3"/>
-    <edge id="a1" source="x1" target="x2" weight="0.0"/>
-    <edge id="a2" source="x2" target="x5" weight="0.0"/>
-    <edge id="a3" source="x5" target="x4" weight="0.0"/>
-    <edge id="a4" source="x5" target="x6" weight="0.0"/>
-    <edge id="a5" source="x4" target="x1" weight="0.0"/>
-    <edge id="a6" source="x6" target="x3" weight="0.0"/>
-    <edge id="a7" source="x3" target="x6" weight="0.0"/>
-    <edge id="a8" source="x3" target="x2" weight="0.0"/>
-    <grau/>
+  <graph id="3" edgedefault="undirected">
+    <node id="1" degree="0"/>
+    <node id="2" degree="0"/>
+    <node id="3" degree="0"/>
+    <node id="4" degree="0"/>
   </graph>
 </graphml>

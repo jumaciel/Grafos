@@ -247,10 +247,28 @@ public class Graph {
                 int no2 = graph.getNodes().indexOf(e.getNode2());
 
                 matriz[no1][index] = 1;
+                matriz[no2][index] = -1;
+                index++;
+            }
+
+            for (int a = 1; a < graph.getEdges().size() + 1; a++) {
+                incidencia += espaco + graph.getEdges().get(a - 1).getId();
+            }
+            for (i = 0; i < graph.getNodes().size(); i++) {
+                incidencia += "\n" + getNodes().get(i).getId();
+                for (j = 0; j < graph.getEdges().size(); j++) {
+                    incidencia += espaco + matriz[i][j];
+                }
+            }
+        } else {
+            for (Edge e : graph.getEdges()) {
+                int no1 = graph.getNodes().indexOf(e.getNode1());
+                int no2 = graph.getNodes().indexOf(e.getNode2());
+
+                matriz[no1][index] = 1;
                 matriz[no2][index] = 1;
                 index++;
             }
-            
             for (int a = 1; a < graph.getEdges().size() + 1; a++) {
                 incidencia += espaco + graph.getEdges().get(a - 1).getId();
             }
@@ -261,24 +279,6 @@ public class Graph {
                 }
             }
         }
-        for (Edge e : graph.getEdges()) {
-            int no1 = graph.getNodes().indexOf(e.getNode1());
-            int no2 = graph.getNodes().indexOf(e.getNode2());
-
-            matriz[no1][index] = 1;
-            matriz[no2][index] = 1;
-            index++;
-        }
-        for (int a = 1; a < graph.getEdges().size() + 1; a++) {
-            incidencia += espaco + graph.getEdges().get(a - 1).getId();
-        }
-        for (i = 0; i < graph.getNodes().size(); i++) {
-            incidencia += "\n" + getNodes().get(i).getId();
-            for (j = 0; j < graph.getEdges().size(); j++) {
-                incidencia += espaco + matriz[i][j];
-            }
-        }
-
         return incidencia;
     }
 
