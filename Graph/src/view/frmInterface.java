@@ -1153,9 +1153,9 @@ public class frmInterface extends javax.swing.JFrame {
                         .addComponent(btnGerarGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel6))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1592,7 +1592,18 @@ public class frmInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_iconNovoMouseClicked
 
     private void btnGerarGraficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarGraficoActionPerformed
-         XStream xstream = new XStream(new DomDriver());
+
+        List<Edge> lista = new ArrayList<Edge>();
+        for (int i = 0; i < graph.getEdges().size(); i++) {
+            lista.add(graph.getEdges().get(i));
+        }
+        graph.getEdges().clear();
+
+        for (int i = 0; i < lista.size(); i++) {
+            graph.addEdges(lista.get(i).getNode2().getId(), lista.get(i).getNode1().getId(), lista.get(i).getPeso(), lista.get(i).getId());
+        }
+
+        XStream xstream = new XStream(new DomDriver());
         String xml = null;
 
         xstream.omitField(Edge.class, "node1");
@@ -1610,14 +1621,20 @@ public class frmInterface extends javax.swing.JFrame {
         xstream.useAttributeFor("weight", float.class);
         xstream.addImplicitArray(Graph.class, "nodes");
         xstream.addImplicitArray(Graph.class, "edges");
+
         graphml.setGraph(graph);
 
         try {
             xml = xstream.toXML(graphml);
-           File xmlFile = new File("resources\\arq.xml");
-           xstream.toXML(graphml, new FileWriter(xmlFile));
-            
-           display.setText("Gerado com sucesso!!");
+            File xmlFile = new File("resources\\arq.xml");
+            xstream.toXML(graphml, new FileWriter(xmlFile));
+
+            display.setText("Gerado com sucesso!!");
+
+            graph.getEdges().clear();
+            for (int i = 0; i < lista.size(); i++) {
+                graph.addEdges(lista.get(i).getNode1().getId(), lista.get(i).getNode2().getId(), lista.get(i).getPeso(), lista.get(i).getId());
+            }
         } catch (IOException ex) {
             display.setText("Erro ao gravar");
         }
@@ -1950,6 +1967,13 @@ public class frmInterface extends javax.swing.JFrame {
         for (int i = 0; i < graph.getNodes().size(); i++) { //Adiciona os vertices no combobox    
             cbOrigem.addItem(graph.getNodes().get(i).getId());
             cbDestino.addItem(graph.getNodes().get(i).getId());
+            cbEditarOrigem.addItem(graph.getNodes().get(i).getId());
+            cbEditarDestino.addItem(graph.getNodes().get(i).getId());
+            cbVerificaOrigem.addItem(graph.getNodes().get(i).getId());
+            cbVerificaDestino.addItem(graph.getNodes().get(i).getId());
+            cbEditarVertice.addItem(graph.getNodes().get(i).getId());
+            cbNovaOrigem.addItem(graph.getNodes().get(i).getId());
+            cbNovoDestino.addItem(graph.getNodes().get(i).getId());
         }
         lblNomeGrafo.setText(graph.getId());
         display.setText(graph.imprimeListas());
@@ -2006,9 +2030,6 @@ public class frmInterface extends javax.swing.JFrame {
     }
 
     public void abrirArquivo() {
-        cbOrigem.removeAllItems();
-        cbDestino.removeAllItems();
-
         JFileChooser arquivo = new JFileChooser();
         FileNameExtensionFilter filtroXML = new FileNameExtensionFilter("Arquivos XML", "xml");
         arquivo.addChoosableFileFilter(filtroXML);
@@ -2071,6 +2092,13 @@ public class frmInterface extends javax.swing.JFrame {
                 for (int i = 0; i < graph.getNodes().size(); i++) {
                     cbOrigem.addItem(graph.getNodes().get(i).getId());
                     cbDestino.addItem(graph.getNodes().get(i).getId());
+                    cbEditarOrigem.addItem(graph.getNodes().get(i).getId());
+                    cbEditarDestino.addItem(graph.getNodes().get(i).getId());
+                    cbVerificaOrigem.addItem(graph.getNodes().get(i).getId());
+                    cbVerificaDestino.addItem(graph.getNodes().get(i).getId());
+                    cbEditarVertice.addItem(graph.getNodes().get(i).getId());
+                    cbNovaOrigem.addItem(graph.getNodes().get(i).getId());
+                    cbNovoDestino.addItem(graph.getNodes().get(i).getId());
                 }
                 graph.setId(graphml.getGraph().getId());
                 graph.setEdgedefault(graphml.getGraph().getEdgedefault());
@@ -2094,6 +2122,7 @@ public class frmInterface extends javax.swing.JFrame {
                     lblTipoGrafo.setText("Não direcionado");
                     m = 0;
                 }
+
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(frmInterface.class.getName()).log(Level.SEVERE, null, ex);
             }
