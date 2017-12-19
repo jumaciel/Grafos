@@ -27,7 +27,7 @@ import view.frmInterface;
 
 /**
  *
- * @author Anah
+ * @author Luiz Fernando
  */
 public class frmCriarGrafo extends javax.swing.JFrame {
 

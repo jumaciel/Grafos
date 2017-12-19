@@ -756,37 +756,4 @@ public class Graph {
         return r;
     }
 
-    public String geraGraph(int m) {
-        String espaco = " ";
-        String lista = "digraph G {\n";
-        int i, v;
-
-        if (getEdgedefault().equals("directed")) {
-            if (m == 0) {
-                for (i = 0; i < getEdges().size(); i++) {
-                    lista += getEdges().get(i).getSoucer() + " -> " + getEdges().get(i).getTarget() + "[label=" + getEdges().get(i).getId() + "]\n";
-                }
-            } else {
-                for (i = 0; i < getEdges().size(); i++) {
-                    lista += getEdges().get(i).getSoucer() + " -> " + getEdges().get(i).getTarget() + "[label=" + getEdges().get(i).getPeso() + "]\n";
-                }
-            }
-        } else {
-            if (m == 0) {
-                for (i = 0; i < getEdges().size(); i++) {
-                    lista += getEdges().get(i).getSoucer() + " -> " + getEdges().get(i).getTarget() + " [dir=none][label=" + getEdges().get(i).getId() + "]\n";
-                }
-            } else {
-                for (i = 0; i < getEdges().size(); i++) {
-                    lista += getEdges().get(i).getSoucer() + " -> " + getEdges().get(i).getTarget() + " [dir=none][label=" + getEdges().get(i).getPeso() + "]\n";
-                }
-            }
-        }
-        for (v = 0; v < getNodes().size(); v++) {
-            lista += getNodes().get(v).getId() + ";\n";
-
-        }
-        lista += "}";
-        return lista;
-    }
 }
