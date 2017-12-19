@@ -46,8 +46,6 @@ public class frmInterface extends javax.swing.JFrame {
     List<Node> listaNode = new ArrayList<Node>();
     List<Edge> listaEdge = new ArrayList<Edge>();
     List<Edge> listaRec = new ArrayList<Edge>();
-    int w = 0;
-    int h = 0;
     int m;
 
     public frmInterface() {
