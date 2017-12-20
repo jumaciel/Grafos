@@ -1680,6 +1680,13 @@ public class frmInterface extends javax.swing.JFrame {
     private void btnLimpaVAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpaVAActionPerformed
         cbOrigem.removeAllItems();
         cbDestino.removeAllItems();
+        cbEditarOrigem.removeAllItems();
+        cbEditarDestino.removeAllItems();
+        cbVerificaOrigem.removeAllItems();
+        cbVerificaDestino.removeAllItems();
+        cbEditarVertice.removeAllItems();
+        cbNovaOrigem.removeAllItems();
+        cbNovoDestino.removeAllItems();
         graph.getNodes().clear();
         graph.getEdges().clear();
     }//GEN-LAST:event_btnLimpaVAActionPerformed
@@ -1940,6 +1947,16 @@ public class frmInterface extends javax.swing.JFrame {
 
     //Recebe os dados da tela frmCriarGrafo
     public void setAbrirGrafo(List<Node> node, List<Edge> edge, String nome, String tipo) {
+        cbOrigem.removeAllItems();
+        cbDestino.removeAllItems();
+        cbEditarOrigem.removeAllItems();
+        cbEditarDestino.removeAllItems();
+        cbVerificaOrigem.removeAllItems();
+        cbVerificaDestino.removeAllItems();
+        cbEditarVertice.removeAllItems();
+        cbNovaOrigem.removeAllItems();
+        cbNovoDestino.removeAllItems();
+
         graph.setNodes(node);
         graph.setEdges(edge);
         graph.setId(nome);
@@ -2030,6 +2047,16 @@ public class frmInterface extends javax.swing.JFrame {
     }
 
     public void abrirArquivo() {
+        cbOrigem.removeAllItems();
+        cbDestino.removeAllItems();
+        cbEditarOrigem.removeAllItems();
+        cbEditarDestino.removeAllItems();
+        cbVerificaOrigem.removeAllItems();
+        cbVerificaDestino.removeAllItems();
+        cbEditarVertice.removeAllItems();
+        cbNovaOrigem.removeAllItems();
+        cbNovoDestino.removeAllItems();
+
         JFileChooser arquivo = new JFileChooser();
         FileNameExtensionFilter filtroXML = new FileNameExtensionFilter("Arquivos XML", "xml");
         arquivo.addChoosableFileFilter(filtroXML);
