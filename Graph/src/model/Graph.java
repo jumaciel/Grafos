@@ -577,7 +577,7 @@ public class Graph {
         return verificaCaminho(auxOrigem, destino, prox, auxVisitado);
     }
 
-    public List<Node> Kruskal() {
+    public String Kruskal() {
         String r = "";
         int cont = 0, pos = 0;
         float menor = getEdges().get(0).getPeso();
@@ -642,15 +642,20 @@ public class Graph {
             getEdges().remove(pos);
             cont++;
         }
-        return lista;
+        r+="{";
+        for(int i = 0; i<lista.size();i++){
+            r+=lista.get(i).getId()+",";
+        }
+         r+="}";
+        return r;
     }
 
-    public List<Node> Prim() {
+    public String Prim() {
         List<Node> lista = new ArrayList<Node>();
         int cont = 0, pos = 0;
         float menor = getEdges().get(0).getPeso();
         boolean existe = false;
-
+        String r="";
         while (cont < getEdges().size() - 1) {
             for (int i = 0; i < getEdges().size(); i++) {
                 if (getEdges().get(i).getPeso() < menor) {
@@ -691,7 +696,12 @@ public class Graph {
             }
             cont++;
         }
-        return lista;
+        r+="{";
+        for(int i = 0; i<lista.size();i++){
+            r+=lista.get(i).getId()+",";
+        }
+         r+="}";
+        return r;
     }
 
     public String ImprimeNode() {

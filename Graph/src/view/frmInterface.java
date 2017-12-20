@@ -1687,6 +1687,7 @@ public class frmInterface extends javax.swing.JFrame {
         cbEditarVertice.removeAllItems();
         cbNovaOrigem.removeAllItems();
         cbNovoDestino.removeAllItems();
+
         graph.getNodes().clear();
         graph.getEdges().clear();
     }//GEN-LAST:event_btnLimpaVAActionPerformed
@@ -1702,36 +1703,30 @@ public class frmInterface extends javax.swing.JFrame {
 
     private void menuKruskalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuKruskalActionPerformed
         String r = "";
-        List<Node> lista = new ArrayList<Node>();
-        lista = graph.Kruskal();
-
-        if (lista.isEmpty()) {
-            display.setText("erro");
-        } else {
-            for (int i = 0; i < lista.size(); i++) {
-                r += "{ " + lista.get(i).getId() + "}";
-            }
-            display.setText(r);
+        for (int i = 0; i < graph.getEdges().size(); i++) {
+            listaRec.add(graph.getEdges().get(i));
         }
-        graph.setNodes(lista);
-        recuperaLista(1);
+        display.setText(graph.Kruskal());
+
+        graph.getEdges().clear();
+        for (int i = 0; i < listaRec.size(); i++) { //Adiciona os vertices no combobox    
+            graph.addEdge(listaRec.get(i));
+        }
+        listaRec.clear();
     }//GEN-LAST:event_menuKruskalActionPerformed
 
     private void menuPrimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPrimActionPerformed
         String r = "";
-        List<Node> lista = new ArrayList<Node>();
-        lista = graph.Prim();
 
-        if (lista.isEmpty()) {
-            display.setText("erro");
-        } else {
-            for (int i = 0; i < lista.size(); i++) {
-                r += "{ " + lista.get(i).getId() + "}";
-            }
-            display.setText(r);
+        for (int i = 0; i < graph.getEdges().size(); i++) {
+            listaRec.add(graph.getEdges().get(i));
         }
-        graph.setNodes(lista);
-        recuperaLista(1);
+        display.setText(graph.Prim());
+        graph.getEdges().clear();
+        for (int i = 0; i < listaRec.size(); i++) { //Adiciona os vertices no combobox    
+            graph.addEdge(listaRec.get(i));
+        }
+        listaRec.clear();
     }//GEN-LAST:event_menuPrimActionPerformed
 
     private void btnConfirmarVerticeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmarVerticeMouseEntered
@@ -1870,19 +1865,6 @@ public class frmInterface extends javax.swing.JFrame {
         arco.setBackground(Color.gray);
         novoArco.setBackground(Color.gray);
     }//GEN-LAST:event_btnCancelarArestaActionPerformed
-    public void recuperaLista(int n) {
-        if (n == 1) {
-            graph.getEdges().clear();
-            for (int i = 0; i < listaRec.size(); i++) { //Adiciona os vertices no combobox    
-                graph.addEdge(listaRec.get(i));
-            }
-
-        } else {
-            for (int i = 0; i < graph.getEdges().size(); i++) { //Adiciona os vertices no combobox    
-                listaRec.add(graph.getEdges().get(i));
-            }
-        }
-    }
 
     public void getAlteracao(List<Node> node, List<Edge> edge, String nome, String tipo) {
         graph.setId(nome);
@@ -1961,8 +1943,6 @@ public class frmInterface extends javax.swing.JFrame {
         graph.setEdges(edge);
         graph.setId(nome);
         graph.setEdgedefault(tipo);
-
-        recuperaLista(0);
 
         if (tipo.equals("undirected")) {
             menuGrauEmissao.setEnabled(false);
