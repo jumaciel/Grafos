@@ -642,74 +642,71 @@ public class Graph {
             getEdges().remove(pos);
             cont++;
         }
-        r+="{";
-        for(int i = 0; i<lista.size();i++){
-            r+=lista.get(i).getId()+",";
+        r += "{";
+        for (int i = 0; i < lista.size(); i++) {
+            r += lista.get(i).getId() + ",";
         }
-         r+="}";
+        r += "}";
         return r;
     }
 
     public String Prim() {
-        List<Node> lista = new ArrayList<Node>();
-        int cont = 0, pos = 0;
-        float menor = getEdges().get(0).getPeso();
-        boolean existe = false;
-        String r="";
-        while (cont < getEdges().size() - 1) {
-            for (int i = 0; i < getEdges().size(); i++) {
-                if (getEdges().get(i).getPeso() < menor) {
-                    menor = getEdges().get(i).getPeso();
-                    pos = i;
+        String r = "";
+        int[] visitado = new int[getNodes().size()];
+        int min = 999;
+        int u = 0;
+        int v = 0;
+        int total = 0;
+        int matrizPeso[][] = new int[getNodes().size()][getNodes().size()];
+
+        for (Edge e : getEdges()) {
+            int no1 = getNodes().indexOf(e.getNode1());
+            int no2 = getNodes().indexOf(e.getNode2());
+            matrizPeso[no1][no2] = (int) e.getPeso();
+        }
+
+        for (int i = 0; i < getNodes().size(); i++) {
+            visitado[i] = 0;
+            for (int j = 0; j < getNodes().size(); j++) {
+                if (matrizPeso[i][j] == 0) {
+                    matrizPeso[i][j] = 999;
                 }
             }
+        }
+        visitado[0] = 1;
 
-            if (lista.isEmpty()) {
-                lista.add(getEdges().get(pos).getNode1());
-                lista.add(getEdges().get(pos).getNode2());
-                getEdges().remove(pos);
-                menor = getEdges().get(0).getPeso();
+        for (int cont = 0; cont < getNodes().size() - 1; cont++) {
+            min = 999;
 
-            } else {
-                for (int i = 0; i < lista.size(); i++) {
-                    if (lista.get(i).getId().equals(getEdges().get(pos).getNode1().getId())) {
-
-                        for (int i2 = 0; i2 < lista.size(); i2++) {
-                            if (lista.get(i2).getId().equals(getEdges().get(pos).getNode2().getId())) {
-                                existe = true;
+            for (int i = 0; i < getNodes().size(); i++) {
+                if (visitado[i] == 1) {
+                    for (int j = 0; j < getNodes().size(); j++) {
+                        if (visitado[j] != 1) {
+                            if(min > matrizPeso[i][j]){
+                                min = matrizPeso[i][j];
+                                u = i;
+                                v = j;
                             }
                         }
                     }
                 }
-                if (existe == false) {
-                    lista.add(getEdges().get(pos).getNode1());
-                    lista.add(getEdges().get(pos).getNode2());
-                    getEdges().remove(pos);
-                    menor = getEdges().get(0).getPeso();
-                    pos = 0;
-
-                } else {
-                    getEdges().remove(pos);
-                    menor = getEdges().get(0).getPeso();
-                    pos = 0;
-                }
             }
-            cont++;
+            visitado[v] = 1;
+            total+= min;
+            r+="Aresta: {"+u+","+v+"}: peso "+min;
+            r+="\n";
+            
         }
-        r+="{";
-        for(int i = 0; i<lista.size();i++){
-            r+=lista.get(i).getId()+",";
-        }
-         r+="}";
+        r+="Peso minimo da arvore: "+total;
         return r;
     }
-    
+
     public String Dijkastra() {
 
         int min;
         int nextNode = 0;
         int[] distancia = new int[getNodes().size()];
-        int[] visited = new int[getNodes().size()];
+        int[] visitado = new int[getNodes().size()];
         int[] preD = new int[getNodes().size()];
         int matrizPeso[][] = new int[getNodes().size()][getNodes().size()];
 
@@ -719,7 +716,7 @@ public class Graph {
             matrizPeso[no1][no2] = (int) e.getPeso();
         }
         for (int i = 0; i < getNodes().size(); i++) {
-            visited[i] = 0;
+            visitado[i] = 0;
             preD[i] = 0;
             for (int j = 0; j < matrizPeso[0].length; j++) {
                 if (matrizPeso[i][j] == 0) {
@@ -729,22 +726,22 @@ public class Graph {
         }
         distancia = matrizPeso[0];
         distancia[0] = 0;
-        visited[0] = 1;
+        visitado[0] = 1;
 
         for (int i = 0;
                 i < getNodes()
                         .size(); i++) {
             min = 999;
             for (int j = 0; j < getNodes().size(); j++) {
-                if (min > distancia[j] && visited[j] != 1) {
+                if (min > distancia[j] && visitado[j] != 1) {
                     min = distancia[j];
                     nextNode = j;
                 }
             }
 
-            visited[nextNode] = 1;
+            visitado[nextNode] = 1;
             for (int i2 = 0; i2 < getNodes().size(); i2++) {
-                if (visited[i2] != 1) {
+                if (visitado[i2] != 1) {
                     if (min + matrizPeso[nextNode][i2] < distancia[i2]) {
                         distancia[i2] = min + matrizPeso[nextNode][i2];
                         preD[i2] = nextNode;
