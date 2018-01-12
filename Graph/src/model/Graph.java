@@ -579,74 +579,56 @@ public class Graph {
 
     public String Kruskal() {
         String r = "";
-        int cont = 0, pos = 0;
-        float menor = getEdges().get(0).getPeso();
-        String auxMatriz = "";
-        List<Node> lista = new ArrayList<Node>();
-        String matriz[][] = new String[getNodes().size()][getNodes().size()];
+        int matrizPeso[][] = new int[getNodes().size()][getNodes().size()];
+        int[] parent = new int[getNodes().size()];
+        int min = 0;
+        int u = 0;
+        int v = 0;
+        int noOfEdges = 1;
+        int total = 0;
 
-        for (int i = 0; i < 3; i++) {
+        for (Edge e : getEdges()) {
+            int no1 = getNodes().indexOf(e.getNode1());
+            int no2 = getNodes().indexOf(e.getNode2());
+            matrizPeso[no1][no2] = (int) e.getPeso();
+        }
+
+        for (int i = 0; i < getNodes().size(); i++) {
+            parent[i] = 0;
             for (int j = 0; j < getNodes().size(); j++) {
-                if (i == 0) {
-                    matriz[i][j] = getNodes().get(j).getId();
-                } else {
-                    matriz[i][j] = "" + (j + 1);
+                if (matrizPeso[i][j] == 0) {
+                    matrizPeso[i][j] = 999;
                 }
             }
         }
-        while (cont < getEdges().size()) {
-            for (int i = 0; i < getEdges().size(); i++) {
-                if (getEdges().get(i).getPeso() < menor) {
-                    menor = getEdges().get(i).getPeso();
-                    pos = i;
-                }
-            }
-            if (cont == 0) {
-                for (int i = 0; i < 3; i++) {
-                    for (int j = 0; j < getNodes().size(); j++) {
-                        if (getEdges().get(pos).getNode1().getId().equals(matriz[0][j])) {
-                            auxMatriz = matriz[1][j];
-                            for (int j2 = 0; j2 < getNodes().size(); j2++) {
-                                if (getEdges().get(pos).getNode2().getId().equals(matriz[0][j2])) {
-                                    matriz[2][j2] = auxMatriz;
-                                    lista.add(getEdges().get(pos).getNode1());
-                                    lista.add(getEdges().get(pos).getNode2());
-                                    i = 2;
-                                }
-                            }
-                        }
-                    }
-                }
-                getEdges().remove(pos);
-            }
-            for (int i = 0; i < 3; i++) {
+        while (noOfEdges < getNodes().size()) {
+            min = 999;
+
+            for (int i = 0; i < getNodes().size(); i++) {
                 for (int j = 0; j < getNodes().size(); j++) {
-                    if (getEdges().get(pos).getNode1().getId().equals(matriz[0][j])
-                            && !matriz[2][j].equals(auxMatriz)) {
-                        matriz[2][j] = auxMatriz;
-                        lista.add(getEdges().get(pos).getNode1());
-                        i = 2;
+                    if (matrizPeso[i][j] < min) {
+                        min = matrizPeso[i][j];
+                        u = i;
+                        v = j;
                     }
                 }
             }
-            for (int i = 0; i < 3; i++) {
-                for (int j = 0; j < getNodes().size(); j++) {
-                    if (getEdges().get(pos).getNode2().getId().equals(matriz[0][j])
-                            && !matriz[2][j].equals(auxMatriz)) {
-                        matriz[2][j] = auxMatriz;
-                        lista.add(getEdges().get(pos).getNode2());
-                        i = 2;
-                    }
-                }
+            while (parent[u] != 0) {
+                u = parent[u];
             }
-            getEdges().remove(pos);
-            cont++;
+            while (parent[v] != 0) {
+                v = parent[v];
+            }
+            if (v != u) {
+                noOfEdges++;
+                r += "Aresta: {" + u + "," + v + "} : Min " + min;
+                r+="\n";
+                total += min;
+                parent[v] = u;
+            }
+            matrizPeso[u][v] = matrizPeso[v][u] = 999;
         }
-        r += "{";
-        for (int i = 0; i < lista.size(); i++) {
-            r += lista.get(i).getId() + ",";
-        }
-        r += "}";
+        r += "Peso minimo da arvore: " + total;
         return r;
     }
 
@@ -682,7 +664,7 @@ public class Graph {
                 if (visitado[i] == 1) {
                     for (int j = 0; j < getNodes().size(); j++) {
                         if (visitado[j] != 1) {
-                            if(min > matrizPeso[i][j]){
+                            if (min > matrizPeso[i][j]) {
                                 min = matrizPeso[i][j];
                                 u = i;
                                 v = j;
@@ -692,16 +674,16 @@ public class Graph {
                 }
             }
             visitado[v] = 1;
-            total+= min;
-            r+="Aresta: {"+u+","+v+"}: peso "+min;
-            r+="\n";
-            
+            total += min;
+            r += "Aresta: {" + u + "," + v + "}: peso " + min;
+            r += "\n";
+
         }
-        r+="Peso minimo da arvore: "+total;
+        r += "Peso minimo da arvore: " + total;
         return r;
     }
 
-    public String Dijkastra() {
+    public String Dijkstra() {
 
         int min;
         int nextNode = 0;
