@@ -169,6 +169,7 @@ public class frmInterface extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         menuKruskal = new javax.swing.JMenuItem();
         menuPrim = new javax.swing.JMenuItem();
+        menuDijkastra = new javax.swing.JMenuItem();
 
         jMenu2.setText("jMenu2");
 
@@ -1317,6 +1318,14 @@ public class frmInterface extends javax.swing.JFrame {
         });
         jMenu3.add(menuPrim);
 
+        menuDijkastra.setText("Dijkastra");
+        menuDijkastra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuDijkastraActionPerformed(evt);
+            }
+        });
+        jMenu3.add(menuDijkastra);
+
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
@@ -1866,6 +1875,10 @@ public class frmInterface extends javax.swing.JFrame {
         novoArco.setBackground(Color.gray);
     }//GEN-LAST:event_btnCancelarArestaActionPerformed
 
+    private void menuDijkastraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDijkastraActionPerformed
+        display.setText(graph.Dijkastra());
+    }//GEN-LAST:event_menuDijkastraActionPerformed
+
     public void getAlteracao(List<Node> node, List<Edge> edge, String nome, String tipo) {
         graph.setId(nome);
         graph.setEdgedefault(tipo);
@@ -2310,6 +2323,7 @@ public class frmInterface extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuAdjacente;
     private javax.swing.JMenu menuArquivo;
     private javax.swing.JMenuItem menuConjunto;
+    private javax.swing.JMenuItem menuDijkastra;
     private javax.swing.JMenu menuExibir;
     private javax.swing.JMenuItem menuFonte;
     private javax.swing.JMenuItem menuGrau;

@@ -1,15 +1,12 @@
 <graphml xmlns="http://graphml.graphdrawing.org/xmlns">
-  <graph id="teste" edgedefault="undirected">
-    <node id="Isadora" degree="1"/>
-    <node id="Alfredo" degree="2"/>
-    <node id="Cecilia" degree="1"/>
-    <node id="Emerson" degree="2"/>
-    <node id="Antonio" degree="3"/>
-    <node id="Renata" degree="1"/>
-    <edge id="a1" source="Emerson" target="Isadora" weight="0.0"/>
-    <edge id="a2" source="Emerson" target="Alfredo" weight="0.0"/>
-    <edge id="a3" source="Antonio" target="Alfredo" weight="0.0"/>
-    <edge id="a4" source="Antonio" target="Cecilia" weight="0.0"/>
-    <edge id="a6" source="Renata" target="Antonio" weight="0.0"/>
+  <graph id="3" edgedefault="directed">
+    <node id="1" degree="0"/>
+    <node id="2" degree="0"/>
+    <node id="3" degree="0"/>
+    <edge id="a1" source="2" target="1" weight="1.0"/>
+    <edge id="a2" source="3" target="1" weight="2.0"/>
+    <edge id="a3" source="3" target="2" weight="3.0"/>
+    <edge id="a4" source="1" target="3" weight="4.0"/>
+    <edge id="a1" source="1" target="1" weight="1.0"/>
   </graph>
 </graphml>

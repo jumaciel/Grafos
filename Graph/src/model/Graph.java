@@ -703,6 +703,72 @@ public class Graph {
          r+="}";
         return r;
     }
+    
+    public String Dijkastra() {
+
+        int min;
+        int nextNode = 0;
+        int[] distancia = new int[getNodes().size()];
+        int[] visited = new int[getNodes().size()];
+        int[] preD = new int[getNodes().size()];
+        int matrizPeso[][] = new int[getNodes().size()][getNodes().size()];
+
+        for (Edge e : getEdges()) {
+            int no1 = getNodes().indexOf(e.getNode1());
+            int no2 = getNodes().indexOf(e.getNode2());
+            matrizPeso[no1][no2] = (int) e.getPeso();
+        }
+        for (int i = 0; i < getNodes().size(); i++) {
+            visited[i] = 0;
+            preD[i] = 0;
+            for (int j = 0; j < matrizPeso[0].length; j++) {
+                if (matrizPeso[i][j] == 0) {
+                    matrizPeso[i][j] = 999;
+                }
+            }
+        }
+        distancia = matrizPeso[0];
+        distancia[0] = 0;
+        visited[0] = 1;
+
+        for (int i = 0;
+                i < getNodes()
+                        .size(); i++) {
+            min = 999;
+            for (int j = 0; j < getNodes().size(); j++) {
+                if (min > distancia[j] && visited[j] != 1) {
+                    min = distancia[j];
+                    nextNode = j;
+                }
+            }
+
+            visited[nextNode] = 1;
+            for (int i2 = 0; i2 < getNodes().size(); i2++) {
+                if (visited[i2] != 1) {
+                    if (min + matrizPeso[nextNode][i2] < distancia[i2]) {
+                        distancia[i2] = min + matrizPeso[nextNode][i2];
+                        preD[i2] = nextNode;
+                    }
+                }
+            }
+        }
+        String r = "";
+
+        for (int i = 0;
+                i < getNodes()
+                        .size(); i++) {
+            int j;
+            r += "Caminho: " + i;
+            j = i;
+
+            do {
+                j = preD[j];
+                r += " <- " + j;
+            } while (j != 0);
+            r += "\n\n";
+        }
+        return r;
+    }
 
     public String ImprimeNode() {
         String r = " Vertice: {";
