@@ -596,6 +596,7 @@ public class Graph {
         }
 
         //Define valor infinitamente alto para arestas == 0
+        //Inicializa com 0 o vetor com pais de vertices
         for (int i = 0; i < getNodes().size(); i++) {
             pai[i] = 0;
             for (int j = 0; j < getNodes().size(); j++) {
@@ -625,28 +626,32 @@ public class Graph {
 //The correction I made
             x = u;
             y = v;
-            //Se o pai da origem da aresta de menor peso é diferente de 0,
+            
+            //Enquanto o pai da origem da aresta de menor peso é diferente de 0,
             //O pai de x é armazenado em x
             while (pai[x] != 0) {
                 x = pai[x];
             }
-            //Se o pai do destino da aresta de menor peso é diferente de 0,
+            
+            //Enquanto o pai do destino da aresta de menor peso é diferente de 0,
             //O pai de y é armazenado em y
-
             while (pai[y] != 0) {
                 y = pai[y];
             }
             
-            
+            // Se a origem é diferente do destino
             if (x != y) {
-                nArestas++;
+                nArestas++; //Adiciona uma aresta na contagem 
+                            // que é comparada com nVértices
                 r += "Aresta: {" + getNodes().get(u).getId() + "," + getNodes().get(v).getId() + "} Peso: " + min;
-                total += min;
+                total += min; // Peso total do grafo recebe o peso min da 
+                              // aresta selecionada na iteração
 //                System.out.println("pai[" + v + "] = " + u);
-                pai[v] = u;
+
+                pai[v] = u; //Atribui uma origem como pai do destino 
                 r += "\n";
             }
-            //A aresta mínima selecionada recebe pesso 99999 e não volta
+            //A aresta mínima selecionada recebe peso 99999 e não volta
             //a passar no  if (matrizPeso[i][j] < min)
             matrizPeso[u][v] = matrizPeso[v][u] = 99999;
         }
