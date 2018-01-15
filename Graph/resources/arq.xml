@@ -9,7 +9,6 @@
     <node id="g" degree="2"/>
     <node id="h" degree="3"/>
     <node id="i" degree="0"/>
-    <node id="tt" degree="0"/>
     <edge id="a1" source="b" target="a" weight="4.0"/>
     <edge id="a2" source="c" target="a" weight="6.0"/>
     <edge id="a3" source="d" target="a" weight="13.0"/>

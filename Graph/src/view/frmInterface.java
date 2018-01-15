@@ -1924,8 +1924,13 @@ public class frmInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscaProfMouseExited
 
     private void btnBuscaProfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaProfActionPerformed
-        List<Node> a = new ArrayList<Node>();
-        display.setText(graph.BuscaProf(graph.getNodes().get(0).getId(), "g", 0, a));
+       List<Node> a = new ArrayList<Node>();
+        if (txtaddVertice.getText().isEmpty()) {
+            display.setText(" 1- Insira o nome do vertice na caixa 'Vertice / nome'\n 2- Clique em Busca Prof... ");
+        } else {
+            display.setText("Caminho: "+graph.BuscaProf(graph.getNodes().get(0).getId(), txtaddVertice.getText(), 0, a));
+        }
+        txtaddVertice.setText("");
     }//GEN-LAST:event_btnBuscaProfActionPerformed
 
     private void btnDijkstraMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDijkstraMouseEntered
