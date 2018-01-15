@@ -771,15 +771,67 @@ public class Graph {
         return r;
     }
 
-     public String BuscaProf(String origem, String destino, int o, List<Node> visitado) {
+    public String Malgrange() {
+        String r = "";
+        int matriz[][] = new int[getNodes().size()][getNodes().size()];
+        List<String> RMais = new ArrayList<String>();
+        List<String> RMenos = new ArrayList<String>();
+        
+        RMais.add(getNodes().get(0).getId());
+        
+        
+        
+        for (Edge e : getEdges()) {
+            int no1 = getNodes().indexOf(e.getNode1());
+            int no2 = getNodes().indexOf(e.getNode2());
+            matriz[no1][no2] = 1;
+        }
+
+        for (int i = 0; i < getNodes().size(); i++) {
+            r += "\n" + getNodes().get(i).getId();
+            for (int j = 0; j < getNodes().size(); j++) {
+                r += "      " + matriz[i][j];
+            }
+        }
+        r += "\n\n\n";
+        r+="R+\n";
+        r+=RMais.get(0);
+        r+=",";
+        for (int i = 0; i < getNodes().size(); i++) {
+            for (int j = 0; j < getNodes().size(); j++) {
+                if (matriz[i][j] == 1) {
+                    if (i == 0) {
+                        RMais.add(getNodes().get(j).getId());
+                        r += getNodes().get(j).getId();
+                        r+=",";
+                    }
+                    boolean tem = false;
+                    for(int i2 = 0; i2 < RMais.size(); i2++){
+                        if(getNodes().get(j).getId().equals(RMais.get(i2))){
+                            tem = true;
+                        }
+                    }
+                    if(tem == false){
+                         RMais.add(getNodes().get(j).getId());
+                         r += getNodes().get(j).getId();
+                         r+=",";
+                    }
+                }
+            }
+        }
+
+        return r;
+    }
+
+    public String BuscaProf(String origem, String destino, int o, List<Node> visitado) {
         List<Node> auxVisitado = new ArrayList<Node>();
         List<Node> auxVisita = new ArrayList<Node>();
         int prox = o, posicao = 0;
         int matriz[][] = new int[getNodes().size()][getNodes().size()];
-        
+
         String result = "{", auxOrigem = "";
         auxVisitado = (List<Node>) visitado;
-        
+
         for (Edge e : getEdges()) {
             int no1 = getNodes().indexOf(e.getNode1());
             int no2 = getNodes().indexOf(e.getNode2());
