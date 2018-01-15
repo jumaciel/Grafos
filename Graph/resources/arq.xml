@@ -1,12 +1,32 @@
 <graphml xmlns="http://graphml.graphdrawing.org/xmlns">
-  <graph id="3" edgedefault="directed">
-    <node id="1" degree="0"/>
-    <node id="2" degree="0"/>
-    <node id="3" degree="0"/>
-    <edge id="a1" source="2" target="1" weight="1.0"/>
-    <edge id="a2" source="3" target="1" weight="2.0"/>
-    <edge id="a3" source="3" target="2" weight="3.0"/>
-    <edge id="a4" source="1" target="3" weight="4.0"/>
-    <edge id="a1" source="1" target="1" weight="1.0"/>
+  <graph id="aaaaaa" edgedefault="directed">
+    <node id="a" degree="3"/>
+    <node id="b" degree="3"/>
+    <node id="c" degree="2"/>
+    <node id="d" degree="1"/>
+    <node id="e" degree="1"/>
+    <node id="f" degree="3"/>
+    <node id="g" degree="2"/>
+    <node id="h" degree="3"/>
+    <node id="i" degree="0"/>
+    <node id="tt" degree="0"/>
+    <edge id="a1" source="b" target="a" weight="4.0"/>
+    <edge id="a2" source="c" target="a" weight="6.0"/>
+    <edge id="a3" source="d" target="a" weight="13.0"/>
+    <edge id="a4" source="c" target="b" weight="2.0"/>
+    <edge id="a5" source="d" target="b" weight="9.0"/>
+    <edge id="a6" source="e" target="b" weight="10.0"/>
+    <edge id="a7" source="e" target="c" weight="7.0"/>
+    <edge id="a8" source="f" target="c" weight="2.0"/>
+    <edge id="a9" source="g" target="d" weight="2.0"/>
+    <edge id="a10" source="d" target="e" weight="1.0"/>
+    <edge id="a11" source="h" target="f" weight="1.0"/>
+    <edge id="a12" source="i" target="f" weight="3.0"/>
+    <edge id="a13" source="e" target="g" weight="1.0"/>
+    <edge id="a14" source="i" target="g" weight="1.0"/>
+    <edge id="a15" source="g" target="h" weight="3.0"/>
+    <edge id="a16" source="i" target="h" weight="2.0"/>
+    <edge id="a17" source="e" target="f" weight="5.0"/>
+    <edge id="a18" source="e" target="h" weight="4.0"/>
   </graph>
 </graphml>

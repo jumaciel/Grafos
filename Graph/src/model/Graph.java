@@ -584,6 +584,7 @@ public class Graph {
         int min = 0;
         int u = 0;
         int v = 0;
+        int x, y;
         int noOfEdges = 1;
         int total = 0;
 
@@ -602,10 +603,9 @@ public class Graph {
             }
         }
         while (noOfEdges < getNodes().size()) {
-            min = 999;
-
-            for (int i = 0; i < getNodes().size(); i++) {
-                for (int j = 0; j < getNodes().size(); j++) {
+            min = 99999;
+            for (int i = 0; i < getNodes().size(); ++i) {
+                for (int j = 0; j < getNodes().size(); ++j) {
                     if (matrizPeso[i][j] < min) {
                         min = matrizPeso[i][j];
                         u = i;
@@ -613,20 +613,26 @@ public class Graph {
                     }
                 }
             }
-            while (parent[u] != 0) {
-                u = parent[u];
+//The correction I made
+            x = u;
+            y = v;
+            while (parent[x] != 0) {
+                x = parent[x];
             }
-            while (parent[v] != 0) {
-                v = parent[v];
+
+            while (parent[y] != 0) {
+                y = parent[y];
             }
-            if (v != u) {
+
+            if (x != y) {
                 noOfEdges++;
-                r += "Aresta: {" + u + "," + v + "} : Min " + min;
-                r+="\n";
+                r += "Aresta: {" + getNodes().get(u).getId() + "," + getNodes().get(v).getId() + "} Peso: " + min;
                 total += min;
+//                System.out.println("pai[" + v + "] = " + u);
                 parent[v] = u;
+                r += "\n";
             }
-            matrizPeso[u][v] = matrizPeso[v][u] = 999;
+            matrizPeso[u][v] = matrizPeso[v][u] = 99999;
         }
         r += "Peso minimo da arvore: " + total;
         return r;
@@ -675,7 +681,7 @@ public class Graph {
             }
             visitado[v] = 1;
             total += min;
-            r += "Aresta: {" + u + "," + v + "}: peso " + min;
+            r += "Aresta: {" + getNodes().get(u).getId() + "," + getNodes().get(v).getId() + "}: peso " + min;
             r += "\n";
 
         }
@@ -737,16 +743,59 @@ public class Graph {
                 i < getNodes()
                         .size(); i++) {
             int j;
-            r += "Caminho: " + i;
+            r += "Caminho: " + getNodes().get(i).getId();
             j = i;
 
             do {
                 j = preD[j];
-                r += " <- " + j;
+                r += " <- " + getNodes().get(j).getId();
             } while (j != 0);
             r += "\n\n";
         }
         return r;
+    }
+
+     public String BuscaProf(String origem, String destino, int o, List<Node> visitado) {
+        List<Node> auxVisitado = new ArrayList<Node>();
+        List<Node> auxVisita = new ArrayList<Node>();
+        int prox = o, posicao = 0;
+        int matriz[][] = new int[getNodes().size()][getNodes().size()];
+        
+        String result = "{", auxOrigem = "";
+        auxVisitado = (List<Node>) visitado;
+        
+        for (Edge e : getEdges()) {
+            int no1 = getNodes().indexOf(e.getNode1());
+            int no2 = getNodes().indexOf(e.getNode2());
+            matriz[no1][no2] = 1;
+        }
+
+        for (int i = 0; i < getNodes().size(); i++) {//varra a lista de vertice
+            if (getNodes().get(i).getId().equals(origem)) { //verifica se encontrou 
+                posicao = i; //guardando a posição do vertice
+                auxVisita.clear(); //limpa a lista
+                auxVisitado.add(getNodes().get(i));//adiciona na lista de visitado
+            }
+        }
+
+        for (int j = 0; j < getNodes().size(); j++) {//varre a lista de vertice
+            if (matriz[posicao][j] == 1) {
+                auxVisita.add(getNodes().get(j));//adiciona na lista que ira ser visitado
+
+            }
+        }
+
+        for (int i2 = 0; i2 < auxVisita.size(); i2++) {//varre a lista de visita
+            if (auxVisita.get(i2).getId().equals(destino)) {//verifica se na lista que ira visitar encontra-se o destino
+                for (int j2 = 0; j2 < auxVisitado.size(); j2++) {//varre a lista de visita
+                    result += auxVisitado.get(j2).getId() + " => ";//pega o resultado da lista de visitado
+                }
+                return result + destino + "}";
+            }
+            auxOrigem = auxVisita.get(0).getId(); // pega o primeiro elemento da lista
+        }
+
+        return BuscaProf(auxOrigem, destino, prox, auxVisitado);
     }
 
     public String ImprimeNode() {
