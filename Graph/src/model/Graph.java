@@ -580,58 +580,74 @@ public class Graph {
     public String Kruskal() {
         String r = "";
         int matrizPeso[][] = new int[getNodes().size()][getNodes().size()];
-        int[] parent = new int[getNodes().size()];
+        int[] pai = new int[getNodes().size()];
         int min = 0;
         int u = 0;
         int v = 0;
         int x, y;
-        int noOfEdges = 1;
+        int nArestas = 1;
         int total = 0;
 
+        //Inicializa matrizPeso com pesos do grafo dado.
         for (Edge e : getEdges()) {
             int no1 = getNodes().indexOf(e.getNode1());
             int no2 = getNodes().indexOf(e.getNode2());
             matrizPeso[no1][no2] = (int) e.getPeso();
         }
 
+        //Define valor infinitamente alto para arestas == 0
         for (int i = 0; i < getNodes().size(); i++) {
-            parent[i] = 0;
+            pai[i] = 0;
             for (int j = 0; j < getNodes().size(); j++) {
                 if (matrizPeso[i][j] == 0) {
                     matrizPeso[i][j] = 999;
                 }
             }
         }
-        while (noOfEdges < getNodes().size()) {
+        
+        // Percorre arestas pegando sempre a aresta de menor peso
+        // e guardando em min este menor peso.
+        // Min é reinicializado para um número alto 
+        // a cada iteração do while.
+        while (nArestas < getNodes().size()) {
             min = 99999;
             for (int i = 0; i < getNodes().size(); ++i) {
                 for (int j = 0; j < getNodes().size(); ++j) {
                     if (matrizPeso[i][j] < min) {
+                        //Grava em u a origem e em v o destino da aresta de menor peso
                         min = matrizPeso[i][j];
                         u = i;
                         v = j;
                     }
                 }
             }
+
 //The correction I made
             x = u;
             y = v;
-            while (parent[x] != 0) {
-                x = parent[x];
+            //Se o pai da origem da aresta de menor peso é diferente de 0,
+            //O pai de x é armazenado em x
+            while (pai[x] != 0) {
+                x = pai[x];
             }
+            //Se o pai do destino da aresta de menor peso é diferente de 0,
+            //O pai de y é armazenado em y
 
-            while (parent[y] != 0) {
-                y = parent[y];
+            while (pai[y] != 0) {
+                y = pai[y];
             }
-
+            
+            
             if (x != y) {
-                noOfEdges++;
+                nArestas++;
                 r += "Aresta: {" + getNodes().get(u).getId() + "," + getNodes().get(v).getId() + "} Peso: " + min;
                 total += min;
 //                System.out.println("pai[" + v + "] = " + u);
-                parent[v] = u;
+                pai[v] = u;
                 r += "\n";
             }
+            //A aresta mínima selecionada recebe pesso 99999 e não volta
+            //a passar no  if (matrizPeso[i][j] < min)
             matrizPeso[u][v] = matrizPeso[v][u] = 99999;
         }
         r += "Peso minimo da arvore: " + total;
