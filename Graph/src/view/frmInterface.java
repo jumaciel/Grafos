@@ -149,9 +149,10 @@ public class frmInterface extends javax.swing.JFrame {
         btnMostrarVA = new javax.swing.JButton();
         btnGerarGrafico = new javax.swing.JButton();
         btnBuscaProf = new javax.swing.JButton();
-        btnDijkstra = new javax.swing.JButton();
+        btnMalgrange = new javax.swing.JButton();
         btnKruskal = new javax.swing.JButton();
         btnPrim = new javax.swing.JButton();
+        btnDijkstra1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuArquivo = new javax.swing.JMenu();
         menuNovo = new javax.swing.JMenuItem();
@@ -1113,23 +1114,23 @@ public class frmInterface extends javax.swing.JFrame {
             }
         });
 
-        btnDijkstra.setBackground(new java.awt.Color(255, 255, 255));
-        btnDijkstra.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnDijkstra.setText("Dijkstra");
-        btnDijkstra.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        btnDijkstra.setContentAreaFilled(false);
-        btnDijkstra.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnDijkstra.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnMalgrange.setBackground(new java.awt.Color(255, 255, 255));
+        btnMalgrange.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnMalgrange.setText("Malgrange");
+        btnMalgrange.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnMalgrange.setContentAreaFilled(false);
+        btnMalgrange.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMalgrange.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnDijkstraMouseEntered(evt);
+                btnMalgrangeMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnDijkstraMouseExited(evt);
+                btnMalgrangeMouseExited(evt);
             }
         });
-        btnDijkstra.addActionListener(new java.awt.event.ActionListener() {
+        btnMalgrange.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDijkstraActionPerformed(evt);
+                btnMalgrangeActionPerformed(evt);
             }
         });
 
@@ -1173,6 +1174,26 @@ public class frmInterface extends javax.swing.JFrame {
             }
         });
 
+        btnDijkstra1.setBackground(new java.awt.Color(255, 255, 255));
+        btnDijkstra1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnDijkstra1.setText("Dijkstra");
+        btnDijkstra1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnDijkstra1.setContentAreaFilled(false);
+        btnDijkstra1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDijkstra1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnDijkstra1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnDijkstra1MouseExited(evt);
+            }
+        });
+        btnDijkstra1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDijkstra1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -1212,10 +1233,12 @@ public class frmInterface extends javax.swing.JFrame {
                             .addComponent(btnGerarGrafico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnBuscaProf, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnDijkstra, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnKruskal, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnPrim, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnBuscaProf, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnKruskal, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnPrim, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnDijkstra1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnMalgrange, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
@@ -1240,19 +1263,21 @@ public class frmInterface extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnLimpaVA, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnPrim, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnPrim, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnLimpaAresta, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnKruskal, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnKruskal, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnDijkstra1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnMostrarVA, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnDijkstra, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnMalgrange, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnGerarGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBuscaProf, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnBuscaProf, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 29, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1933,17 +1958,17 @@ public class frmInterface extends javax.swing.JFrame {
         txtaddVertice.setText("");
     }//GEN-LAST:event_btnBuscaProfActionPerformed
 
-    private void btnDijkstraMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDijkstraMouseEntered
+    private void btnMalgrangeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMalgrangeMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnDijkstraMouseEntered
+    }//GEN-LAST:event_btnMalgrangeMouseEntered
 
-    private void btnDijkstraMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDijkstraMouseExited
+    private void btnMalgrangeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMalgrangeMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnDijkstraMouseExited
+    }//GEN-LAST:event_btnMalgrangeMouseExited
 
-    private void btnDijkstraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDijkstraActionPerformed
-        display.setText(graph.Dijkstra());
-    }//GEN-LAST:event_btnDijkstraActionPerformed
+    private void btnMalgrangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMalgrangeActionPerformed
+        display.setText(graph.Malgrange());
+    }//GEN-LAST:event_btnMalgrangeActionPerformed
 
     private void btnKruskalMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKruskalMouseEntered
         // TODO add your handling code here:
@@ -1988,6 +2013,18 @@ public class frmInterface extends javax.swing.JFrame {
         }
         listaRec.clear();
     }//GEN-LAST:event_btnPrimActionPerformed
+
+    private void btnDijkstra1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDijkstra1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDijkstra1MouseEntered
+
+    private void btnDijkstra1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDijkstra1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDijkstra1MouseExited
+
+    private void btnDijkstra1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDijkstra1ActionPerformed
+        display.setText(graph.Dijkstra());
+    }//GEN-LAST:event_btnDijkstra1ActionPerformed
 
     public void getAlteracao(List<Node> node, List<Edge> edge, String nome, String tipo) {
         graph.setId(nome);
@@ -2373,12 +2410,13 @@ public class frmInterface extends javax.swing.JFrame {
     private javax.swing.JButton btnConfirmarVertice;
     private javax.swing.JButton btnConfirmarVertice1;
     private javax.swing.JButton btnDeletarVertice;
-    private javax.swing.JButton btnDijkstra;
+    private javax.swing.JButton btnDijkstra1;
     private javax.swing.JButton btnGerarGrafico;
     private javax.swing.JButton btnKruskal;
     private javax.swing.JButton btnLimpaAresta;
     private javax.swing.JButton btnLimpaVA;
     private javax.swing.JButton btnListaAdj;
+    private javax.swing.JButton btnMalgrange;
     private javax.swing.JButton btnMatrizAdj;
     private javax.swing.JButton btnMatrizInc;
     private javax.swing.JButton btnMostrarVA;
