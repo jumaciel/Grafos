@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -78,14 +79,14 @@ public class Graph {
                 getNodes().remove(i); // Remove o vertice na posição de i
 
                 for (int a = 0; a < getEdges().size(); a++) { // Varre a lista de arestas
-                    // Verifica se há uma aresta que tenha como origem o vértice apagado
+                    // Verifica se a aresta na posição de i é igual o passado pelo paramentro
                     if (getEdges().get(a).getNode1().getId().equals(node)) {
                         getEdges().remove(a);  // Remove a aresta na posição de i
                         a--;
                     }
                 }
                 for (int a2 = 0; a2 < getEdges().size(); a2++) { // Varre a lista de arestas
-                    // Verifica se há uma aresta que tenha como destino o vértice apagado
+                    // Verifica se a aresta na posição de i é igual o passado pelo paramentro
                     if (getEdges().get(a2).getNode2().getId().equals(node)) {
                         getEdges().remove(a2); // Remove a aresta na posição de i2
                         a2--;
@@ -101,26 +102,26 @@ public class Graph {
         String r = "";
         String b = node;
 
-        for (int i = 0; i < getNodes().size(); i++) {
-            if (getNodes().get(i).getId().equals(node)) {
-                getNodes().get(i).setId(novo);
+        for (int i = 0; i < getNodes().size(); i++) { // FOR VARENDO TODOS OS NOS
+            if (getNodes().get(i).getId().equals(node)) {// VERIFICANDO SE É O NO 
+                getNodes().get(i).setId(novo); // SE FOR, ALTERA
                 r += "Vertice alterado com sucesso.\n\n"
                         + "Vertice " + node + " === Trocado por === > " + novo + "\n\n"
                         + "Edges atualizadas com sucesso.\n\n";
             }
         }
-        for (int a = 0; a < getEdges().size(); a++) {
-            if (getEdges().get(a).getOrigem().equals(b)) {
-                getEdges().get(a).setOrigem(novo);
+        for (int a = 0; a < getEdges().size(); a++) { // FOR VARENDO TDS AS ARESTAS
+            if (getEdges().get(a).getSoucer().equals(b)) {// VENDO SE A ARESTA ANTIGA É A ORIGEM
+                getEdges().get(a).setSoucer(novo);  //SE FOR, COLOCA O NOVO PARAMETRO
 //                a--;
             }
         }
-        for (int a2 = 0; a2 < getEdges().size(); a2++) {
-            if (getEdges().get(a2).getDestino().equals(b)) {
-                r += "Edge (" + getEdges().get(a2).getOrigem() + "," + getEdges().get(a2).getDestino() + ") ============== > ("
+        for (int a2 = 0; a2 < getEdges().size(); a2++) {// OUTRO FOR VARENDO ARESTAS
+            if (getEdges().get(a2).getTarget().equals(b)) {//VERIFICA SE A ARESTA ANTIGA É O DESTINO
+                r += "Edge (" + getEdges().get(a2).getSoucer() + "," + getEdges().get(a2).getTarget() + ") ============== > ("
                         + getEdges().get(a2).getNode1().getId() + "," + getEdges().get(a2).getNode2().getId() + ")\n";
-                getEdges().get(a2).setDestino(novo);
-//                a2--;
+                getEdges().get(a2).setTarget(novo);
+//                a2--; // ADC OS VERTICES Q FORAM ALTERADOS E COLOCA EM R
             }
         }
         return r;
@@ -148,7 +149,8 @@ public class Graph {
     }
 
     public String removerEdge(String node1, String node2) {
-        for (int i = 0; i < edges.size(); i++) {
+        for (int i = 0; i < edges.size(); i++) {//VARENDO A LISTA DE ARESTAS
+            //PROCURANDO SE OS NÓS SÃO = AOS PASSADOS
             if (edges.get(i).getNode1().getId().equals(node1) && edges.get(i).getNode2().getId().equals(node2)) {
                 edges.remove(i);
                 return "Aresta (" + node1 + "," + node2 + ") removido com sucesso";
@@ -238,7 +240,8 @@ public class Graph {
     public String matrizIncidencia(Graph graph) {
         String incidencia = "  ";
         String espaco = "       ";
-        int index = 0, i, j;
+        int index = 0;
+        int i, j;
         int matriz[][] = new int[graph.getNodes().size()][graph.getEdges().size()];
 
         if (getEdgedefault().equals("directed")) {
@@ -246,14 +249,24 @@ public class Graph {
                 int no1 = graph.getNodes().indexOf(e.getNode1());
                 int no2 = graph.getNodes().indexOf(e.getNode2());
 
-                matriz[no1][index] = 1;
-                matriz[no2][index] = -1;
-                index++;
+                if (!e.getNode1().getId().equals(e.getNode2().getId())) {
+                    matriz[no1][index] = 1;
+                    matriz[no2][index] = -1;
+
+                    index++;
+                } else {
+                    matriz[no1][index] = 2;
+                    matriz[no2][index] = 2;
+                    index++;
+
+                }
+
             }
 
             for (int a = 1; a < graph.getEdges().size() + 1; a++) {
                 incidencia += espaco + graph.getEdges().get(a - 1).getId();
             }
+
             for (i = 0; i < graph.getNodes().size(); i++) {
                 incidencia += "\n" + getNodes().get(i).getId();
                 for (j = 0; j < graph.getEdges().size(); j++) {
@@ -596,7 +609,6 @@ public class Graph {
         }
 
         //Define valor infinitamente alto para arestas == 0
-        //Inicializa com 0 o vetor com pais de vertices
         for (int i = 0; i < getNodes().size(); i++) {
             pai[i] = 0;
             for (int j = 0; j < getNodes().size(); j++) {
@@ -605,7 +617,7 @@ public class Graph {
                 }
             }
         }
-        
+
         // Percorre arestas pegando sempre a aresta de menor peso
         // e guardando em min este menor peso.
         // Min é reinicializado para um número alto 
@@ -623,35 +635,29 @@ public class Graph {
                 }
             }
 
-//The correction I made
             x = u;
             y = v;
-            
-            //Enquanto o pai da origem da aresta de menor peso é diferente de 0,
+            //Se o pai da origem da aresta de menor peso é diferente de 0,
             //O pai de x é armazenado em x
             while (pai[x] != 0) {
                 x = pai[x];
             }
-            
-            //Enquanto o pai do destino da aresta de menor peso é diferente de 0,
+            //Se o pai do destino da aresta de menor peso é diferente de 0,
             //O pai de y é armazenado em y
+
             while (pai[y] != 0) {
                 y = pai[y];
             }
-            
-            // Se a origem é diferente do destino
-            if (x != y) {
-                nArestas++; //Adiciona uma aresta na contagem 
-                            // que é comparada com nVértices
-                r += "Aresta: {" + getNodes().get(u).getId() + "," + getNodes().get(v).getId() + "} Peso: " + min;
-                total += min; // Peso total do grafo recebe o peso min da 
-                              // aresta selecionada na iteração
-//                System.out.println("pai[" + v + "] = " + u);
 
-                pai[v] = u; //Atribui uma origem como pai do destino 
+            if (x != y) {
+                nArestas++;
+                r += "Aresta: {" + getNodes().get(u).getId() + "," + getNodes().get(v).getId() + "} Peso: " + min;
+                total += min;
+//                System.out.println("pai[" + v + "] = " + u);
+                pai[v] = u;
                 r += "\n";
             }
-            //A aresta mínima selecionada recebe peso 99999 e não volta
+            //A aresta mínima selecionada recebe pesso 99999 e não volta
             //a passar no  if (matrizPeso[i][j] < min)
             matrizPeso[u][v] = matrizPeso[v][u] = 99999;
         }
@@ -667,41 +673,43 @@ public class Graph {
         int v = 0;
         int total = 0;
         int matrizPeso[][] = new int[getNodes().size()][getNodes().size()];
-
+//PREENCHE UMA MATRIZ DE PESOS
         for (Edge e : getEdges()) {
             int no1 = getNodes().indexOf(e.getNode1());
             int no2 = getNodes().indexOf(e.getNode2());
             matrizPeso[no1][no2] = (int) e.getPeso();
         }
-
+//VARE OS VERTICES, COLOCANDO OS VISITADOS COMO 0
         for (int i = 0; i < getNodes().size(); i++) {
             visitado[i] = 0;
+            //VARE A LISTA DE VERTICE E VE ONDE O PESO É 0, E COLOCA "INFINITO", PESO MAX...
             for (int j = 0; j < getNodes().size(); j++) {
                 if (matrizPeso[i][j] == 0) {
                     matrizPeso[i][j] = 999;
                 }
             }
         }
-        visitado[0] = 1;
+        visitado[0] = 1; //PRIMEIRA POSIÇÃO DO VISITADO 
 
+        //VARE A LISTA DE VERTICES
         for (int cont = 0; cont < getNodes().size() - 1; cont++) {
             min = 999;
 
             for (int i = 0; i < getNodes().size(); i++) {
-                if (visitado[i] == 1) {
+                if (visitado[i] == 1) { //VERIFICA SE JA FOI VISITADO
                     for (int j = 0; j < getNodes().size(); j++) {
                         if (visitado[j] != 1) {
                             if (min > matrizPeso[i][j]) {
-                                min = matrizPeso[i][j];
-                                u = i;
+                                min = matrizPeso[i][j]; //SE O MIN FOR MAIOR Q A MATRIZ DE PESO , O MIN RECEBE AQUELE PESO...
+                                u = i;//GUARDA AS POSIÇÕES
                                 v = j;
                             }
                         }
                     }
                 }
             }
-            visitado[v] = 1;
-            total += min;
+            visitado[v] = 1; //NA POSICAO DE V , RECEBE 1 COMO VISITADO
+            total += min; //ENCREMENTA O TOTAL
             r += "Aresta: {" + getNodes().get(u).getId() + "," + getNodes().get(v).getId() + "}: peso " + min;
             r += "\n";
 
@@ -719,17 +727,19 @@ public class Graph {
         int[] preD = new int[getNodes().size()];
         int matrizPeso[][] = new int[getNodes().size()][getNodes().size()];
 
-        for (Edge e : getEdges()) {
+        for (Edge e : getEdges()) { //PREENCHE A MATRIZ DE PESO
             int no1 = getNodes().indexOf(e.getNode1());
             int no2 = getNodes().indexOf(e.getNode2());
             matrizPeso[no1][no2] = (int) e.getPeso();
         }
+        //VARENDO OS VERTICES  COLOCA 0 NOS VISITADOS
         for (int i = 0; i < getNodes().size(); i++) {
             visitado[i] = 0;
             preD[i] = 0;
+            //COLOCA "INFINITO" (PESO MAX), NOS QUE TEM PESO 0
             for (int j = 0; j < matrizPeso[0].length; j++) {
                 if (matrizPeso[i][j] == 0) {
-                    matrizPeso[i][j] = 999;
+                    matrizPeso[i][j] = Integer.MAX_VALUE;
                 }
             }
         }
@@ -737,10 +747,11 @@ public class Graph {
         distancia[0] = 0;
         visitado[0] = 1;
 
-        for (int i = 0;
-                i < getNodes()
-                        .size(); i++) {
+        //VARE OS VERTICES COLOCANDO O "INFINITO" NO MIN
+        for (int i = 0; i < getNodes().size(); i++) {
             min = 999;
+
+            //FOR TA VARENDO OS VERTICES VERIFICANDO SE O MIN É MAIOR Q A DISTANCIA E SE OS VISITADOS E != 1
             for (int j = 0; j < getNodes().size(); j++) {
                 if (min > distancia[j] && visitado[j] != 1) {
                     min = distancia[j];
@@ -749,27 +760,26 @@ public class Graph {
             }
 
             visitado[nextNode] = 1;
+            //VARE A LISTA DE VERTICE VERIFICANDO SE VISITADO É != 1
             for (int i2 = 0; i2 < getNodes().size(); i2++) {
                 if (visitado[i2] != 1) {
-                    if (min + matrizPeso[nextNode][i2] < distancia[i2]) {
-                        distancia[i2] = min + matrizPeso[nextNode][i2];
+                    if (min + matrizPeso[nextNode][i2] < distancia[i2]) { //SOMA O MIN + MATRIZ DE PESO E VERIFICA SE É MENOR Q A DISTANCIA 
+                        distancia[i2] = min + matrizPeso[nextNode][i2]; //DISYANCIA RECEBE MIN+MATRIZ DE PESO
                         preD[i2] = nextNode;
                     }
                 }
             }
         }
         String r = "";
-
-        for (int i = 0;
-                i < getNodes()
-                        .size(); i++) {
+//PARA IMPRIMIR
+        for (int i = 0; i < getNodes().size(); i++) {
             int j;
             r += "Caminho: " + getNodes().get(i).getId();
             j = i;
 
             do {
                 j = preD[j];
-                r += " <- " + getNodes().get(j).getId();
+                r += " <= " + getNodes().get(j).getId();
             } while (j != 0);
             r += "\n\n";
         }
@@ -781,11 +791,10 @@ public class Graph {
         int matriz[][] = new int[getNodes().size()][getNodes().size()];
         List<String> RMais = new ArrayList<String>();
         List<String> RMenos = new ArrayList<String>();
-        
-        RMais.add(getNodes().get(0).getId());
-        
-        
-        
+        List<String> Result = new ArrayList<String>();
+
+        RMenos.add(getNodes().get(0).getId());
+
         for (Edge e : getEdges()) {
             int no1 = getNodes().indexOf(e.getNode1());
             int no2 = getNodes().indexOf(e.getNode2());
@@ -799,30 +808,67 @@ public class Graph {
             }
         }
         r += "\n\n\n";
-        r+="R+\n";
-        r+=RMais.get(0);
-        r+=",";
+        r += "R-\n";
+        r += RMenos.get(0);
+        r += ",";
         for (int i = 0; i < getNodes().size(); i++) {
             for (int j = 0; j < getNodes().size(); j++) {
                 if (matriz[i][j] == 1) {
                     if (i == 0) {
-                        RMais.add(getNodes().get(j).getId());
+                        RMenos.add(getNodes().get(j).getId());
                         r += getNodes().get(j).getId();
-                        r+=",";
+                        r += ",";
                     }
                     boolean tem = false;
-                    for(int i2 = 0; i2 < RMais.size(); i2++){
-                        if(getNodes().get(j).getId().equals(RMais.get(i2))){
+                    for (int i2 = 0; i2 < RMenos.size(); i2++) {
+                        if (getNodes().get(j).getId().equals(RMenos.get(i2))) {
                             tem = true;
                         }
                     }
-                    if(tem == false){
-                         RMais.add(getNodes().get(j).getId());
-                         r += getNodes().get(j).getId();
-                         r+=",";
+                    if (tem == false) {
+                        RMenos.add(getNodes().get(j).getId());
+                        r += getNodes().get(j).getId();
+                        r += ",";
                     }
                 }
             }
+        }
+        RMais.add(getNodes().get(0).getId());
+        r += "\n\n\n";
+        r += "R+\n";
+        r += RMais.get(0);
+        r += ",";
+        for (int i = 0; i < getNodes().size(); i++) {
+            for (int j = 0; j < getNodes().size(); j++) {
+                if (matriz[j][i] == 1) {
+                    if (j == 0) {
+                        RMais.add(getNodes().get(i).getId());
+                        r += getNodes().get(i).getId();
+                        r += ",";
+                    }
+                    boolean tem = false;
+                    for (int i2 = 0; i2 < RMais.size(); i2++) {
+                        if (getNodes().get(i).getId().equals(RMais.get(i2))) {
+                            tem = true;
+                        }
+                    }
+                    if (tem == false) {
+                        RMais.add(getNodes().get(i).getId());
+                        r += getNodes().get(i).getId();
+                        r += ",";
+                    }
+                }
+            }
+        }
+        r += "\n\n"
+                + "Resultado: ";
+        for (int i = 0; i < RMenos.size(); i++) {
+            for (int j = 0; j < RMais.size(); j++) {
+                if (RMenos.get(i).equals(RMais.get(j))) {
+                    r += RMenos.get(i);
+                }
+            }
+            r += ",";
         }
 
         return r;
@@ -837,6 +883,7 @@ public class Graph {
         String result = "{", auxOrigem = "";
         auxVisitado = (List<Node>) visitado;
 
+        //PREENCHE A MATRIZ ADJACENTE
         for (Edge e : getEdges()) {
             int no1 = getNodes().indexOf(e.getNode1());
             int no2 = getNodes().indexOf(e.getNode2());

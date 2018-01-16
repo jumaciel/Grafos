@@ -1449,16 +1449,6 @@ public class frmInterface extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_menuSairActionPerformed
 
-    private void menuInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuInfoActionPerformed
-        if (graph.completo() == true) {
-            display.setText("Grafo Completo");
-        } else if (graph.regular() == true) {
-            display.setText("Grafo Regular");
-        } else if (graph.multigrafo() == true) {
-            display.setText("Multigrafo");
-        }
-    }//GEN-LAST:event_menuInfoActionPerformed
-
     private void menuNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNovoActionPerformed
         novoArquivo();
     }//GEN-LAST:event_menuNovoActionPerformed
@@ -2026,6 +2016,16 @@ public class frmInterface extends javax.swing.JFrame {
         display.setText(graph.Dijkstra());
     }//GEN-LAST:event_btnDijkstra1ActionPerformed
 
+    private void menuInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuInfoActionPerformed
+        if (graph.completo() == true) {
+            display.setText("Grafo Completo");
+        } else if (graph.regular() == true) {
+            display.setText("Grafo Regular");
+        } else if (graph.multigrafo() == true) {
+            display.setText("Multigrafo");
+        }
+    }//GEN-LAST:event_menuInfoActionPerformed
+
     public void getAlteracao(List<Node> node, List<Edge> edge, String nome, String tipo) {
         graph.setId(nome);
         graph.setEdgedefault(tipo);
@@ -2241,10 +2241,10 @@ public class frmInterface extends javax.swing.JFrame {
 
                 for (Edge edge : graphml.getGraph().getEdges()) {
                     for (Node no : graphml.getGraph().getNodes()) {
-                        if (no.getId().equals(edge.getOrigem())) {
+                        if (no.getId().equals(edge.getSoucer())) {
                             edge.setNode1(no);
                         }
-                        if (no.getId().equals(edge.getDestino())) {
+                        if (no.getId().equals(edge.getTarget())) {
                             edge.setNode2(no);
                         }
                     }
