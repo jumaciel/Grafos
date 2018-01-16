@@ -2241,10 +2241,10 @@ public class frmInterface extends javax.swing.JFrame {
 
                 for (Edge edge : graphml.getGraph().getEdges()) {
                     for (Node no : graphml.getGraph().getNodes()) {
-                        if (no.getId().equals(edge.getSoucer())) {
+                        if (no.getId().equals(edge.getOrigem())) {
                             edge.setNode1(no);
                         }
-                        if (no.getId().equals(edge.getTarget())) {
+                        if (no.getId().equals(edge.getDestino())) {
                             edge.setNode2(no);
                         }
                     }
