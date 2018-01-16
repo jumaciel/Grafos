@@ -78,14 +78,14 @@ public class Graph {
                 getNodes().remove(i); // Remove o vertice na posição de i
 
                 for (int a = 0; a < getEdges().size(); a++) { // Varre a lista de arestas
-                    // Verifica se a aresta na posição de i é igual o passado pelo paramentro
+                    // Verifica se há uma aresta que tenha como origem o vértice apagado
                     if (getEdges().get(a).getNode1().getId().equals(node)) {
                         getEdges().remove(a);  // Remove a aresta na posição de i
                         a--;
                     }
                 }
                 for (int a2 = 0; a2 < getEdges().size(); a2++) { // Varre a lista de arestas
-                    // Verifica se a aresta na posição de i é igual o passado pelo paramentro
+                    // Verifica se há uma aresta que tenha como destino o vértice apagado
                     if (getEdges().get(a2).getNode2().getId().equals(node)) {
                         getEdges().remove(a2); // Remove a aresta na posição de i2
                         a2--;
@@ -110,16 +110,16 @@ public class Graph {
             }
         }
         for (int a = 0; a < getEdges().size(); a++) {
-            if (getEdges().get(a).getSoucer().equals(b)) {
-                getEdges().get(a).setSoucer(novo);
+            if (getEdges().get(a).getOrigem().equals(b)) {
+                getEdges().get(a).setOrigem(novo);
 //                a--;
             }
         }
         for (int a2 = 0; a2 < getEdges().size(); a2++) {
-            if (getEdges().get(a2).getTarget().equals(b)) {
-                r += "Edge (" + getEdges().get(a2).getSoucer() + "," + getEdges().get(a2).getTarget() + ") ============== > ("
+            if (getEdges().get(a2).getDestino().equals(b)) {
+                r += "Edge (" + getEdges().get(a2).getOrigem() + "," + getEdges().get(a2).getDestino() + ") ============== > ("
                         + getEdges().get(a2).getNode1().getId() + "," + getEdges().get(a2).getNode2().getId() + ")\n";
-                getEdges().get(a2).setTarget(novo);
+                getEdges().get(a2).setDestino(novo);
 //                a2--;
             }
         }
