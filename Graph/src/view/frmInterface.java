@@ -2028,7 +2028,7 @@ public class frmInterface extends javax.swing.JFrame {
         boolean e = false;
         for(int i =0; i < graph.getEdges().size();i++){
             if(graph.getEdges().get(i).getPeso() != 0){
-               display.setText("Grafo Valorado");
+               display.setText("Grafo Valorado ");
             }
         }
     }//GEN-LAST:event_menuInfoActionPerformed
