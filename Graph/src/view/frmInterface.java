@@ -2017,12 +2017,19 @@ public class frmInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDijkstra1ActionPerformed
 
     private void menuInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuInfoActionPerformed
+
         if (graph.completo() == true) {
             display.setText("Grafo Completo");
         } else if (graph.regular() == true) {
             display.setText("Grafo Regular");
         } else if (graph.multigrafo() == true) {
             display.setText("Multigrafo");
+        }
+        boolean e = false;
+        for(int i =0; i < graph.getEdges().size();i++){
+            if(graph.getEdges().get(i).getPeso() != 0){
+               display.setText("Grafo Valorado");
+            }
         }
     }//GEN-LAST:event_menuInfoActionPerformed
 
